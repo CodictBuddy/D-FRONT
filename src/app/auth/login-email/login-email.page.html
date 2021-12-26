@@ -1,0 +1,51 @@
+<ion-header translucent>
+  <ion-toolbar class="header-back">
+    <ion-buttons slot="start">
+      <ion-icon name="chevron-back-outline" class="container-header back-icon routerLink" [routerLink]="['/login']">
+      </ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main-container ion-padding-horizontal">
+  <br />
+
+  <div class="ion-padding-horizontal">
+    <h1 class="title-30 text-primary">Welcome</h1>
+    <h1 class="title-30 text-primary">Back</h1>
+
+    <br />
+    <form [formGroup]="loginForm" (ngSubmit)="loginAccess(loginForm.valid,loginForm.value)">
+      <ion-item style="margin-top: 5px">
+        <ion-label class="input-label text-gray" position="stacked">Email ID</ion-label>
+        <ion-input inputmode="text" formControlName="user_email"></ion-input>
+      </ion-item>
+
+      <p *ngIf="loginForm.controls['user_email'].invalid && (loginForm.controls['user_email'].dirty || loginForm.controls['user_email'].touched)"
+        class="text-danger">
+        Please enter valid Email
+      </p>
+
+      <ion-item style="margin-top: 10px">
+        <ion-label class="input-label text-gray" position="stacked">Password</ion-label>
+        <ion-input inputmode="text" type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <p *ngIf="loginForm.controls.password.errors?.minlength"
+      class="text-danger">
+      Minimum 6 characters required
+    </p>
+      <br />
+
+      <ion-button color="primary" class="round-btn-40" expand="block" type="submit">
+        Login
+      </ion-button>
+
+      <div class="df-space-between">
+        <h4 class="h4-sub-title text-dark routerLink" [routerLink]="['/forgot-password']">Forgot Password?</h4>
+        <h4 class="h4-sub-title text-primary routerLink" [routerLink]="['/sign-up']">Sign Up</h4>
+      </div>
+    </form>
+  </div>
+
+</ion-content>
