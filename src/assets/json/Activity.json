@@ -1,0 +1,66 @@
+[
+  {
+    "_id": "1",
+    "activity_name": "",
+    "activity_sport": "Cricket",
+    "activity_date": "1601374892000",
+    "activity_location_name": "Vadapalani, chennai",
+    "attendee_count": "15",
+    "category": {
+      "category_icon": "flaticon-cricket-stick-and-ball"
+    },
+    "user": {
+      "user_name": "Meenakshi Sundaram Kumaraverma",
+      "user_id": "10000",
+      "media_url": "https://casttree.nyc3.digitaloceanspaces.com/profile/b01b0850-eb57-4629-b0f8-062cf9308a18.jpg"
+    }
+  },
+  {
+    "_id": "2",
+    "activity_name": "",
+    "activity_sport": "Football",
+    "activity_date": "1601374892000",
+    "activity_location_name": "Tnagar, Chennai",
+    "attendee_count": "15",
+    "category": {
+      "category_icon": "flaticon-soccer"
+    },
+    "user": {
+      "user_name": "Suresh Kumar",
+      "user_id": "10000",
+      "media_url": "https://casttree.nyc3.digitaloceanspaces.com/profile/b01b0850-eb57-4629-b0f8-062cf9308a18.jpg"
+    }
+  },
+  {
+    "_id": "3",
+    "activity_name": "",
+    "activity_sport": "Badmitton",
+    "activity_date": "1601374892000",
+    "activity_location_name": "Madipakkam, Chennai",
+    "attendee_count": "20",
+    "category": {
+      "category_icon": "flaticon-badminton-shuttle"
+    },
+    "user": {
+      "user_name": "Manikandan",
+      "user_id": "10000",
+      "media_url": "https://casttree.nyc3.digitaloceanspaces.com/profile/b01b0850-eb57-4629-b0f8-062cf9308a18.jpg"
+    }
+  },
+  {
+    "_id": "4",
+    "activity_name": "",
+    "activity_sport": "Badmitton",
+    "activity_date": "1601374892000",
+    "activity_location_name": "Madipakkam, Chennai",
+    "attendee_count": "20",
+    "category": {
+      "category_icon": "flaticon-badminton-shuttle"
+    },
+    "user": {
+      "user_name": "Vijay Kumar",
+      "user_id": "10000",
+      "media_url": "https://casttree.nyc3.digitaloceanspaces.com/profile/b01b0850-eb57-4629-b0f8-062cf9308a18.jpg"
+    }
+  }
+]
