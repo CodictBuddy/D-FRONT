@@ -1,0 +1,107 @@
+[
+    {
+        "_id":"1",
+        "created_at":"2020-08-08T16:58:47Z",
+        "updated_at":"121313",
+        "post_privacy":"public",
+        "post_comments_id":"1",
+        "post_comments_count":"300",
+        "post_likes_id":"1",
+        "post_liked":false,
+        "post_like_count":"2089",
+        "post_user_tags":["21212","21122112"], 
+        "post_description":[
+            {
+                "language":"en",
+                "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+            },
+            {
+                "language":"ta",
+                "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+            }
+        ],
+        "user":{
+            "user_name":"Naveen",
+            "user_id": "10000",
+            "media_url":"https://casttree.nyc3.digitaloceanspaces.com/profile/b01b0850-eb57-4629-b0f8-062cf9308a18.jpg"
+          },
+        "media":[
+            {
+                "type":"post",
+                "media_url": "https://sm.askmen.com/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_gstt.jpg",
+                "privacy":"public"
+            }
+        ]
+
+    },
+    {
+        "_id":"2",
+        "created_at":"2020-08-08T16:58:47Z",
+        "updated_at":"121313",
+        "post_privacy":"public",
+        "post_comments_id":"2",
+        "post_comments_count":"550",
+        "post_likes_id":"2",
+        "post_liked":false,
+        "post_like_count":"100000",
+        "post_user_tags":["21212","21122112"], 
+        "post_description":[
+            {
+                "language":"en",
+                "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+            },
+            {
+                "language":"ta",
+                "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+            }
+        ],
+        "user":{
+            "user_name":"Udhay",
+            "user_id": "10000",
+            "media_url":"https://casttree.nyc3.digitaloceanspaces.com/profile/b01b0850-eb57-4629-b0f8-062cf9308a18.jpg"
+          },
+        "media":[
+            {
+                "type":"post",
+                "media_url": "https://ibighit.com/txt/images/txt/profile/member-hk.jpg",
+                "privacy":"public"
+            }
+        ]
+
+    },
+    {
+        "_id":"3",
+        "created_at":"2020-08-08T16:58:47Z",
+        "updated_at":"121313",
+        "post_privacy":"public",
+        "post_comments_id":"3",
+        "post_comments_count":"300",
+        "post_likes_id":"3",
+        "post_liked":false,
+        "post_like_count":"1000000",
+        "post_user_tags":["21212","21122112"], 
+        "post_description":[
+            {
+                "language":"en",
+                "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+            },
+            {
+                "language":"ta",
+                "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+            }
+        ],
+        "user":{
+            "user_name":"Chandru",
+            "user_id": "10000",
+            "media_url":"https://casttree.nyc3.digitaloceanspaces.com/profile/b01b0850-eb57-4629-b0f8-062cf9308a18.jpg"
+          },
+        "media":[
+            {
+                "type":"post",
+                "media_url": "https://casttree.nyc3.digitaloceanspaces.com/news/news/casttreenews160103730518219sushant1.jpg",
+                "privacy":"public"
+            }
+        ]
+
+    }
+]
