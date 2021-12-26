@@ -1,0 +1,152 @@
+[
+  {
+    "group_name": [
+      {
+        "language": "en",
+        "group_name": "Tamilnadu Rock Stars"
+      },
+      {
+        "language": "ta",
+        "group_name": "தமிழ்நாடு ராக் ஸ்டார்ஸ்"
+      }
+    ],
+    "group_description": [
+      {
+        "language": "en",
+        "group_description": "Tamilnadu Rock Stars is a group for tamil people"
+      },
+      {
+        "language": "ta",
+        "group_description":
+          "தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+      }
+    ],
+    "group_privacy": "public",
+    "group_visibility": "hide",
+    "group_location": { "latitude": "", "longitude": "" },
+    "group_category": "sports",
+    "group_status": "Active",
+    "media": [
+      {
+        "type": "cover",
+        "media_id": {
+          "_id": "5fb7c847e3b5ee96f2e3bbfe",
+          "media_type": "image",
+          "media_format": "jpeg",
+          "media_url":
+            "https://mafix.nyc3.digitaloceanspaces.com/public-read/1605878482461match1.jpg",
+          "location": "1605878482461match1.jpg",
+          "file_name": "match1.jpg",
+          "description": [
+            {
+              "content": "logo",
+              "version": "1",
+              "status": "Active"
+            }
+          ]
+        },
+        "privacy": "Public"
+      }
+    ]
+  },
+  {
+    "group_name": [
+      {
+        "language": "en",
+        "group_name": "Tamilnadu Super Kings"
+      },
+      {
+        "language": "ta",
+        "group_name": "தமிழ்நாடு சூப்பர் கிங்ஸ்"
+      }
+    ],
+    "group_description": [
+      {
+        "language": "en",
+        "group_description": "Tamilnadu Super Kings is a group for tamil people"
+      },
+      {
+        "language": "ta",
+        "group_description":
+          "தமிழ்நாடு சூப்பர் கிங்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+      }
+    ],
+    "group_privacy": "public",
+    "group_visibility": "hide",
+    "group_location": { "latitude": "", "longitude": "" },
+    "group_category": "sports",
+    "group_status": "Active",
+    "media": [
+      {
+        "type": "cover",
+        "media_id": {
+          "_id": "5fb7c847e3b5ee96f2e3bbff",
+          "media_type": "image",
+          "media_format": "jpeg",
+          "media_url":
+            "https://mafix.nyc3.digitaloceanspaces.com/public-read/1605879637778match5.jpeg",
+          "location": "1605879637778match5.jpeg",
+          "file_name": "match5.jpeg",
+          "description": [
+            {
+              "content": "logo",
+              "version": "1",
+              "status": "Active"
+            }
+          ]
+        },
+        "privacy": "Public"
+      }
+    ]
+  },
+  {
+    "group_name": [
+      {
+        "language": "en",
+        "group_name": "Mumbai Indians"
+      },
+      {
+        "language": "ta",
+        "group_name": "மும்பை இந்தியன்ஸ்"
+      }
+    ],
+    "group_description": [
+      {
+        "language": "en",
+        "group_description": "Mumbai Indians is a group for mumbai people"
+      },
+      {
+        "language": "ta",
+        "group_description":
+          "மும்பை இந்தியன்ஸ் என்பது மும்பை மக்களுக்கான ஒரு குழு"
+      }
+    ],
+    "group_privacy": "public",
+    "group_visibility": "hide",
+    "group_location": { "latitude": "", "longitude": "" },
+    "group_category": "sports",
+    "group_status": "Active",
+    "media": [
+      {
+        "type": "profile",
+        "media_id": {
+          "_id": "5fb7c847e3b5ee96f2e3bc01",
+          "media_type": "image",
+          "media_format": "jpeg",
+          "media_url":
+            "https://mafix.nyc3.digitaloceanspaces.com/public-read/1605879752613match2.jpg",
+          "location": "1605879752613match2.jpg",
+          "file_name": "match2.jpg",
+          "description": [
+            {
+              "content": "profile",
+              "version": "1",
+              "status": "Active"
+            }
+          ]
+        },
+        "privacy": "Public"
+      }
+    ]
+  }
+]
