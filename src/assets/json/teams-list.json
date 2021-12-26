@@ -1,0 +1,230 @@
+[
+    {
+      "_id": "1",
+      "team_join": false,
+      "team_name":[
+          {
+              "language":"en",
+              "group_name":"Mumbai team"
+          },
+          {
+              "language":"ta",
+              "group_name":"சென்னை சூப்பர் கிங்"
+          }
+      ],
+      "team_description":[
+          {
+              "language":"en",
+              "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+          },
+          {
+              "language":"en",
+              "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+          }
+      ],
+      "team_members_count":"12",
+      "media": [
+        {
+          "type": "primary",
+          "media_url": "../../../assets/MI.png",
+          "privacy": "public"
+        },
+        {
+          "type": "cover",
+          "media_url": "../../../assets/MI.png",
+          "privacy": "public"
+        }
+      ],
+      "created_by": "212112"
+    },
+    {
+      "_id": "2",
+      "team_join": false,
+      "team_name":[
+          {
+              "language":"en",
+              "group_name":"Chennai Super Kings"
+          },
+          {
+              "language":"ta",
+              "group_name":"சென்னை சூப்பர் கிங்"
+          }
+      ],
+      "team_description":[
+          {
+              "language":"en",
+              "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+          },
+          {
+              "language":"en",
+              "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+          }
+      ],
+      "team_members_count":"15",
+      "media": [
+        {
+          "type": "primary",
+          "media_url": "../../../assets/CSK.png",
+          "privacy": "public"
+        },
+        {
+          "type": "cover",
+          "media_url": "../../../assets/CSK.png",
+          "privacy": "public"
+        }
+      ],
+      "created_by": "212112"
+    },
+    {
+      "_id": "3",
+      "team_join": false,
+      "team_name":[
+          {
+              "language":"en",
+              "group_name":"Delhi Capitals"
+          },
+          {
+              "language":"ta",
+              "group_name":"சென்னை சூப்பர் கிங்"
+          }
+      ],
+      "team_description":[
+          {
+              "language":"en",
+              "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+          },
+          {
+              "language":"en",
+              "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+          }
+      ],
+      "team_members_count":"09",
+      "media": [
+        {
+          "type": "primary",
+          "media_url": "../../../assets/DC.png",
+          "privacy": "public"
+        },
+        {
+          "type": "cover",
+          "media_url": "../../../assets/DC.png",
+          "privacy": "public"
+        }
+      ],
+      "created_by": "212112"
+    },
+    {
+      "_id": "4",
+      "team_join": false,
+      "team_name":[
+          {
+              "language":"en",
+              "group_name":"Royal Challengers"
+          },
+          {
+              "language":"ta",
+              "group_name":"சென்னை சூப்பர் கிங்"
+          }
+      ],
+      "team_description":[
+          {
+              "language":"en",
+              "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+          },
+          {
+              "language":"en",
+              "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+          }
+      ],
+      "team_members_count":"10",
+      "media": [
+        {
+          "type": "primary",
+          "media_url": "../../../assets/RCB.png",
+          "privacy": "public"
+        },
+        {
+          "type": "cover",
+          "media_url": "../../../assets/RCB.png",
+          "privacy": "public"
+        }
+      ],
+      "created_by": "212112"
+    },
+    {
+      "_id": "5",
+      "team_join": false,
+      "team_name":[
+          {
+              "language":"en",
+              "group_name":"Virat"
+          },
+          {
+              "language":"ta",
+              "group_name":"சென்னை சூப்பர் கிங்"
+          }
+      ],
+      "team_description":[
+          {
+              "language":"en",
+              "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+          },
+          {
+              "language":"en",
+              "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+          }
+      ],
+      "team_members_count":"13",
+      "media": [
+        {
+          "type": "primary",
+          "media_url": "../../../assets/Virat.png",
+          "privacy": "public"
+        },
+        {
+          "type": "cover",
+          "media_url": "../../../assets/Virat.png",
+          "privacy": "public"
+        }
+      ],
+      "created_by": "212112"
+    },
+    {
+      "_id": "6",
+      "team_join": false,
+      "team_name":[
+          {
+              "language":"en",
+              "group_name":"Messi"
+          },
+          {
+              "language":"ta",
+              "group_name":"சென்னை சூப்பர் கிங்"
+          }
+      ],
+      "team_description":[
+          {
+              "language":"en",
+              "group_description":"Tamilnadu Rock Stars is a group for tamil people"
+          },
+          {
+              "language":"en",
+              "group_description":"தமிழ்நாடு ராக் ஸ்டார்ஸ் என்பது தமிழ் மக்களுக்கான ஒரு குழு"
+          }
+      ],
+      "team_members_count":"07",
+      "media": [
+        {
+          "type": "primary",
+          "media_url": "../../../assets/Messi.png",
+          "privacy": "public"
+        },
+        {
+          "type": "cover",
+          "media_url": "../../../assets/Messi.png",
+          "privacy": "public"
+        }
+      ],
+      "created_by": "212112"
+    }
+  ]
