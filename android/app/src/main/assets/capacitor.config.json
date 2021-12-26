@@ -1,0 +1,6 @@
+{
+	"appId": "com.mobile.dtalks",
+	"appName": "D-Talks",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

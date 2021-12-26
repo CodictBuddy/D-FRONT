@@ -1,5 +1,7 @@
 {
   "name": "D-FRONT",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
