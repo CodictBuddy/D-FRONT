@@ -1,0 +1,190 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 09/10/2020 13:07
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-calendar:before { content: "\f100"; }
+.flaticon-share:before { content: "\f101"; }
+.flaticon-group:before { content: "\f102"; }
+.flaticon-email:before { content: "\f103"; }
+.flaticon-facebook:before { content: "\f104"; }
+.flaticon-cursor:before { content: "\f105"; }
+.flaticon-clock:before { content: "\f106"; }
+.flaticon-more:before { content: "\f107"; }
+.flaticon-document:before { content: "\f108"; }
+.flaticon-gps:before { content: "\f109"; }
+.flaticon-user:before { content: "\f10a"; }
+.flaticon-star:before { content: "\f10b"; }
+.flaticon-ticket:before { content: "\f10c"; }
+.flaticon-grid:before { content: "\f10d"; }
+.flaticon-team:before { content: "\f10e"; }
+.flaticon-teamwork:before { content: "\f10f"; }
+.flaticon-place:before { content: "\f110"; }
+.flaticon-group-1:before { content: "\f111"; }
+.flaticon-cricket-stick-and-ball:before { content: "\f112"; }
+.flaticon-badminton-shuttle:before { content: "\f113"; }
+.flaticon-soccer:before { content: "\f114"; }
+.flaticon-hockey:before { content: "\f115"; }
+.flaticon-table-tennis:before { content: "\f116"; }
+.flaticon-tennis:before { content: "\f117"; }
+.flaticon-basketball:before { content: "\f118"; }
+.flaticon-kabaddi-court:before { content: "\f119"; }
+.flaticon-boxing-gloves:before { content: "\f11a"; }
+.flaticon-volleyball:before { content: "\f11b"; }
+.flaticon-history:before { content: "\f11c"; }
+.flaticon-worldwide:before { content: "\f11d"; }
+.flaticon-eye:before { content: "\f11e"; }
+.flaticon-shield:before { content: "\f11f"; }
+.flaticon-add-group:before { content: "\f120"; }
+.flaticon-add-user:before { content: "\f121"; }
+.flaticon-shield-with-star:before { content: "\f122"; }
+.flaticon-settings:before { content: "\f123"; }
+.flaticon-comment:before { content: "\f124"; }
+.flaticon-messenger:before { content: "\f125"; }
+.flaticon-search:before { content: "\f126"; }
+.flaticon-user-1:before { content: "\f127"; }
+.flaticon-like:before { content: "\f128"; }
+.flaticon-comment-1:before { content: "\f129"; }
+.flaticon-comment-2:before { content: "\f12a"; }
+.flaticon-users:before { content: "\f12b"; }
+.flaticon-event:before { content: "\f12c"; }
+.flaticon-logout:before { content: "\f12d"; }
+.flaticon-settings-1:before { content: "\f12e"; }
+.flaticon-menu:before { content: "\f12f"; }
+.flaticon-menu-1:before { content: "\f130"; }
+.flaticon-home:before { content: "\f131"; }
+.flaticon-bell:before { content: "\f132"; }
+.flaticon-tshirt:before { content: "\f133"; }
+.flaticon-tshirt-1:before { content: "\f134"; }
+.flaticon-friends:before { content: "\f135"; }
+.flaticon-user-2:before { content: "\f136"; }
+.flaticon-user-3:before { content: "\f137"; }
+.flaticon-election-event-on-a-calendar-with-star-symbol:before { content: "\f138"; }
+.flaticon-pulse:before { content: "\f139"; }
+.flaticon-trophy:before { content: "\f13a"; }
+.flaticon-like-1:before { content: "\f13b"; }
+.flaticon-pencil:before { content: "\f13c"; }
+.flaticon-photo-camera:before { content: "\f13d"; }
+.flaticon-motorcycle:before { content: "\f13e"; }
+.flaticon-running:before { content: "\f13f"; }
+.flaticon-running-1:before { content: "\f140"; }
+.flaticon-dumbbell:before { content: "\f141"; }
+.flaticon-cycling:before { content: "\f142"; }
+.flaticon-billiards:before { content: "\f143"; }
+.flaticon-handball-court:before { content: "\f144"; }
+.flaticon-judo:before { content: "\f145"; }
+.flaticon-karate:before { content: "\f146"; }
+.flaticon-swimming:before { content: "\f147"; }
+.flaticon-tennis-1:before { content: "\f148"; }
+.flaticon-karate-1:before { content: "\f149"; }
+.flaticon-yoga:before { content: "\f14a"; }
+    
+    $font-Flaticon-calendar: "\f100";
+    $font-Flaticon-share: "\f101";
+    $font-Flaticon-group: "\f102";
+    $font-Flaticon-email: "\f103";
+    $font-Flaticon-facebook: "\f104";
+    $font-Flaticon-cursor: "\f105";
+    $font-Flaticon-clock: "\f106";
+    $font-Flaticon-more: "\f107";
+    $font-Flaticon-document: "\f108";
+    $font-Flaticon-gps: "\f109";
+    $font-Flaticon-user: "\f10a";
+    $font-Flaticon-star: "\f10b";
+    $font-Flaticon-ticket: "\f10c";
+    $font-Flaticon-grid: "\f10d";
+    $font-Flaticon-team: "\f10e";
+    $font-Flaticon-teamwork: "\f10f";
+    $font-Flaticon-place: "\f110";
+    $font-Flaticon-group-1: "\f111";
+    $font-Flaticon-cricket-stick-and-ball: "\f112";
+    $font-Flaticon-badminton-shuttle: "\f113";
+    $font-Flaticon-soccer: "\f114";
+    $font-Flaticon-hockey: "\f115";
+    $font-Flaticon-table-tennis: "\f116";
+    $font-Flaticon-tennis: "\f117";
+    $font-Flaticon-basketball: "\f118";
+    $font-Flaticon-kabaddi-court: "\f119";
+    $font-Flaticon-boxing-gloves: "\f11a";
+    $font-Flaticon-volleyball: "\f11b";
+    $font-Flaticon-history: "\f11c";
+    $font-Flaticon-worldwide: "\f11d";
+    $font-Flaticon-eye: "\f11e";
+    $font-Flaticon-shield: "\f11f";
+    $font-Flaticon-add-group: "\f120";
+    $font-Flaticon-add-user: "\f121";
+    $font-Flaticon-shield-with-star: "\f122";
+    $font-Flaticon-settings: "\f123";
+    $font-Flaticon-comment: "\f124";
+    $font-Flaticon-messenger: "\f125";
+    $font-Flaticon-search: "\f126";
+    $font-Flaticon-user-1: "\f127";
+    $font-Flaticon-like: "\f128";
+    $font-Flaticon-comment-1: "\f129";
+    $font-Flaticon-comment-2: "\f12a";
+    $font-Flaticon-users: "\f12b";
+    $font-Flaticon-event: "\f12c";
+    $font-Flaticon-logout: "\f12d";
+    $font-Flaticon-settings-1: "\f12e";
+    $font-Flaticon-menu: "\f12f";
+    $font-Flaticon-menu-1: "\f130";
+    $font-Flaticon-home: "\f131";
+    $font-Flaticon-bell: "\f132";
+    $font-Flaticon-tshirt: "\f133";
+    $font-Flaticon-tshirt-1: "\f134";
+    $font-Flaticon-friends: "\f135";
+    $font-Flaticon-user-2: "\f136";
+    $font-Flaticon-user-3: "\f137";
+    $font-Flaticon-election-event-on-a-calendar-with-star-symbol: "\f138";
+    $font-Flaticon-pulse: "\f139";
+    $font-Flaticon-trophy: "\f13a";
+    $font-Flaticon-like-1: "\f13b";
+    $font-Flaticon-pencil: "\f13c";
+    $font-Flaticon-photo-camera: "\f13d";
+    $font-Flaticon-motorcycle: "\f13e";
+    $font-Flaticon-running: "\f13f";
+    $font-Flaticon-running-1: "\f140";
+    $font-Flaticon-dumbbell: "\f141";
+    $font-Flaticon-cycling: "\f142";
+    $font-Flaticon-billiards: "\f143";
+    $font-Flaticon-handball-court: "\f144";
+    $font-Flaticon-judo: "\f145";
+    $font-Flaticon-karate: "\f146";
+    $font-Flaticon-swimming: "\f147";
+    $font-Flaticon-tennis-1: "\f148";
+    $font-Flaticon-karate-1: "\f149";
+    $font-Flaticon-yoga: "\f14a";
