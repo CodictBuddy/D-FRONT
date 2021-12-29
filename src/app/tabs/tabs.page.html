@@ -1,0 +1,32 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" routerLinkActive="active">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="network">
+      <ion-icon name="people-outline"></ion-icon>
+      <ion-label>Network</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/post">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Add Talks</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="notification">
+      <!-- style="position: absolute; top: -1px; left: 20px" -->
+      <!-- <ion-label>
+        <ion-badge
+          style="position: absolute; top: 8px; right: 20%; z-index: +1"
+          slot="end"
+          color="secondary"
+          >2</ion-badge
+        ></ion-label
+      > -->
+      <ion-label>notifications</ion-label>
+      <ion-icon name="notifications-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
