@@ -1,36 +1,28 @@
 <ion-header>
-  <ion-toolbar class="main-header">
-    <div class="container-header">
-      <div class="ion-activatable routerLink">
-        <!-- <ion-avatar >
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
-      </ion-avatar> -->
-        <div class="profile-img">
-          <ion-avatar>
-            <img
-              src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-            />
-          </ion-avatar>
-          <!-- <ion-label>Item Avatar</ion-label> -->
-        </div>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-avatar class="regular-font-size" [routerLink]="['/dashboard']">
+        <img src="assets/Image/Empty State Icon/People.svg" />
+      </ion-avatar>
+    </ion-buttons>
 
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-      <div class="ion-activatable section-search routerLink">
-        <app-search></app-search>
-        <!-- <ion-ripple-effect></ion-ripple-effect> -->
-      </div>
-      <div class="ion-activatable message-icon routerLink">
-        <div *ngIf="newMessage" class="notification-bell"></div>
+    <ion-buttons slot="end">
+      <app-search style="border: none"></app-search>
+    </ion-buttons>
 
+    <ion-buttons slot="end" id="main">
+      <ion-button class="container-header" routerLink="/home/chat-list">
+        <ion-badge
+          style="position: absolute; top: -1px; left: 20px"
+          slot="end"
+          color="secondary"
+          >2</ion-badge
+        >
         <ion-icon
-          name="notifications-outline"
-          style="font-size: 32px"
+          name="chatbox-ellipses-outline"
+          class="regular-font-size"
         ></ion-icon>
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-    </div>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
