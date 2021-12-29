@@ -5,7 +5,10 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <post-card></post-card>
+
+  <div class="" *ngFor="let card of activity_list">
+    <post-card [detail]="false"></post-card>
+  </div>
   <!-- <app-activity-card
     [userPref]="userPreference"
     [limitBody]="limit"
@@ -55,4 +58,7 @@
       </ion-slides>
     </div>
   </div>
+  <!-- <div class=""> -->
+  <!-- <app-footer></app-footer> -->
+  <!-- </div> -->
 </ion-content>

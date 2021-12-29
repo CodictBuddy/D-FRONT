@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import Speech from 'speak-tts';
 
@@ -8,6 +8,7 @@ import Speech from 'speak-tts';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
+  @Input('detail') detail: Boolean = true;
   isLiked: Boolean = false;
   playSound: Boolean = false;
 
@@ -15,7 +16,9 @@ export class CardComponent implements OnInit {
   speechData: any;
   constructor(private tts: TextToSpeech) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('value here', this.detail);
+  }
 
   toggleLike() {
     this.isLiked = !this.isLiked;
@@ -26,13 +29,15 @@ export class CardComponent implements OnInit {
 
     if (!this.playSound) {
       // this.speech.pause();
-      this.tts.stop()
+      this.tts.stop();
     }
     if (this.playSound) {
       this.tts
-        .speak({ text: 'your text reading software is working now',
+        .speak({
+          text: 'your text reading software is working now',
           locale: 'en-GB',
-          rate: 0.75})
+          rate: 0.75,
+        })
         .then(() => {
           console.log('Success !');
         })
