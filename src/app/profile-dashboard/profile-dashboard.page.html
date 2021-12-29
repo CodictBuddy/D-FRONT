@@ -1,0 +1,322 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        style="opacity: 0.6"
+        defaultHref="/home"
+        class="container-header"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" id="main">
+      <ion-button (click)="openMenu()" class="container-header"
+        ><ion-icon class="regular-font-size" name="settings-sharp"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card style="height: 150px; z-index: -1; margin: 0">
+    <ion-icon
+      style="z-index: +2; margin-bottom: -40px; float: right; padding: 10px"
+      name="camera"
+    ></ion-icon>
+    <img
+      width="100%"
+      height="100%"
+      src="assets/Image/Empty State Icon/People.svg"
+  /></ion-card>
+  <div class="">
+    <ion-avatar
+      style="
+        height: 100px;
+        width: 100px;
+        border: 5px solid white;
+        margin: -55px 0 0 20px;
+      "
+    >
+      <img src="assets/Image/Empty State Icon/People.svg" />
+      <ion-icon class="add-img-positioning" name="add-circle-sharp"></ion-icon>
+    </ion-avatar>
+  </div>
+  <h4 style="margin: 0 15px; opacity: 0.8">Raunak Srivastava</h4>
+  <h6 style="margin: 0 15px; opacity: 0.6">A story teller guy</h6>
+
+  <ion-card style="padding: 5px">
+    <div class="" style="padding: 5px">
+      <h4>About</h4>
+      <p>
+        Multiline text that should wrap when it is too long to fit on one line
+        in the item.
+      </p>
+    </div>
+  </ion-card>
+
+  <ion-segment
+    [value]="tab"
+    (ionChange)="segmentChanged($event)"
+    color="secondary"
+    style="padding-top: 10px"
+  >
+    <ion-segment-button value="1">
+      <ion-icon name="heart"></ion-icon>
+      <ion-label>Likes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="2">
+      <ion-icon name="people-sharp"></ion-icon>
+      <ion-label>Network</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="3">
+      <ion-icon name="book-sharp"></ion-icon>
+
+      <ion-label>Talks</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="4">
+      <ion-icon name="book-sharp"></ion-icon>
+
+      <ion-label>Activity</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="" [ngSwitch]="tab">
+    <div class="" *ngSwitchCase="'1'">
+      <ion-list style="padding: 0 10px">
+        <ion-list-header>
+          {{'433452'| number}} People likes the talks
+        </ion-list-header>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Poe</h2>
+
+            <p>just a story teller..</p>
+          </ion-label>
+          <ion-icon slot="end" name="heart"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Ben</h2>
+            <p>These aren't the droids you're looking for...</p>
+          </ion-label>
+          <ion-icon slot="end" name="heart"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Leia</h2>
+            <p>I've placed information vital to the survival...</p>
+          </ion-label>
+          <ion-icon slot="end" name="heart"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Yoda</h2>
+            <p>Do or do not. There is no try...</p>
+          </ion-label>
+          <ion-icon slot="end" name="heart"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- networks tab -->
+    <div class="" *ngSwitchCase="'2'">
+      <ion-list style="padding: 0 10px">
+        <ion-list-header> {{'433452'|number}} connections </ion-list-header>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Poe</h2>
+            <p>intro heading of user</p>
+          </ion-label>
+          <ion-icon
+            name="ellipsis-vertical-outline"
+            slot="end"
+            (click)="presentActionSheet()"
+          ></ion-icon>
+          <ion-icon slot="end" name="send"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Ben</h2>
+            <p>These aren't the droids you're looking for...</p>
+          </ion-label>
+          <ion-icon
+            name="ellipsis-vertical-outline"
+            slot="end"
+            (click)="presentActionSheet()"
+          ></ion-icon>
+          <ion-icon slot="end" name="send"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Leia</h2>
+            <p>I've placed information vital to the survival...</p>
+          </ion-label>
+          <ion-icon
+            name="ellipsis-vertical-outline"
+            slot="end"
+            (click)="presentActionSheet()"
+          ></ion-icon>
+          <ion-icon slot="end" name="send"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Yoda</h2>
+            <p>Do or do not. There is no try...</p>
+          </ion-label>
+          <ion-icon
+            name="ellipsis-vertical-outline"
+            slot="end"
+            (click)="presentActionSheet()"
+          ></ion-icon>
+          <ion-icon slot="end" name="send"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- talks tab -->
+    <div class="" *ngSwitchCase="'3'">
+      <ion-list style="padding: 0 10px">
+        <ion-list-header>
+          {{'433452'|number}} talks added till now
+        </ion-list-header>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>talk heading</h2>
+            <p>5 words talk description</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Ben</h2>
+            <p>These aren't the droids you're looking for...</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Leia</h2>
+            <p>I've placed information vital to the survival...</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Yoda</h2>
+            <p>Do or do not. There is no try...</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div class="" *ngSwitchCase="'4'">
+      <ion-list style="padding: 0 10px">
+        <ion-list-header> My activities</ion-list-header>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Talk title</h2>
+            <p>I liked the post..</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Talk title</h2>
+            <p>I commented on talk...</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Leia</h2>
+            <p>I've shared the talk...</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/Image/Empty State Icon/People.svg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Yoda</h2>
+            <p>Do or do not. There is no try...</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <ion-menu side="end" menu-id="first" contentId="main">
+    <ion-list>
+      <ion-item routerLink="/profile">
+        <ion-icon
+          class="pl10 regular-font-size"
+          name="create-outline"
+        ></ion-icon>
+        <ion-label class="pl10">Edit profile</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/login']">
+        <ion-icon
+          class="pl10 regular-font-size"
+          name="log-out-outline"
+        ></ion-icon>
+        <ion-label class="pl10">Sign out </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-button color="secondary">Version 1.0.0</ion-button>
+  </ion-menu>
+</ion-content>
