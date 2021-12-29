@@ -1,6 +1,6 @@
 <!-- <ion-content fullscreen> -->
 <ion-list>
-  <ion-list-header size="small"> Comments on your talks </ion-list-header>
+  <ion-list-header size="small"> Comments on this talk </ion-list-header>
 
   <ion-item style="">
     <ion-label>
@@ -154,18 +154,39 @@
 
 <div class="comments-input" style="">
   <ion-avatar class="avatar-small-image">
-    <img
-      src="assets/Image/Empty State Icon/People.svg"
-      style="width: 35px; height: 35px"
-      class="img-round"
-    />
+    <img src="assets/Image/Empty State Icon/People.svg" class="img-round" />
   </ion-avatar>
   <div style="width: 675px; margin-top: 7px">
     <h4 class="h4-title text-dark">
-      <ion-input type="text" placeholder="Leave your thoughts here..."></ion-input>
+      <ion-input
+        type="text"
+        placeholder="Leave your thoughts here..."
+      ></ion-input>
     </h4>
   </div>
   <div class="comment-message">
     <ion-icon style="font-size: 20px" name="send-outline"></ion-icon>
   </div>
+</div>
+
+<!-- skeleton text -->
+<div>
+  <ion-list>
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </div>
