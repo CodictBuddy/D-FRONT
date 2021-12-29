@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,8 +24,6 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
-
 
 html,
 body {
@@ -98,6 +96,13 @@ ion-slides {
 // }
 input:focus {
   border-color: transparent !important;
+}
+.input-suffix {
+  cursor: pointer;
+  opacity: 0.9;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 .iti__selected-flag {
   z-index: 1;
@@ -459,7 +464,7 @@ ion-footer {
 }
 /**********************/
 
-$primary: #7a08fa;
+$primary: #db3d3d;
 // $primary-dark: #800080;
 
 // body.dark {
@@ -550,6 +555,9 @@ body.medium {
   color: $medium;
 }
 
+.regular-font-size {
+  font-size: 28px;
+}
 .h1-title {
   font-size: 18px;
   font-weight: bold;
@@ -1383,7 +1391,8 @@ ion-segment {
     }
   }
 
-  .post-overlay, .game-overlay {
+  .post-overlay,
+  .game-overlay {
     position: absolute !important;
     bottom: 15px !important;
     left: 230px !important;
@@ -1475,7 +1484,8 @@ ion-segment {
       margin-top: 10px !important;
     }
   }
-  .post-overlay, .game-overlay {
+  .post-overlay,
+  .game-overlay {
     position: absolute !important;
     bottom: 15px !important;
     left: 360px !important;
@@ -1587,7 +1597,8 @@ ion-segment {
     }
   }
 
-  .post-overlay, .game-overlay {
+  .post-overlay,
+  .game-overlay {
     position: absolute !important;
     bottom: 15px !important;
     left: 520px !important;
