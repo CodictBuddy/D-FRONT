@@ -1,6 +1,3 @@
-import { SearchComponent } from './utils/search/search.component';
-import { FooterComponent } from './landing/footer/footer.component';
-import { HeaderComponent } from './landing/header/header.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -10,12 +7,17 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
 
 @NgModule({
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  declarations: [AppComponent,FooterComponent],
+  declarations: [AppComponent],
   entryComponents: [],
-  providers: [TextToSpeech,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    TextToSpeech,
+    SpeechRecognition,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

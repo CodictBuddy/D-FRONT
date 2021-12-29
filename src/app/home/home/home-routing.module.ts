@@ -1,3 +1,4 @@
+import { CardComponent } from './../card/card.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -6,8 +7,19 @@ import { HomePage } from './home.page';
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
-  }
+    component: HomePage,
+  },
+  {
+    path: 'detail',
+    component: CardComponent,
+  },
+  {
+    path: 'chat-list',
+    loadChildren: () =>
+      import('../../chat-list/chat-list.module').then(
+        (m) => m.ChatListPageModule
+      ),
+  },
 ];
 
 @NgModule({

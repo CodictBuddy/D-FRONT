@@ -5,14 +5,20 @@
 
 }
 
+.profile-img{
+  // border: 1px solid;
+  margin: 0 0 0 -6px;
+    padding: 0;
+    height: 100%;
+}
 
 .section-search{
   width: 75%;
- 
+
 }
 ion-avatar{
-  padding: 10% 0;
-  width: 34px;
+  padding: 0;
+  width: 44px;
   height: 44px;
   // font-size: 24px;
 }
@@ -27,7 +33,7 @@ ion-icon {
   text-align: center;
   color: #fff;
   position: absolute;
-  background-color: #7a08fa;
+  background-color: #d44638;
   border-radius: 50%;
   top: 15px;
   right: 16px;
