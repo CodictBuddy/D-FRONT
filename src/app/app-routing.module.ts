@@ -4,9 +4,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     loadChildren: () =>
-      import('./home/home/home.module').then((m) => m.HomePageModule),
+      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
     path: 'login',
@@ -15,9 +15,59 @@ const routes: Routes = [
     canActivate: [DoLoginGuard],
   },
   {
+    path: 'post',
+    loadChildren: () =>
+      import('./post/post.module').then((m) => m.PostPageModule),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./profile-dashboard/profile-dashboard.module').then(
+        (m) => m.ProfileDashboardPageModule
+      ),
+  },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile-manage/profile-manage.module').then(
+        (m) => m.ProfileManagePageModule
+      ),
+  },
+
+  {
+    path: 'signup',
+    loadChildren: () =>
+      import('./signup/signup.module').then((m) => m.SignupPageModule),
+  },
+
+  {
+    path: 'forgot-password',
+    loadChildren: () =>
+      import('./forgot-password/forgot-password.module').then(
+        (m) => m.ForgotPasswordPageModule
+      ),
+  },
+
+  {
+    path: 'chat-room',
+    loadChildren: () =>
+      import('./chat-room/chat-room.module').then((m) => m.ChatRoomPageModule),
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () =>
+      import(
+        './reset-password-verification/reset-password-verification.module'
+      ).then((m) => m.ResetPasswordVerificationPageModule),
+  },
+  {
+    path: 'new-password',
+    loadChildren: () => import('./new-password/new-password.module').then( m => m.NewPasswordPageModule)
   },
 ];
 

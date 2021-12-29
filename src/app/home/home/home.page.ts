@@ -27,7 +27,7 @@ export class HomePage {
   recommendedListLoader: Boolean = false;
   private userDetail;
   id: any;
-  activity_list: any = false;
+  activity_list: any[] = [1,2,3,4,5,6,7,8,9,4];
   slideOptsOne = {
     initialSlide: 0,
     slidesPerView: 2.3,
