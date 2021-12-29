@@ -10,12 +10,14 @@ import { Platform } from "@ionic/angular";
   styleUrls: ["./login.page.scss"],
 })
 export class LoginPage implements OnInit {
+  hide:Boolean = false
   constructor(
     private router: Router,
     public platform: Platform,
     // private iab: InAppBrowser,
     // private userService: UserService
   ) {}
+
   ngOnInit() {}
   addMessageListener() {
     if (!window["hasListener"]) {
@@ -83,5 +85,9 @@ export class LoginPage implements OnInit {
   }
   doELogin() {
     this.router.navigate(["/login-email"]);
+  }
+
+  toggleView(){
+    this.hide =!this.hide
   }
 }
