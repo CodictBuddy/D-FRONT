@@ -1,6 +1,8 @@
+import { RecommendationComponent } from './recommendation/recommendation.component';
 import { DoLoginGuard } from './auth/guards/do-login.guards';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { InvitationsComponent } from './invitations/invitations.component';
 
 const routes: Routes = [
   {
@@ -19,6 +21,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./post/post.module').then((m) => m.PostPageModule),
   },
+  { path: 'recommendations', component: RecommendationComponent },
+  { path: 'invitations', component: InvitationsComponent },
   {
     path: '',
     redirectTo: 'home',
@@ -67,7 +71,10 @@ const routes: Routes = [
   },
   {
     path: 'new-password',
-    loadChildren: () => import('./new-password/new-password.module').then( m => m.NewPasswordPageModule)
+    loadChildren: () =>
+      import('./new-password/new-password.module').then(
+        (m) => m.NewPasswordPageModule
+      ),
   },
 ];
 
