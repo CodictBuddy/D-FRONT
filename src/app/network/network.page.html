@@ -1,9 +1,41 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>network</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content>
-
+<ion-content class="network_base">
+  <div class="invitations">
+    <ion-toolbar>
+      <ion-title style="opacity: 0.8">Invitations</ion-title>
+      <ion-buttons slot="end">
+        <ion-button routerLink="/invitations">
+          <ion-icon name="chevron-forward-outline"></ion-icon
+        ></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <app-invitations [reusable]="true"></app-invitations>
+  </div>
+  <div class="recommendations">
+    <app-recommendation [reusable]="true"></app-recommendation>
+    <!-- <div
+      class=""
+      slot="bottom"
+      routerLink="/recommendations"
+      style="padding: 0.5% 40%; cursor: pointer"
+    >
+      <span>See all</span>
+    </div> -->
+    <ion-buttons slot="end" expand="full">
+      <ion-button
+        style="width: 100%; text-transform: initial"
+        slot="end"
+        expand="full"
+        routerLink="/recommendations"
+      >
+        See all</ion-button
+      >
+    </ion-buttons>
+    <!-- <ion-button slot="bottom"> hii </ion-button> -->
+  </div>
 </ion-content>
