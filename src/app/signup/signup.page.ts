@@ -5,14 +5,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
+// ImageUploadPage
 export class SignupPage implements OnInit {
-hide:Boolean = false
-  constructor() { }
+  hide: Boolean = false;
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  toggleView(){
-    this.hide =!this.hide
+  toggleView() {
+    this.hide = !this.hide;
   }
 }
