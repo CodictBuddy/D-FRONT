@@ -1,0 +1,24 @@
+.f-t {
+  text-transform: initial;
+}
+
+.no-bg-button {
+  margin-top: 20px;
+  justify-content: center;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+ion-content {
+  // overwrite inline styles
+  --offset-bottom: auto !important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,70 @@
+<ion-header translucent>
+  <ion-toolbar class="header-back">
+    <ion-buttons slot="start">
+      <ion-avatar>
+        <img src="assets/icon/favicon.png" alt="" />
+      </ion-avatar>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main-container ion-padding-horizontal">
+  <br />
+  <div class="ion-padding-horizontal">
+    <h5 class="title-20" style="opacity: 0.9">
+      Adding an intro will help you stand out
+    </h5>
+    <div class="df-space-between"></div>
+    <form style="padding: 15px">
+      <ion-list>
+        <ion-radio-group>
+          <ion-item>
+            <ion-label>Male</ion-label>
+            <ion-radio value="Male"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Female</ion-label>
+            <ion-radio value="Female"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Other</ion-label>
+            <ion-radio value="Other"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-item style="margin-top: 10px">
+        <ion-label
+          color="secondary"
+          class="input-label text-gray"
+          position="floating"
+          >Headline
+        </ion-label>
+        <ion-input inputmode="text"></ion-input>
+      </ion-item>
+
+      <ion-item style="margin-top: 10px">
+        <ion-label
+          color="secondary"
+          class="input-label text-gray"
+          position="floating"
+          >About
+        </ion-label>
+        <ion-textarea inputmode="text"></ion-textarea>
+      </ion-item>
+
+      <ion-button
+        color="secondary"
+        shape="round"
+        class="round-btn-40 m-t"
+        expand="block"
+        type="submit"
+        [routerLink]="['/profile-image']"
+      >
+        Next
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
