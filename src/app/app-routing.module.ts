@@ -1,6 +1,8 @@
+import { RecommendationComponent } from './recommendation/recommendation.component';
 import { DoLoginGuard } from './auth/guards/do-login.guards';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { InvitationsComponent } from './invitations/invitations.component';
 
 const routes: Routes = [
   {
@@ -12,8 +14,15 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./auth/login/login.module').then((m) => m.LoginPageModule),
-    canActivate: [DoLoginGuard],
+    // canActivate: [DoLoginGuard],
   },
+  {
+    path: 'post',
+    loadChildren: () =>
+      import('./post/post.module').then((m) => m.PostPageModule),
+  },
+  { path: 'recommendations', component: RecommendationComponent },
+  { path: 'invitations', component: InvitationsComponent },
   {
     path: 'post',
     loadChildren: () =>
@@ -67,7 +76,24 @@ const routes: Routes = [
   },
   {
     path: 'new-password',
-    loadChildren: () => import('./new-password/new-password.module').then( m => m.NewPasswordPageModule)
+    loadChildren: () =>
+      import('./new-password/new-password.module').then(
+        (m) => m.NewPasswordPageModule
+      ),
+  },
+  {
+    path: 'profile-image',
+    loadChildren: () =>
+      import('./profile-image/profile-image.module').then(
+        (m) => m.ProfileImagePageModule
+      ),
+  },
+  {
+    path: 'complete-profile',
+    loadChildren: () =>
+      import('./complete-profile/complete-profile.module').then(
+        (m) => m.CompleteProfilePageModule
+      ),
   },
 ];
 
