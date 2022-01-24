@@ -23,15 +23,6 @@
         <img src="assets/icon/favicon.png" alt="" />
       </ion-avatar>
     </ion-buttons>
-    <!-- <ion-buttons slot="end">
-      <ion-button color="secondary">
-        <ion-label
-          class="container-header back-icon routerLink"
-          [routerLink]="['/signup']"
-          >Join now
-        </ion-label>
-      </ion-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -41,12 +32,12 @@
   <div class="ion-padding-horizontal">
     <h1 class="title-30" style="opacity: 0.9">Join D-TALKS</h1>
     <div class="df-space-between">
-
       <h4
-        class="h4-sub-title text-primary routerLink" style="font-weight:500;cursor:pointer"
+        class="h4-sub-title text-primary routerLink"
+        style="font-weight: 500; cursor: pointer"
         [routerLink]="['/login']"
       >
-      <span style="color: black;">or</span>
+        <span style="color: black">or</span>
         sign in
       </h4>
     </div>
@@ -64,7 +55,7 @@
 
       <p class="text-danger">Please enter valid Email</p>
 
-      <ion-item style="margin-top: 10px;">
+      <ion-item style="margin-top: 10px">
         <ion-label
           color="secondary"
           class="input-label text-gray"
@@ -87,7 +78,7 @@
       </ion-item>
 
       <p class="text-danger">Minimum 6 characters required</p>
-      <ion-item style="margin-top: 10px;">
+      <ion-item style="margin-top: 10px">
         <ion-label
           color="secondary"
           class="input-label text-gray"
@@ -97,7 +88,7 @@
         <ion-input inputmode="text"></ion-input>
       </ion-item>
 
-      <ion-item style="margin-top: 10px;">
+      <ion-item style="margin-top: 10px">
         <ion-label
           color="secondary"
           class="input-label text-gray"
@@ -121,8 +112,9 @@
         class="round-btn-40"
         expand="block"
         type="submit"
-        [routerLink]="['/']"
+        [routerLink]="['/complete-profile']"
       >
+        <!-- [routerLink]="['/profile-image']" -->
         Agree & Join
       </ion-button>
     </form>
