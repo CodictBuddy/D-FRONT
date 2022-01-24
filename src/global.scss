@@ -40,6 +40,14 @@ img {
   margin-top: 10px !important;
   margin-bottom: 10px !important;
 }
+
+.title-20 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
 ion-label {
   font-family: "Roboto", Open Sans, sans-serif !important;
 }
@@ -1050,6 +1058,15 @@ b {
 .df-space-between {
   display: flex;
   justify-content: space-between;
+}
+.p-10 {
+  padding: 10px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.m-t {
+  margin-top: 10px;
 }
 .footer-outline {
   margin-left: 20px;
