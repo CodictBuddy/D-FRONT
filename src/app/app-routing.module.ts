@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./auth/login/login.module').then((m) => m.LoginPageModule),
-    canActivate: [DoLoginGuard],
+    // canActivate: [DoLoginGuard],
   },
   {
     path: 'post',
@@ -75,6 +75,14 @@ const routes: Routes = [
       import('./new-password/new-password.module').then(
         (m) => m.NewPasswordPageModule
       ),
+  },
+  {
+    path: 'profile-image',
+    loadChildren: () => import('./profile-image/profile-image.module').then( m => m.ProfileImagePageModule)
+  },
+  {
+    path: 'complete-profile',
+    loadChildren: () => import('./complete-profile/complete-profile.module').then( m => m.CompleteProfilePageModule)
   },
 ];
 
