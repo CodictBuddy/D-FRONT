@@ -23,7 +23,7 @@
   <div class="ion-padding-horizontal">
     <h1 class="title-30" style="opacity: 0.9">Sign in</h1>
 
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="loginAccess(loginForm.valid,loginForm.value)">
       <ion-item style="margin-top: 5px">
         <ion-label
           color="secondary"
@@ -31,10 +31,11 @@
           position="floating"
           >Email
         </ion-label>
-        <ion-input inputmode="text"></ion-input>
+        <ion-input inputmode="text"  formControlName="user_email"></ion-input>
       </ion-item>
 
-      <p class="text-danger">Please enter valid Email</p>
+      <p class="text-danger" *ngIf="loginForm.controls['user_email'].invalid && (loginForm.controls['user_email'].dirty || loginForm.controls['user_email'].touched)"
+      >Please enter valid Email</p>
 
       <ion-item style="margin-top: 10px; display: flex">
         <ion-label
@@ -45,6 +46,7 @@
         >
         <ion-input
           inputmode="text"
+          formControlName="password"
           type="password"
           [type]="hide ? 'password' : 'text'"
         ></ion-input>
@@ -58,7 +60,7 @@
         </div>
       </ion-item>
 
-      <p class="text-danger">Minimum 6 characters required</p>
+      <p class="text-danger" *ngIf="loginForm.controls.password.errors?.minlength">Minimum 6 characters required</p>
       <br />
       <div class="df-space-between">
         <h4
@@ -75,7 +77,6 @@
         class="round-btn-40"
         expand="block"
         type="submit"
-        [routerLink]="['/']"
       >
         Continue
       </ion-button>
