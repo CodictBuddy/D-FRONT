@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +13,9 @@ import { ResetPasswordVerificationPage } from './reset-password-verification.pag
     CommonModule,
     FormsModule,
     IonicModule,
-    ResetPasswordVerificationPageRoutingModule
+    ReactiveFormsModule,
+    ResetPasswordVerificationPageRoutingModule,
   ],
-  declarations: [ResetPasswordVerificationPage]
+  declarations: [ResetPasswordVerificationPage],
 })
 export class ResetPasswordVerificationPageModule {}
