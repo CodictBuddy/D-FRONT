@@ -1,3 +1,4 @@
+import { IsAuthorizedGuard } from './auth/guards/is-authorized.guards';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import { DoLoginGuard } from './auth/guards/do-login.guards';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
+    canActivate: [IsAuthorizedGuard],
   },
   {
     path: 'login',
@@ -20,13 +22,23 @@ const routes: Routes = [
     path: 'post',
     loadChildren: () =>
       import('./post/post.module').then((m) => m.PostPageModule),
+    canActivate: [IsAuthorizedGuard],
   },
-  { path: 'recommendations', component: RecommendationComponent },
-  { path: 'invitations', component: InvitationsComponent },
+  {
+    path: 'recommendations',
+    component: RecommendationComponent,
+    canActivate: [IsAuthorizedGuard],
+  },
+  {
+    path: 'invitations',
+    component: InvitationsComponent,
+    canActivate: [IsAuthorizedGuard],
+  },
   {
     path: 'post',
     loadChildren: () =>
       import('./post/post.module').then((m) => m.PostPageModule),
+    canActivate: [IsAuthorizedGuard],
   },
   {
     path: '',
@@ -39,6 +51,7 @@ const routes: Routes = [
       import('./profile-dashboard/profile-dashboard.module').then(
         (m) => m.ProfileDashboardPageModule
       ),
+    canActivate: [IsAuthorizedGuard],
   },
   {
     path: 'profile',
@@ -46,6 +59,7 @@ const routes: Routes = [
       import('./profile-manage/profile-manage.module').then(
         (m) => m.ProfileManagePageModule
       ),
+    canActivate: [IsAuthorizedGuard],
   },
 
   {
@@ -66,6 +80,7 @@ const routes: Routes = [
     path: 'chat-room',
     loadChildren: () =>
       import('./chat-room/chat-room.module').then((m) => m.ChatRoomPageModule),
+    canActivate: [IsAuthorizedGuard],
   },
   {
     path: 'reset-password',
@@ -87,6 +102,7 @@ const routes: Routes = [
       import('./profile-image/profile-image.module').then(
         (m) => m.ProfileImagePageModule
       ),
+    canActivate: [IsAuthorizedGuard],
   },
   {
     path: 'complete-profile',
@@ -94,6 +110,7 @@ const routes: Routes = [
       import('./complete-profile/complete-profile.module').then(
         (m) => m.CompleteProfilePageModule
       ),
+    canActivate: [IsAuthorizedGuard],
   },
 ];
 
