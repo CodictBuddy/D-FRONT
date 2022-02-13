@@ -1,3 +1,4 @@
+import { UtilService } from './../utils/util.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController, ActionSheetController } from '@ionic/angular';
 
@@ -10,7 +11,8 @@ export class ProfileDashboardPage implements OnInit {
   tab = '1';
   constructor(
     private menu: MenuController,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private util: UtilService
   ) {}
 
   ngOnInit() {}
@@ -56,5 +58,10 @@ export class ProfileDashboardPage implements OnInit {
 
     const { role, data } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role and data', role, data);
+  }
+
+  logoutUser() {
+    localStorage.clear();
+    this.util.routeNavigation('/login');
   }
 }
