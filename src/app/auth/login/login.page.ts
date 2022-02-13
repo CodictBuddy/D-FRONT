@@ -1,32 +1,30 @@
 import { AuthService } from '../auth.service';
 import { UtilService } from '../../utils/util.service';
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Platform } from "@ionic/angular";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.page.html",
-  styleUrls: ["./login.page.scss"],
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  hide:Boolean = false
+  hide: Boolean = true;
   loginForm: FormGroup;
 
   constructor(
-    private router: Router,
     public platform: Platform,
     private loginBuilder: FormBuilder,
-    private util:UtilService,
-    private auth:AuthService
-    // private userService: UserService
+    private util: UtilService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
-    this.loginFormBuilder()
+    this.loginFormBuilder();
   }
-
-  loginFormBuilder(){
+  // https://alligator.io/nodejs/express-cookies/  reference for cookies from node js
+  loginFormBuilder() {
     this.loginForm = this.loginBuilder.group({
       user_email: [
         '',
@@ -45,15 +43,12 @@ export class LoginPage implements OnInit {
         (res) => {
           console.log('login response', res);
           this.util.toast('Login Successfully', 2000);
-          localStorage.setItem(
-            "access_token",
-           res.access_token
-          );
-          // on success navigate to [routerLink]="['/']"
-          // this.userAccessor()
+          this.util.setLocalStorage('access_token', res.access_token);
+          this.util.routeNavigation('/');
+          this.loginFormBuilder();
         },
         (err) => {
-          console.log('Login Error',err);
+          console.log('Login Error', err);
 
           this.util.toast(err.error['message'], 2000);
         }
@@ -61,8 +56,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-
-  toggleView(){
-    this.hide =!this.hide
+  toggleView() {
+    this.hide = !this.hide;
   }
 }
