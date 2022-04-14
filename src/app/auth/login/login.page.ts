@@ -1,3 +1,4 @@
+import { SocketService } from './../../services/socket.service';
 import { AuthService } from '../auth.service';
 import { UtilService } from '../../utils/util.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
     public platform: Platform,
     private loginBuilder: FormBuilder,
     private util: UtilService,
-    private auth: AuthService
+    private auth: AuthService,
+    private socket: SocketService
   ) {}
 
   ngOnInit() {
@@ -44,8 +46,10 @@ export class LoginPage implements OnInit {
           console.log('login response', res);
           this.util.toast('Login Successfully', 2000);
           this.util.setLocalStorage('access_token', res.access_token);
+          this.util.setLocalStorage('user_data', res.user);
           this.util.routeNavigation('/');
           this.loginFormBuilder();
+          this.socket.loginUserSocket(res?.user?._id);
         },
         (err) => {
           console.log('Login Error', err);
