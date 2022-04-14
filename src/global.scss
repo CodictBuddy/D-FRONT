@@ -261,6 +261,11 @@ ion-icon {
   font-size: 18px;
 }
 
+.cross-btn {
+  float: right;
+  padding: 5px;
+}
+
 .category_slide {
   width: 100%;
   .category_img {
@@ -1065,6 +1070,32 @@ b {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.round-border {
+  border-radius: 50%;
+}
+.w-bg {
+  background: whitesmoke;
+}
+.border-white {
+  border: 2px solid white;
+}
+
+.profile-image-avatar {
+  height: 100px;
+  width: 100px;
+  border: 5px solid white;
+  margin: -55px 0 0 20px;
+}
+
+.segment-adjust {
+  padding: 10px 10px 0 10px;
+}
+
 .m-t {
   margin-top: 10px;
 }
@@ -1226,6 +1257,14 @@ ion-back-button {
   font-weight: bold !important;
   color: #342d2d !important;
 }
+
+.alertButtonSetting {
+  border: 2px solid;
+  border-radius: 50%;
+  padding: 7px;
+  color: #d44638;
+}
+
 .action-spam {
   .action-sheet-button {
     text-align: center !important;
@@ -1256,6 +1295,13 @@ ion-chip {
 }
 .alert-wrapper.sc-ion-alert-md {
   border-radius: 20px !important;
+  font-size: 13px !important;
+  .alert-message {
+    font-size: inherit;
+  }
+  .alert-button {
+    text-transform: capitalize;
+  }
 }
 .action-sheet-icon {
   margin-right: 10px !important;

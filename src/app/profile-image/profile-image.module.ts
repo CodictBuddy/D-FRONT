@@ -14,9 +14,9 @@ import { ProfileImagePage } from './profile-image.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfileImagePageRoutingModule
+    ProfileImagePageRoutingModule,
   ],
   declarations: [ProfileImagePage],
-  providers:[MediaService]
+  providers: [MediaService],
 })
 export class ProfileImagePageModule {}

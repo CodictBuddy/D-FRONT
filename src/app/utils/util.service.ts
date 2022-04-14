@@ -1,6 +1,11 @@
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import {
+  ToastController,
+  AlertController,
+  ActionSheetController,
+} from '@ionic/angular';
 // import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import {
   Camera,
@@ -13,11 +18,63 @@ import {
   providedIn: 'root',
 })
 export class UtilService {
+  public actionSheetOutput = new BehaviorSubject<any>({});
+
   constructor(
     public toastController: ToastController,
+    public alertController: AlertController,
+    public actionSheetController: ActionSheetController,
     private router: Router
   ) {}
   public default_language = { lng: 'en' };
+  public mediaKeyAccessor = {
+    profile: 'user_profile_image',
+    cover: 'user_background_image',
+  };
+
+  public connection_btns = {
+    0: 'Connect',
+    1: 'Pending',
+    2: 'Withdrawn',
+    3: 'Follow',
+    4: 'Message',
+    5: 'Followed',
+  };
+
+  public alert_options = {
+    profile_connection_options: [
+      {
+        text: 'Share Profile',
+        icon: 'share-social-outline',
+      },
+      {
+        text: 'Connect',
+        icon: 'person-add',
+      },
+      {
+        text: 'Remove',
+        icon: 'person-remove',
+      },
+      {
+        text: 'Report or block',
+        icon: 'flag',
+      },
+      {
+        text: 'Share profile via message',
+        icon: 'send',
+      },
+    ],
+  };
+
+  public alert_constants = {
+    withdraw_invitation: {
+      heading: 'Withdraw invitation',
+      subHeading: `If you withdraw now, you won't be able to resend to this person for up to a month.`,
+      buttons: ['Cancel', 'Withdraw'],
+    },
+  };
+
+  public fallbackUserImage = 'assets/Image/Empty State Icon/People.svg';
   async toast(message, duration) {
     const toast = await this.toastController.create({
       message: message,
@@ -25,6 +82,57 @@ export class UtilService {
       position: 'bottom',
     });
     toast.present();
+  }
+
+  async dynamicActionSheet(metaData) {
+    if (!metaData?.buttons?.length) return;
+    const btnFrame = [];
+
+    for (let i = 0; i < metaData.buttons.length; i++) {
+      const keys: any[] = Object.keys(metaData.buttons[i]);
+      const btnKeys = {};
+      if (keys.length) {
+        for (const key of keys) {
+          btnKeys[key] = metaData.buttons[i][key];
+        }
+      }
+      btnFrame.push(btnKeys);
+    }
+
+    const mainActionSheetObject = {
+      buttons: btnFrame,
+    };
+    if (metaData.heading) {
+      mainActionSheetObject['heading'] = metaData.heading;
+    }
+    const actionSheet = await this.actionSheetController.create(
+      mainActionSheetObject
+    );
+
+    actionSheet.present();
+  }
+
+  async showAlert(metaData) {
+    if (!metaData?.buttons.length || !metaData.heading) return;
+    const btnFrame = [];
+    for (let i = 0; i < metaData?.buttons.length; i++) {
+      btnFrame.push({
+        text: metaData?.buttons[i],
+        handler: () => {
+          this.actionSheetOutput.next({
+            button: metaData?.buttons[i],
+            information: metaData.information ?? null,
+          });
+        },
+      });
+    }
+
+    const alert: any = await this.alertController.create({
+      header: metaData.heading ?? '',
+      message: metaData.subHeading ?? '',
+      buttons: btnFrame,
+    });
+    alert.present();
   }
 
   partialHideEmail(email) {

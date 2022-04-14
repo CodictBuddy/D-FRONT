@@ -54,6 +54,14 @@ const routes: Routes = [
     canActivate: [IsAuthorizedGuard],
   },
   {
+    path: 'dashboard/:id',
+    loadChildren: () =>
+      import('./profile-dashboard/profile-dashboard.module').then(
+        (m) => m.ProfileDashboardPageModule
+      ),
+    canActivate: [IsAuthorizedGuard],
+  },
+  {
     path: 'profile',
     loadChildren: () =>
       import('./profile-manage/profile-manage.module').then(
