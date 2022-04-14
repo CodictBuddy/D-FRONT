@@ -1,20 +1,33 @@
+import { environment } from './../environments/environment';
 import { TokenInterceptor } from './utils/token.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
-import { Camera } from "@ionic-native/camera/ngx";
-import { File } from "@ionic-native/file/ngx";
-import { Crop } from "@ionic-native/crop/ngx";
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { Crop } from '@ionic-native/crop/ngx';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = {
+  url: environment.base_url,
+  options: { path: '/socket' },
+};
 
 @NgModule({
-  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    SocketIoModule.forRoot(config),
+  ],
   declarations: [AppComponent],
   entryComponents: [],
   providers: [

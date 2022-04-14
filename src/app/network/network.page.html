@@ -17,7 +17,11 @@
     <app-invitations [reusable]="true"></app-invitations>
   </div>
   <div class="recommendations">
-    <app-recommendation [reusable]="true"></app-recommendation>
+    <app-recommendation
+      [reusable]="true"
+      [showCount]="5"
+      (list)="trackListData($event)"
+    ></app-recommendation>
     <!-- <div
       class=""
       slot="bottom"
@@ -28,6 +32,7 @@
     </div> -->
     <ion-buttons slot="end" expand="full">
       <ion-button
+        *ngIf="showMore"
         style="width: 100%; text-transform: initial"
         slot="end"
         expand="full"

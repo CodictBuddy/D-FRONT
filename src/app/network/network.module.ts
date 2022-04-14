@@ -1,3 +1,4 @@
+import { UtilsModule } from './../utils/utils.module';
 import { InvitationsComponent } from './../invitations/invitations.component';
 import { RecommendationComponent } from './../recommendation/recommendation.component';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,13 @@ import { NetworkPageRoutingModule } from './network-routing.module';
 import { NetworkPage } from './network.page';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, NetworkPageRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    NetworkPageRoutingModule,
+    UtilsModule,
+  ],
   declarations: [NetworkPage, RecommendationComponent, InvitationsComponent],
 })
 export class NetworkPageModule {}
