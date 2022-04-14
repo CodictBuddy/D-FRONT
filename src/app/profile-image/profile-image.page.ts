@@ -32,8 +32,8 @@ export class ProfileImagePage implements OnInit, OnDestroy {
     this.userData = this.util.processData(this.userData);
   }
 
-  async addImage(alreadyImage) {
-    await this.mediaService.processMedia(alreadyImage, this.userImg);
+  async addImage(alreadyImage, addImage) {
+    await this.mediaService.processMedia(alreadyImage, this.userImg, addImage);
   }
 
   ngOnDestroy(): void {

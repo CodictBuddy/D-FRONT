@@ -8,7 +8,10 @@
       ></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end" id="main">
-      <ion-button (click)="openMenu()" class="container-header"
+      <ion-button
+        (click)="openMenu()"
+        class="container-header"
+        *ngIf="userMeta?.['self']"
         ><ion-icon class="regular-font-size" name="settings-sharp"></ion-icon
       ></ion-button>
     </ion-buttons>
@@ -17,37 +20,44 @@
 
 <ion-content>
   <ion-card style="height: 150px; z-index: -1; margin: 0">
-    <ion-icon
+    <ion-icon *ngIf="myProfile"
+      (click)="addImage(!!userCoverImg?.['url'] , 'cover')"
       style="z-index: +2; margin-bottom: -40px; float: right; padding: 10px"
       name="camera"
     ></ion-icon>
     <img
       width="100%"
       height="100%"
-      src="assets/Image/Empty State Icon/People.svg"
+      [src]="userCoverImg?.['url'] ||userFallbackImage"
   /></ion-card>
-  <div class="">
-    <ion-avatar
-      style="
-        height: 100px;
-        width: 100px;
-        border: 5px solid white;
-        margin: -55px 0 0 20px;
-      "
-    >
-      <img src="assets/Image/Empty State Icon/People.svg" />
-      <ion-icon class="add-img-positioning" name="add-circle-sharp"></ion-icon>
+  <div class="m-b-20">
+    <ion-avatar class="profile-image-avatar">
+      <img [src]="userImg?.['url'] ||userFallbackImage" />
+      <ion-icon *ngIf="myProfile"
+        (click)="addImage(!!userImg?.['url'] , 'profile')"
+        class="add-img-positioning round-border w-bg"
+        name="add-circle-sharp"
+      ></ion-icon>
     </ion-avatar>
   </div>
-  <h4 style="margin: 0 15px; opacity: 0.8">Raunak Srivastava</h4>
-  <h6 style="margin: 0 15px; opacity: 0.6">A story teller guy</h6>
+  <h4 style="margin: 0 15px; opacity: 0.8">
+    {{user?.['first_name']?.['description'] |titlecase}}
+    {{user?.['last_name']?.['description'] |titlecase}}
+  </h4>
+  <h6 style="margin: 0 15px; opacity: 0.6">
+    {{user?.['user_headline']?.['description'] || 'Add your headline here... '}}
+  </h6>
+
+  <ng-container *ngIf="!myProfile">
+    <app-action-buttons></app-action-buttons>
+  </ng-container>
 
   <ion-card style="padding: 5px">
     <div class="" style="padding: 5px">
       <h4>About</h4>
       <p>
-        Multiline text that should wrap when it is too long to fit on one line
-        in the item.
+        {{user?.['user_about']?.['description'] || "Let people know about
+        yourself..."}}
       </p>
     </div>
   </ion-card>
@@ -56,7 +66,7 @@
     [value]="tab"
     (ionChange)="segmentChanged($event)"
     color="secondary"
-    style="padding-top: 10px"
+    class="segment-adjust"
   >
     <ion-segment-button value="1">
       <ion-icon name="heart"></ion-icon>
