@@ -1,3 +1,4 @@
+import { UtilsModule } from './../utils/utils.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +14,9 @@ import { ProfileDashboardPage } from './profile-dashboard.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfileDashboardPageRoutingModule
+    ProfileDashboardPageRoutingModule,
+    UtilsModule,
   ],
-  declarations: [ProfileDashboardPage]
+  declarations: [ProfileDashboardPage],
 })
 export class ProfileDashboardPageModule {}

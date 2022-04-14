@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./network.page.scss'],
 })
 export class NetworkPage implements OnInit {
+  showMore: boolean;
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  trackListData(event) {
+    this.showMore = event?.list && event?.list.length;
   }
-
 }
