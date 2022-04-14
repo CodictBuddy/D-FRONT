@@ -55,7 +55,7 @@
       class="round-btn-40 f-t"
       expand="block"
       type="submit"
-      (click)="addImage(!!userImg['url'])"
+      (click)="addImage(!!userImg['url'] , 'profile')"
     >
       {{userImg['url']? 'Change photo':'Add a photo'}}
     </ion-button>
