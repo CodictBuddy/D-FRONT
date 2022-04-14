@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +13,9 @@ import { ProfileManagePage } from './profile-manage.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfileManagePageRoutingModule
+    ReactiveFormsModule,
+    ProfileManagePageRoutingModule,
   ],
-  declarations: [ProfileManagePage]
+  declarations: [ProfileManagePage],
 })
 export class ProfileManagePageModule {}
