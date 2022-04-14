@@ -1,3 +1,4 @@
+
 import { ConnectionService } from './../services/connection.service';
 import { Subscription } from 'rxjs';
 import { UtilService } from '../utils/util.service';
@@ -16,6 +17,7 @@ import {
   templateUrl: './recommendation.component.html',
   styleUrls: ['./recommendation.component.scss'],
 })
+
 export class RecommendationComponent implements OnInit, OnDestroy {
   @Input('reusable') reusable: Boolean = false;
   @Input('showCount') showCount: number = 10;
