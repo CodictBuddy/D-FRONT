@@ -14,9 +14,11 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// import { FCM} from '@ionic-native/fcm/ngx';
+// import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
 
 const config: SocketIoConfig = {
-  url: environment.base_url,
+  url: environment.url,
   options: { path: '/socket' },
 };
 
@@ -31,6 +33,7 @@ const config: SocketIoConfig = {
   declarations: [AppComponent],
   entryComponents: [],
   providers: [
+    // FCM,
     TextToSpeech,
     SpeechRecognition,
     Camera,

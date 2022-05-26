@@ -15,16 +15,17 @@
       <ion-label>Add Talks</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="notification">
+    <ion-tab-button tab="notification" (click)="notificationCount = 0">
       <!-- style="position: absolute; top: -1px; left: 20px" -->
-      <!-- <ion-label>
+      <ion-label>
         <ion-badge
+          *ngIf="notificationCount > 0"
           style="position: absolute; top: 8px; right: 20%; z-index: +1"
           slot="end"
           color="secondary"
-          >2</ion-badge
+          >{{notificationCount}}</ion-badge
         ></ion-label
-      > -->
+      >
       <ion-label>notifications</ion-label>
       <ion-icon name="notifications-outline"></ion-icon>
     </ion-tab-button>

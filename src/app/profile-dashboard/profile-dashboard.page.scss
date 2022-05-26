@@ -2,6 +2,20 @@
   padding-left: 10px;
 }
 
+.profile-camera-positioning {
+  position: absolute;
+  right: 1px;
+  padding: 4px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.card-setting {
+  height: 150px;
+  z-index: -1;
+  margin: 0;
+}
 .add-img-positioning {
   position: relative;
   opacity: 0.6;

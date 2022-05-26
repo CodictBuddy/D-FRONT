@@ -1,3 +1,4 @@
+import { NotificationService } from './../services/notification.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,12 +10,8 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 import { TabsPage } from './tabs.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TabsPageRoutingModule
-  ],
-  declarations: [TabsPage]
+  imports: [CommonModule, FormsModule, IonicModule, TabsPageRoutingModule],
+  declarations: [TabsPage],
+  providers: [NotificationService],
 })
 export class TabsPageModule {}

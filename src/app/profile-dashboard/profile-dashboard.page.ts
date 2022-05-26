@@ -1,12 +1,9 @@
+import { ConnectionService } from './../services/connection.service';
 import { ActivatedRoute } from '@angular/router';
 import { MediaService } from './../profile-image/media.service';
 import { UserService } from './../services/user.service';
 import { UtilService } from './../utils/util.service';
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuController, ActionSheetController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
@@ -23,6 +20,8 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
   userImg = {};
   userCoverImg = {};
   imageType = '';
+  sender_name = '';
+  my_information = {};
   myProfile: boolean;
 
   mediaSubscription: Subscription;
@@ -54,6 +53,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     const id = this.route.snapshot.params['id'];
     this.myProfile = !id;
     this.getUserDetails(id);
+    this.getMyDetails();
   }
 
   async addImage(alreadyImage, addImage) {
@@ -63,11 +63,16 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     await this.mediaService.processMedia(alreadyImage, imageObject, addImage);
   }
 
+  getMyDetails() {
+    let myInfo = this.userService.getMyDetails();
+    myInfo = this.userService.processData(myInfo, this.util.default_language);
+    this.my_information = this.userService.profilePatchingObject(myInfo);
+    this.sender_name = `${this.my_information['first_name']} ${this.my_information['last_name']}`;
+  }
   async getUserDetails(uid) {
     const userId = uid ? uid : this.userService.getMyDetails()?._id;
     const uData = await this.userService.getUserProfile(userId);
     if (!uid) {
-
       this.userMeta = uData?.userMeta;
     }
     this.user = this.userService.processData(
