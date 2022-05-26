@@ -19,17 +19,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-card style="height: 150px; z-index: -1; margin: 0">
-    <ion-icon *ngIf="myProfile"
-      (click)="addImage(!!userCoverImg?.['url'] , 'cover')"
+  <ion-icon
+    *ngIf="myProfile"
+    (click)="addImage(!!userCoverImg?.['url'] , 'cover')"
+    name="camera"
+    class="profile-camera-positioning"
+  >
+  </ion-icon>
+  <ion-card class="card-setting">
+    <img
       width="100%"
       height="100%"
       [src]="userCoverImg?.['url'] ||userFallbackImage"
-  /></ion-card>
+    />
+  </ion-card>
   <div class="m-b-20">
     <ion-avatar class="profile-image-avatar">
-      <img [src]="userImg?.['url'] ||userFallbackImage" />
-      <ion-icon *ngIf="myProfile"
+      <img [src]="userImg?.['url'] || userFallbackImage" />
+      <ion-icon
+        *ngIf="myProfile"
         (click)="addImage(!!userImg?.['url'] , 'profile')"
         class="add-img-positioning round-border w-bg"
         name="add-circle-sharp"
@@ -44,8 +52,12 @@
     {{user?.['user_headline']?.['description'] || 'Add your headline here... '}}
   </h6>
 
-  <ng-container *ngIf="!myProfile">
-    <app-action-buttons></app-action-buttons>
+  <ng-container *ngIf="!myProfile && user?.['_id']">
+    <app-action-buttons
+      [user_id]="user?.['_id']"
+      [sender_name]="sender_name"
+      [sender_info]="my_information"
+    ></app-action-buttons>
   </ng-container>
 
   <ion-card style="padding: 5px">

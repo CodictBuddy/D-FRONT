@@ -26,86 +26,170 @@
     color="secondary"
     style="padding-top: 10px"
   >
-    <ion-segment-button value="1">
+    <ion-segment-button value="2">
       <ion-label>Recieved</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="2">
+    <ion-segment-button value="1">
       <ion-label>Sent</ion-label>
     </ion-segment-button>
   </ion-segment>
 </div>
 
+<ng-container *ngIf="!reusable; else invitationsView">
+  <ion-content>
+    <div class="" [ngSwitch]="tab">
+      <div class="" *ngSwitchCase="'2'">
+        <ion-list style="padding: 0 10px">
+          <ion-list-header>
+            {{ recieved_network_list.length | number }} Pending invitations
+          </ion-list-header>
 
-<ng-container *ngIf="!reusable else invitationsView">
-<ion-content>
-  <div class="" [ngSwitch]="tab" >
-    <div class="" *ngSwitchCase="'1'">
+          <ion-item
+            *ngFor="let n of recieved_network_list; let in = index"
+            (click)="goToProfile(n?.user?._id)"
+          >
+            <ion-avatar slot="start">
+              <img
+                [src]="n.user.user_profile_image?.url || userFallbackImage"
+              />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ n.user.first_name.description | titlecase }}</h2>
+              <p>{{ n.user.user_headline?.description }}</p>
+            </ion-label>
+            <ion-fab-button
+              (click)="
+                removeConnection(
+                  n.user._id,
+                  n.type,
+                  in,
+                  recieved_network_list,
+                  'Recieved'
+                );
+                $event.stopPropagation()
+              "
+              style="background: none"
+              size="small"
+              fill="outline"
+              ><ion-icon name="close-outline"></ion-icon
+            ></ion-fab-button>
+            <ion-fab-button
+              (click)="
+                modifyConnection(n, in, recieved_network_list);
+                $event.stopPropagation()
+              "
+              shape="round"
+              size="small"
+              fill="outline"
+              ><ion-icon name="checkmark-outline"></ion-icon
+            ></ion-fab-button>
+          </ion-item>
+
+          <!-- <ion-item>
+            <ion-avatar slot="start">
+              <img src="assets/Image/Empty State Icon/People.svg" />
+            </ion-avatar>
+            <ion-label>
+              <h2>Leia</h2>
+              <p>I've placed information vital to the survival...</p>
+            </ion-label>
+            <ion-fab-button style="background: none" size="small" fill="outline"
+              ><ion-icon name="close-outline"></ion-icon
+            ></ion-fab-button>
+            <ion-fab-button shape="round" size="small" fill="outline"
+              ><ion-icon name="checkmark-outline"></ion-icon
+            ></ion-fab-button>
+          </ion-item> -->
+        </ion-list>
+      </div>
+
+      <!-- networks tab -->
+
+      <div class="" *ngSwitchCase="'1'">
+        <ion-list style="padding: 0 10px">
+          <ion-list-header>
+            {{ sent_network_list.length | number }} Sent invitations
+          </ion-list-header>
+
+          <ion-item
+            *ngFor="let n of sent_network_list; let ind = index"
+            (click)="goToProfile(n?.user?._id)"
+          >
+            <ion-avatar slot="start">
+              <img
+                [src]="n.user.user_profile_image?.url || userFallbackImage"
+              />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ n.user.first_name.description | titlecase }}</h2>
+              <p>{{ n.user.user_headline?.description }}</p>
+            </ion-label>
+
+            <ion-buttons slot="end" size="small">
+              <ion-button
+                (click)="
+                  showRemoveConnectionPopup(
+                    n.user._id,
+                    ind,
+                    sent_network_list,
+                    'Sent'
+                  );
+                  $event.stopPropagation()
+                "
+                style="text-transform: Capitalize; opacity: 0.6"
+                >withdraw</ion-button
+              >
+            </ion-buttons>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </ion-content>
+</ng-container>
+
+<ng-template #invitationsView>
+  <div class="" [ngSwitch]="tab">
+    <div class="" *ngSwitchCase="'2'">
       <ion-list style="padding: 0 10px">
         <ion-list-header>
-          {{ "433452" | number }} Pending invitations
+          {{ recieved_network_list.length | number }} Pending invitations
         </ion-list-header>
 
-        <ion-item>
+        <ion-item
+          *ngFor="let n of recieved_network_list; let in = index"
+          (click)="goToProfile(n?.user?._id)"
+        >
           <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
+            <img [src]="n.user.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>
           <ion-label>
-            <h2>Poe</h2>
-
-            <p>just a story teller..</p>
+            <h2>{{ n.user.first_name.description | titlecase }}</h2>
+            <p>{{ n.user.user_headline?.description }}</p>
           </ion-label>
-          <ion-fab-button style="background: none" size="small" fill="outline"
+          <ion-fab-button
+            (click)="
+              removeConnection(
+                n.user._id,
+                n.type,
+                in,
+                recieved_network_list,
+                'Recieved'
+              );
+              $event.stopPropagation()
+            "
+            style="background: none"
+            size="small"
+            fill="outline"
             ><ion-icon name="close-outline"></ion-icon
           ></ion-fab-button>
-          <ion-fab-button shape="round" size="small" fill="outline"
-            ><ion-icon name="checkmark-outline"></ion-icon
-          ></ion-fab-button>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Ben</h2>
-            <p>These aren't the droids you're looking for...</p>
-          </ion-label>
-          <ion-fab-button style="background: none" size="small" fill="outline"
-            ><ion-icon name="close-outline"></ion-icon
-          ></ion-fab-button>
-          <ion-fab-button shape="round" size="small" fill="outline"
-            ><ion-icon name="checkmark-outline"></ion-icon
-          ></ion-fab-button>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Leia</h2>
-            <p>I've placed information vital to the survival...</p>
-          </ion-label>
-          <ion-fab-button style="background: none" size="small" fill="outline"
-            ><ion-icon name="close-outline"></ion-icon
-          ></ion-fab-button>
-          <ion-fab-button shape="round" size="small" fill="outline"
-            ><ion-icon name="checkmark-outline"></ion-icon
-          ></ion-fab-button>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Yoda</h2>
-            <p>Do or do not. There is no try...</p>
-          </ion-label>
-          <ion-fab-button style="background: none" size="small" fill="outline"
-            ><ion-icon name="close-outline"></ion-icon
-          ></ion-fab-button>
-          <ion-fab-button shape="round" size="small" fill="outline"
+          <ion-fab-button
+            (click)="
+              modifyConnection(n, in, recieved_network_list);
+              $event.stopPropagation()
+            "
+            shape="round"
+            size="small"
+            fill="outline"
             ><ion-icon name="checkmark-outline"></ion-icon
           ></ion-fab-button>
         </ion-item>
@@ -114,71 +198,36 @@
 
     <!-- networks tab -->
 
-
-    <div class="" *ngSwitchCase="'2'">
+    <div class="" *ngSwitchCase="'1'">
       <ion-list style="padding: 0 10px">
         <ion-list-header>
-          {{ "433452" | number }} Sent invitations
+          {{ sent_network_list.length | number }} Sent invitations
         </ion-list-header>
 
-        <ion-item>
+        <ion-item
+          *ngFor="let n of sent_network_list; let ind = index"
+          (click)="goToProfile(n?.user?._id)"
+        >
           <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
+            <img [src]="n.user.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>
           <ion-label>
-            <h2>Poe</h2>
-            <p>intro heading of user</p>
+            <h2>{{ n.user.first_name.description | titlecase }}</h2>
+            <p>{{ n.user.user_headline?.description }}</p>
           </ion-label>
 
           <ion-buttons slot="end" size="small">
-            <ion-button style="text-transform: Capitalize; opacity: 0.6"
-              >withdraw</ion-button
-            >
-          </ion-buttons>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Ben</h2>
-            <p>These aren't the droids you're looking for...</p>
-          </ion-label>
-
-          <ion-buttons slot="end" size="small">
-            <ion-button style="text-transform: Capitalize; opacity: 0.6"
-              >withdraw</ion-button
-            >
-          </ion-buttons>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Leia</h2>
-            <p>I've placed information vital to the survival...</p>
-          </ion-label>
-
-          <ion-buttons slot="end" size="small">
-            <ion-button style="text-transform: Capitalize; opacity: 0.6"
-              >withdraw</ion-button
-            >
-          </ion-buttons>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Yoda</h2>
-            <p>Do or do not. There is no try...</p>
-          </ion-label>
-          <ion-buttons slot="end" size="small">
-            <ion-button style="text-transform: Capitalize; opacity: 0.6"
+            <ion-button
+              (click)="
+                showRemoveConnectionPopup(
+                  n.user._id,
+                  ind,
+                  sent_network_list,
+                  'Sent'
+                );
+                $event.stopPropagation()
+              "
+              style="text-transform: Capitalize; opacity: 0.6"
               >withdraw</ion-button
             >
           </ion-buttons>
@@ -186,156 +235,4 @@
       </ion-list>
     </div>
   </div>
-</ion-content>
-</ng-container>
-
-<ng-template #invitationsView>
-    <div class="" [ngSwitch]="tab" >
-      <div class="" *ngSwitchCase="'1'">
-        <ion-list style="padding: 0 10px">
-          <ion-list-header>
-            {{ "433452" | number }} Pending invitations
-          </ion-list-header>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="assets/Image/Empty State Icon/People.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Poe</h2>
-
-              <p>just a story teller..</p>
-            </ion-label>
-            <ion-fab-button style="background: none" size="small" fill="outline"
-              ><ion-icon name="close-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-fab-button shape="round" size="small" fill="outline"
-              ><ion-icon name="checkmark-outline"></ion-icon
-            ></ion-fab-button>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="assets/Image/Empty State Icon/People.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Ben</h2>
-              <p>These aren't the droids you're looking for...</p>
-            </ion-label>
-            <ion-fab-button style="background: none" size="small" fill="outline"
-              ><ion-icon name="close-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-fab-button shape="round" size="small" fill="outline"
-              ><ion-icon name="checkmark-outline"></ion-icon
-            ></ion-fab-button>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="assets/Image/Empty State Icon/People.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Leia</h2>
-              <p>I've placed information vital to the survival...</p>
-            </ion-label>
-            <ion-fab-button style="background: none" size="small" fill="outline"
-              ><ion-icon name="close-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-fab-button shape="round" size="small" fill="outline"
-              ><ion-icon name="checkmark-outline"></ion-icon
-            ></ion-fab-button>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="assets/Image/Empty State Icon/People.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Yoda</h2>
-              <p>Do or do not. There is no try...</p>
-            </ion-label>
-            <ion-fab-button style="background: none" size="small" fill="outline"
-              ><ion-icon name="close-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-fab-button shape="round" size="small" fill="outline"
-              ><ion-icon name="checkmark-outline"></ion-icon
-            ></ion-fab-button>
-          </ion-item>
-        </ion-list>
-      </div>
-
-      <!-- networks tab -->
-
-
-      <div class="" *ngSwitchCase="'2'">
-        <ion-list style="padding: 0 10px">
-          <ion-list-header>
-            {{ "433452" | number }} Sent invitations
-          </ion-list-header>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="assets/Image/Empty State Icon/People.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Poe</h2>
-              <p>intro heading of user</p>
-            </ion-label>
-
-            <ion-buttons slot="end" size="small">
-              <ion-button style="text-transform: Capitalize; opacity: 0.6"
-                >withdraw</ion-button
-              >
-            </ion-buttons>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="assets/Image/Empty State Icon/People.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Ben</h2>
-              <p>These aren't the droids you're looking for...</p>
-            </ion-label>
-
-            <ion-buttons slot="end" size="small">
-              <ion-button style="text-transform: Capitalize; opacity: 0.6"
-                >withdraw</ion-button
-              >
-            </ion-buttons>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="assets/Image/Empty State Icon/People.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Leia</h2>
-              <p>I've placed information vital to the survival...</p>
-            </ion-label>
-
-            <ion-buttons slot="end" size="small">
-              <ion-button style="text-transform: Capitalize; opacity: 0.6"
-                >withdraw</ion-button
-              >
-            </ion-buttons>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="assets/Image/Empty State Icon/People.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Yoda</h2>
-              <p>Do or do not. There is no try...</p>
-            </ion-label>
-            <ion-buttons slot="end" size="small">
-              <ion-button style="text-transform: Capitalize; opacity: 0.6"
-                >withdraw</ion-button
-              >
-            </ion-buttons>
-          </ion-item>
-        </ion-list>
-      </div>
-    </div>
 </ng-template>

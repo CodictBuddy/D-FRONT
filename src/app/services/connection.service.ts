@@ -21,24 +21,30 @@ export class ConnectionService {
       .toPromise();
   }
 
-  modifyConnection(type, _input) {
+  modifyConnection( _input) {
     return this.http
       .patch<any>(this.baseurl + `/connection`, _input)
       .toPromise();
   }
 
-  removeConnection(_input) {
+  removeConnection(user_id, connection_type) {
     return this.http
-      .delete<any>(this.baseurl + `/connection`, _input)
+      .delete<any>(this.baseurl + `/connection/${user_id}/${connection_type}`)
       .toPromise();
   }
 
-  getConnectionDetail(view_type, connection_type, connection_status) {
+  getConnectionList(view_type, connection_type, connection_status) {
     return this.http
       .get<any>(
         this.baseurl +
           `/connection/${view_type}/${connection_type}/${connection_status}`
       )
+      .toPromise();
+  }
+
+  getConnectionDetail(_input) {
+    return this.http
+      .post<any>(this.baseurl + `/connection/detail`, _input)
       .toPromise();
   }
 }

@@ -1,21 +1,23 @@
-<div class="container">
+<div class="container" *ngIf="showBtns">
   <ion-button
     [ngClass]="{ halfWidth: multipleButtons, fullWidth: !multipleButtons }"
-    fill="outline"
     color="secondary"
     shape="round"
     class="round-btn-40"
+    [fill]="changeBtnView ? 'solid' : 'outline'"
+    (click)="handleConnection(btn1, user_id )"
   >
-    Follow
+    {{ btn1 }}
   </ion-button>
   <ion-button
     *ngIf="multipleButtons"
     color="secondary"
     shape="round"
     class="round-btn-40 halfWidth"
+    (click)="handleConnection(btn1, user_id)"
   >
     <ion-icon class="mt-7" name="lock-closed-outline"></ion-icon>
-    message
+    {{ btn2 }}
   </ion-button>
 
   <div class="p-6">

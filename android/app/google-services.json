@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "948270622580",
+    "project_id": "d-talks-dev",
+    "storage_bucket": "d-talks-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948270622580:android:dc3a528a783fcabfd1ee21",
+        "android_client_info": {
+          "package_name": "com.mobile.dtalks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948270622580-4g3ln3tfq9plcc7hploe7f7o807mq2fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcj6a0Wh6Sycz0bqu_O7H_xCXPVze5gMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948270622580-4g3ln3tfq9plcc7hploe7f7o807mq2fg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
