@@ -39,28 +39,60 @@ export class UtilService {
     3: 'Follow',
     4: 'Message',
     5: 'Followed',
+    6: 'Accept',
+  };
+
+  public notification_template_constants = {
+    connection_req_sent: 'have sent you a connection request.',
+    connection_req_accepted: "Hi!, I'm adding you in my  connections.",
   };
 
   public alert_options = {
+    notification_options: [
+      {
+        text: 'Delete this notification',
+        icon: 'trash',
+      },
+    ],
     profile_connection_options: [
       {
         text: 'Share Profile',
+        data: 'Share Profile',
         icon: 'share-social-outline',
       },
       {
         text: 'Connect',
+        data: 'Connect',
         icon: 'person-add',
       },
       {
         text: 'Remove',
+        data: 'Remove',
         icon: 'person-remove',
       },
       {
+        text: 'Follow',
+        data: 'Follow',
+        icon: 'add-outline',
+      },
+      {
+        text: 'Unfollow',
+        data: 'Unfollow',
+        icon: 'person-remove-outline',
+      },
+      {
+        text: 'Message',
+        data: 'Message',
+        icon: 'lock-closed',
+      },
+      {
         text: 'Report or block',
+        data: 'Report or block',
         icon: 'flag',
       },
       {
         text: 'Share profile via message',
+        data: 'Share profile via message',
         icon: 'send',
       },
     ],
@@ -110,6 +142,21 @@ export class UtilService {
     );
 
     actionSheet.present();
+    return actionSheet;
+  }
+
+  modifyActionSheetOptions(optionsToRemove: string[]) {
+    const optionsArray = [...this.alert_options.profile_connection_options];
+    for (let i = 0; i < optionsArray.length; i++) {
+      for (let j = 0; j < optionsToRemove.length; j++) {
+        if (!optionsArray[i]) continue;
+        if (optionsArray[i].text === optionsToRemove[j]) {
+          optionsArray[i] = null;
+        }
+      }
+    }
+
+    return optionsArray.filter((el) => !!el);
   }
 
   async showAlert(metaData) {
@@ -161,6 +208,10 @@ export class UtilService {
       value = JSON.stringify(value);
     }
     localStorage.setItem(`${key}`, value);
+  }
+
+  arrayItemRemover(i, array) {
+    return array.filter((el, _index) => i !== _index);
   }
 
   retrieveLocalStorage(key) {

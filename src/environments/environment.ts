@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: "https://dtalks-back.herokuapp.com/4201121119/4201121119",
+  base_url: 'https://dtalks-back.herokuapp.com/4201121119/4201121119',
+  url: 'https://dtalks-back.herokuapp.com',
 };
 
 /*
