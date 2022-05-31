@@ -9,7 +9,10 @@
     </ion-buttons>
     <ion-buttons>
       <div class="">
-        <ion-label class="container-header"> Raj Sharma</ion-label>
+        <ion-label class="container-header"
+          >{{memberInfo['first_name'] | titlecase}} {{memberInfo['last_name'] |
+          titlecase}}</ion-label
+        >
 
         <ion-label style="font-size: small; padding: 0 0 0 10px">
           <ion-icon
@@ -35,22 +38,23 @@
   <ion-list style="padding: 10px">
     <ion-list-header size="small;" style="padding: 10px 0 20px 0">
       <ion-label>
-        <div class="" style="padding: 1%">
-          <div
-            class=""
-            style="
-              display: inline-block;
-              justify-self: center important;
-              width: 62px;
-              margin-right: 5px;
-            "
-          >
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </div>
+        <!-- <div class=""> -->
+        <div class="chat-room-member-profile" style="">
+          <ion-avatar class="">
+            <img
+              [src]="memberInfo['user_profile_image']?.url ||userFallbackImage "
+            />
+          </ion-avatar>
         </div>
+        <!-- </div> -->
 
-        <h6 style="font-size: 16px">Robert Gilbert</h6>
-        <p style="font-size: 12px">intro line here..</p>
+        <h6 style="font-size: 16px">
+          {{memberInfo['first_name'] | titlecase}} {{memberInfo['last_name'] |
+          titlecase}}
+        </h6>
+        <p style="font-size: 12px">
+          {{memberInfo['user_headline'] | lowercase}}
+        </p>
       </ion-label>
     </ion-list-header>
 

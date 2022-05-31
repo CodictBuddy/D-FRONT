@@ -1,3 +1,4 @@
+import { ChatService } from './../services/chat.service';
 import { ConnectionService } from './../services/connection.service';
 import { ActivatedRoute } from '@angular/router';
 import { MediaService } from './../profile-image/media.service';
@@ -32,6 +33,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     private util: UtilService,
     private userService: UserService,
     private mediaService: MediaService,
+    private chatService: ChatService,
     private route: ActivatedRoute
   ) {
     this.mediaSubscription = this.mediaService.imageData.subscribe((r) => {
