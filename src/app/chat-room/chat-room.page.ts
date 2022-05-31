@@ -1,15 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { UserService } from './../services/user.service';
+import { UtilService } from './../utils/util.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chat-room',
   templateUrl: './chat-room.page.html',
   styleUrls: ['./chat-room.page.scss'],
 })
-export class ChatRoomPage implements OnInit {
-  constructor(private actionSheetController: ActionSheetController) {}
+export class ChatRoomPage implements OnInit, OnDestroy {
+  chatRoomSubscription: Subscription;
+  memberInfo = {};
+  userFallbackImage = this.util.fallbackUserImage;
+  constructor(
+    private actionSheetController: ActionSheetController,
+    private util: UtilService,
+    private userService: UserService
+  ) {
+    this.chatRoomSubscription = this.util.chatRoomDetailLive.subscribe((r) => {
+      this.getMyDetails(r.members);
+    });
+  }
 
   ngOnInit() {}
+  ngOnDestroy(): void {
+    this.chatRoomSubscription.unsubscribe();
+  }
+
+  getMyDetails(data) {
+    let _memberInfo = this.userService.processData(
+      data,
+      this.util.default_language
+    );
+    this.memberInfo = this.userService.profilePatchingObject(_memberInfo);
+  }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({

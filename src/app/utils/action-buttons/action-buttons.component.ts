@@ -1,3 +1,4 @@
+import { ChatService } from './../../services/chat.service';
 import { ConnectionService } from './../../services/connection.service';
 import { UtilService } from '../util.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -10,7 +11,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ActionButtonsComponent implements OnInit {
   constructor(
     private util: UtilService,
-    private connectionService: ConnectionService
+    private connectionService: ConnectionService,
+    private chatService: ChatService
   ) {}
   @Input('user_id') user_id;
   @Input('sender_name') sender_name;
@@ -24,6 +26,7 @@ export class ActionButtonsComponent implements OnInit {
   utilButtons = this.util.connection_btns;
   customizedActionButtonSheet = [];
   changeBtnView = false;
+  chatRoomInfo = {};
 
   ngOnInit() {
     this.checkConnection();
@@ -35,10 +38,10 @@ export class ActionButtonsComponent implements OnInit {
       this.utilButtons[0]
     );
 
-    this.setButtonLabels(this.connectionStatusObject);
+    await this.setButtonLabels(this.connectionStatusObject);
   }
 
-  setButtonLabels(connectionStatusObject) {
+  async setButtonLabels(connectionStatusObject) {
     if (!connectionStatusObject) {
       this.btn1 = this.utilButtons[3];
       this.btn2 = this.utilButtons[4];
@@ -70,6 +73,10 @@ export class ActionButtonsComponent implements OnInit {
           this.customizedActionButtonSheet = this.util.modifyActionSheetOptions(
             ['Message', 'Follow', 'Connect']
           );
+
+          this.chatRoomInfo = await this.chatService.getRoomData({
+            user_id: this.user_id,
+          });
         }
       } else if (
         connectionStatusObject.type === this.utilButtons[5] &&
@@ -130,7 +137,10 @@ export class ActionButtonsComponent implements OnInit {
         this.sender_name,
         `/dashboard/${this.sender_info['_id']}`
       );
-    } else if (type === 'Remove') {
+    } else if (type === this.util.connection_btns[4]) {
+      this.util.chatRoomDetailLive.next(this.chatRoomInfo);
+      this.util.routeNavigation('/chat-room', this.chatRoomInfo?.['_id']);
+    } else if (type === this.util.connection_btns[7]) {
       this.removeConnection(user_id, this.util.connection_btns[0]);
     }
   }
