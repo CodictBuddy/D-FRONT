@@ -1,3 +1,4 @@
+import { ChatService } from './../services/chat.service';
 import { UserService } from './../services/user.service';
 import { Subscription } from 'rxjs';
 import { UtilService } from './../utils/util.service';
@@ -21,6 +22,7 @@ export class InvitationsComponent implements OnInit, OnDestroy {
   sent_network_list = [];
   constructor(
     private connectionService: ConnectionService,
+    private chatService: ChatService,
     private userService: UserService,
     private util: UtilService
   ) {
@@ -113,6 +115,7 @@ export class InvitationsComponent implements OnInit, OnDestroy {
     const updatedD = await this.connectionService.modifyConnection(payload);
     if (updatedD) {
       this.recieved_network_list = this.util.arrayItemRemover(position, array);
+      await this.chatService.createChatRoom({ user_id: payload.user_id });
     }
   }
 

@@ -19,6 +19,7 @@ import {
 })
 export class UtilService {
   public actionSheetOutput = new BehaviorSubject<any>({});
+  public chatRoomDetailLive = new BehaviorSubject<any>({});
 
   constructor(
     public toastController: ToastController,
@@ -40,6 +41,7 @@ export class UtilService {
     4: 'Message',
     5: 'Followed',
     6: 'Accept',
+    7: 'Remove',
   };
 
   public notification_template_constants = {

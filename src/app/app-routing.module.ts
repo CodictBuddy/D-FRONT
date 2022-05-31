@@ -85,7 +85,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'chat-room',
+    path: 'chat-room/:id',
     loadChildren: () =>
       import('./chat-room/chat-room.module').then((m) => m.ChatRoomPageModule),
     canActivate: [IsAuthorizedGuard],

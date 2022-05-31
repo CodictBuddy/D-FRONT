@@ -26,12 +26,17 @@
 ></ion-searchbar>
 <ion-content>
   <ion-list style="padding: 0 10px">
-    <ion-item [routerLink]="['/chat-room']">
+    <ion-item (click)="goToChatRoom(room)" *ngFor="let room of room_list">
       <ion-avatar slot="start">
-        <img src="assets/Image/Empty State Icon/People.svg" />
+        <img
+          [src]="room?.members?.user_profile_image?.url ||userFallbackImage "
+        />
       </ion-avatar>
       <ion-label>
-        <h2>Poe</h2>
+        <h2>
+          {{room?.members?.first_name |titlecase}} {{room?.members?.last_name
+          |titlecase}}
+        </h2>
         <p>latest message ....</p>
       </ion-label>
       <ion-label slot="end" style="margin-top: -8px; opacity: 0.7"
