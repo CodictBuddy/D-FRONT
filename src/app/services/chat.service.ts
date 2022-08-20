@@ -9,7 +9,7 @@ import { UtilService } from '../utils/util.service';
 export class ChatService {
   baseurl = environment.base_url;
 
-  constructor(private http: HttpClient, private util: UtilService) {}
+  constructor(private http: HttpClient, private util: UtilService) { }
 
   generateChatRoom(_input) {
     return this.http
@@ -38,4 +38,19 @@ export class ChatService {
     const data = await this.generateChatRoom(fv);
     console.log('data here for room creation', data);
   }
+
+  sendChatMessage(_input) {
+    return this.http
+      .post<any>(this.baseurl + `/chat/new-message`, _input)
+      .toPromise();
+  }
+
+  getMessagesList(_input) {
+    return this.http
+      .post<any>(
+        this.baseurl + `/chat/get-message-list`, _input
+      )
+      .toPromise();
+  }
+
 }

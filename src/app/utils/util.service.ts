@@ -26,7 +26,7 @@ export class UtilService {
     public alertController: AlertController,
     public actionSheetController: ActionSheetController,
     private router: Router
-  ) {}
+  ) { }
   public default_language = { lng: 'en' };
   public mediaKeyAccessor = {
     profile: 'user_profile_image',
@@ -98,6 +98,24 @@ export class UtilService {
         icon: 'send',
       },
     ],
+    chat_options: [
+      {
+        text: 'Copy Message',
+        data: 'Copy Message',
+        icon: 'copy-outline',
+      },
+      {
+        text: 'Edit Message',
+        data: 'Edit Message',
+        icon: 'create-outline',
+      },
+      {
+        text: 'Remove Message',
+        data: 'Remove Message',
+        icon: 'trash-outline',
+      },
+
+    ]
   };
 
   public alert_constants = {
@@ -147,8 +165,8 @@ export class UtilService {
     return actionSheet;
   }
 
-  modifyActionSheetOptions(optionsToRemove: string[]) {
-    const optionsArray = [...this.alert_options.profile_connection_options];
+  modifyActionSheetOptions(optionsToRemove: string[], fromList = this.alert_options.profile_connection_options) {
+    const optionsArray = [...fromList];
     for (let i = 0; i < optionsArray.length; i++) {
       for (let j = 0; j < optionsToRemove.length; j++) {
         if (!optionsArray[i]) continue;
