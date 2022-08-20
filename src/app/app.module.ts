@@ -19,7 +19,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 const config: SocketIoConfig = {
   url: environment.url,
-  options: { path: '/socket' },
+  options: { path: '' },
 };
 
 @NgModule({
@@ -48,4 +48,4 @@ const config: SocketIoConfig = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
