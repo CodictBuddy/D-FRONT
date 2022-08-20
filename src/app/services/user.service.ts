@@ -11,7 +11,7 @@ export class UserService {
   baseurl = environment.base_url;
   userData = new BehaviorSubject<any>({});
 
-  constructor(private http: HttpClient, private util: UtilService) {}
+  constructor(private http: HttpClient, private util: UtilService) { }
 
   getMyDetails() {
     return JSON.parse(this.util.retrieveLocalStorage('user_data'));
@@ -57,5 +57,13 @@ export class UserService {
         userObject[objectKeys[i]]?.['description'] || userObject[objectKeys[i]];
     }
     return refactoredObject;
+  }
+
+  getFullyProcessedUserData(data) {
+    let _memberInfo = this.processData(
+      data,
+      this.util.default_language
+    );
+    return this.profilePatchingObject(_memberInfo);
   }
 }
