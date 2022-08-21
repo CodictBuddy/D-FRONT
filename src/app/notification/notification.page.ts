@@ -13,7 +13,11 @@ export class NotificationPage implements OnInit {
   notificationCount = 0;
   notification_alert_list = [];
   skip = 0;
+<<<<<<< HEAD
   limit = 50;
+=======
+  limit = 5;
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
   userFallbackImage = this.util.fallbackUserImage;
 
   constructor(
@@ -35,8 +39,11 @@ export class NotificationPage implements OnInit {
       .getAllNotifications({ skip: this.skip, limit: this.limit })
       .then((res) => {
         this.notification_list = res?.notifications;
+<<<<<<< HEAD
         console.log('notilist = ', this.notification_list);
         
+=======
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
       });
 
     this.notificationService.getUnreadNotifications().then((res) => {
@@ -45,9 +52,13 @@ export class NotificationPage implements OnInit {
   }
 
   async markRead(notification) {
+<<<<<<< HEAD
     if(!notification.isRead){
       notification.isRead = true;
     }
+=======
+    notification.isRead = true;
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
     const payload = {
       isRead: true,
       notification_type: notification.type,
@@ -55,18 +66,26 @@ export class NotificationPage implements OnInit {
       notification_id: notification._id,
     };
     const d = await this.notificationService.updateNotificationStatus(payload);
+<<<<<<< HEAD
     console.log(d);
     
     if (d) {
       this.notificationCount;
       // console.log('noti objs',notification);
+=======
+    if (d) {
+      this.notificationCount--;
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
       if (notification?.navigation_url) {
         this.util.routeNavigation(`${notification.navigation_url}`);
       }
     }
+<<<<<<< HEAD
     if(d.isNewNotification && !notification.isRead){
       this.notificationCount--;
     } 
+=======
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
   }
 
   async removeNotification(notification_id, notification_type) {
