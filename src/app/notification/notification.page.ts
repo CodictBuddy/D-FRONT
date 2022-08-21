@@ -13,7 +13,7 @@ export class NotificationPage implements OnInit {
   notificationCount = 0;
   notification_alert_list = [];
   skip = 0;
-  limit = 5;
+  limit = 50;
   userFallbackImage = this.util.fallbackUserImage;
 
   constructor(
@@ -35,6 +35,8 @@ export class NotificationPage implements OnInit {
       .getAllNotifications({ skip: this.skip, limit: this.limit })
       .then((res) => {
         this.notification_list = res?.notifications;
+        console.log('notilist = ', this.notification_list);
+        
       });
 
     this.notificationService.getUnreadNotifications().then((res) => {
@@ -43,7 +45,9 @@ export class NotificationPage implements OnInit {
   }
 
   async markRead(notification) {
-    notification.isRead = true;
+    if(!notification.isRead){
+      notification.isRead = true;
+    }
     const payload = {
       isRead: true,
       notification_type: notification.type,
@@ -51,12 +55,18 @@ export class NotificationPage implements OnInit {
       notification_id: notification._id,
     };
     const d = await this.notificationService.updateNotificationStatus(payload);
+    console.log(d);
+    
     if (d) {
-      this.notificationCount--;
+      this.notificationCount;
+      // console.log('noti objs',notification);
       if (notification?.navigation_url) {
         this.util.routeNavigation(`${notification.navigation_url}`);
       }
     }
+    if(d.isNewNotification && !notification.isRead){
+      this.notificationCount--;
+    } 
   }
 
   async removeNotification(notification_id, notification_type) {
