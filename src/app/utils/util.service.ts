@@ -42,11 +42,12 @@ export class UtilService {
     5: 'Followed',
     6: 'Accept',
     7: 'Remove',
+    8: 'Ignore'
   };
 
   public notification_template_constants = {
     connection_req_sent: 'have sent you a connection request.',
-    connection_req_accepted: "Hi!, I'm adding you in my  connections.",
+    connection_req_accepted: "Hi, I'm adding you in my  connections.",
   };
 
   public alert_options = {
