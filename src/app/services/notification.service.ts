@@ -29,7 +29,11 @@ export class NotificationService {
 
   getUnreadNotifications() {
     return this.http
+<<<<<<< HEAD
       .get<any>(this.baseurl +  `/notification/unread`)
+=======
+      .get<any>(this.baseurl + `/notification/unread`)
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
       .toPromise();
   }
 
