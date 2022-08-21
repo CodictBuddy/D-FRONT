@@ -102,8 +102,11 @@ export class InvitationsComponent implements OnInit, OnDestroy {
 
   async modifyConnection(connectionObject, position, array) {
     if (!connectionObject) return;
+<<<<<<< HEAD
     console.log(connectionObject);
     
+=======
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
 
     const payload = {
       connection_status: this.connection_btns[6],
