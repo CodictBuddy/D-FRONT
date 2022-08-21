@@ -42,12 +42,19 @@ export class UtilService {
     5: 'Followed',
     6: 'Accept',
     7: 'Remove',
+<<<<<<< HEAD
     8: 'Ignore'
+=======
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
   };
 
   public notification_template_constants = {
     connection_req_sent: 'have sent you a connection request.',
+<<<<<<< HEAD
     connection_req_accepted: "Hi, I'm adding you in my  connections.",
+=======
+    connection_req_accepted: "Hi!, I'm adding you in my  connections.",
+>>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
   };
 
   public alert_options = {
