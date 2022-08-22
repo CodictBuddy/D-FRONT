@@ -1,11 +1,7 @@
 import { ChatService } from './../../services/chat.service';
 import { ConnectionService } from './../../services/connection.service';
 import { UtilService } from '../util.service';
-<<<<<<< HEAD
 import { Component, Input, OnInit, Type } from '@angular/core';
-=======
-import { Component, Input, OnInit } from '@angular/core';
->>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
 
 @Component({
   selector: 'app-action-buttons',
@@ -31,18 +27,12 @@ export class ActionButtonsComponent implements OnInit {
   customizedActionButtonSheet = [];
   changeBtnView = false;
   chatRoomInfo = {};
-<<<<<<< HEAD
   hideIcon=false;
 
   ngOnInit() {
     this.checkConnection();
     console.log(this.sender_info);
     
-=======
-
-  ngOnInit() {
-    this.checkConnection();
->>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
   }
 
   async checkConnection() {
@@ -50,11 +40,8 @@ export class ActionButtonsComponent implements OnInit {
       this.user_id,
       this.utilButtons[0]
     );
-<<<<<<< HEAD
     console.log(this.connectionStatusObject);
     
-=======
->>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
 
     await this.setButtonLabels(this.connectionStatusObject);
   }
@@ -65,17 +52,13 @@ export class ActionButtonsComponent implements OnInit {
       this.btn2 = this.utilButtons[4];
       this.showBtns = !connectionStatusObject;
       this.multipleButtons = !connectionStatusObject;
-<<<<<<< HEAD
       this.changeBtnView= !this.btn1 
-=======
->>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
 
       this.customizedActionButtonSheet = this.util.modifyActionSheetOptions([
         'Remove',
         'Unfollow',
       ]);
     } else {
-<<<<<<< HEAD
       if(connectionStatusObject.connection_status === this.utilButtons[6]&&
         connectionStatusObject.target_user_id === this.sender_info['_id'] ){
          this.btn1= this.utilButtons[4];
@@ -101,11 +84,6 @@ export class ActionButtonsComponent implements OnInit {
       if (
         connectionStatusObject.type === this.utilButtons[0] &&
         connectionStatusObject.target_user_id === this.user_id 
-=======
-      if (
-        connectionStatusObject.type === this.utilButtons[0] &&
-        connectionStatusObject.target_user_id === this.user_id
->>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
       ) {
         this.btn1 =
           connectionStatusObject.connection_status === this.utilButtons[1]
@@ -191,7 +169,6 @@ export class ActionButtonsComponent implements OnInit {
       this.util.chatRoomDetailLive.next(this.chatRoomInfo);  
       this.util.routeNavigation('/chat-room', this.chatRoomInfo?.['_id']);
     } else if (type === this.util.connection_btns[7]) {
-<<<<<<< HEAD
       console.log(type);
       this.removeConnection(user_id, this.util.connection_btns[0]);
     } else if(type === this.util.connection_btns[8]){
@@ -200,9 +177,6 @@ export class ActionButtonsComponent implements OnInit {
     else if(type === this.util.connection_btns[6]){
       this.modifyConnection({_id:this.connectionStatusObject?.['_id'],user_id:this.connectionStatusObject?.['user_id']}
       )
-=======
-      this.removeConnection(user_id, this.util.connection_btns[0]);
->>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
     }
   }
 
@@ -232,7 +206,6 @@ export class ActionButtonsComponent implements OnInit {
     this.connectionService
       .removeConnection(user_id, connection_type)
       .then(() => {
-<<<<<<< HEAD
         this.hideIcon=false;
         this.checkConnection();
       });
@@ -265,9 +238,3 @@ export class ActionButtonsComponent implements OnInit {
   }
 }
 }
-=======
-        this.checkConnection();
-      });
-  }
-}
->>>>>>> bb88670204c20415f90044e4a8236bc838357f5a
