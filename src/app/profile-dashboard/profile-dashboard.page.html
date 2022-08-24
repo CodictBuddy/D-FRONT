@@ -154,63 +154,15 @@
     <!-- networks tab -->
     <div class="" *ngSwitchCase="'2'">
       <ion-list style="padding: 0 10px">
-        <ion-list-header> {{'433452'|number}} connections </ion-list-header>
+        <ion-list-header> {{connected_user_list.length|number}} connections </ion-list-header>
 
-        <ion-item>
+        <ion-item *ngFor="let n of connected_user_list; let in = index">
           <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
+            <img [src]="n.connected_user.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>
           <ion-label>
-            <h2>Poe</h2>
-            <p>intro heading of user</p>
-          </ion-label>
-          <ion-icon
-            name="ellipsis-vertical-outline"
-            slot="end"
-            (click)="presentActionSheet()"
-          ></ion-icon>
-          <ion-icon slot="end" name="send"></ion-icon>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Ben</h2>
-            <p>These aren't the droids you're looking for...</p>
-          </ion-label>
-          <ion-icon
-            name="ellipsis-vertical-outline"
-            slot="end"
-            (click)="presentActionSheet()"
-          ></ion-icon>
-          <ion-icon slot="end" name="send"></ion-icon>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Leia</h2>
-            <p>I've placed information vital to the survival...</p>
-          </ion-label>
-          <ion-icon
-            name="ellipsis-vertical-outline"
-            slot="end"
-            (click)="presentActionSheet()"
-          ></ion-icon>
-          <ion-icon slot="end" name="send"></ion-icon>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Yoda</h2>
-            <p>Do or do not. There is no try...</p>
+            <h2>{{ n.connected_user.first_name | titlecase }} {{ n.connected_user.last_name | titlecase }}</h2>
+            <p>{{ n.connected_user.user_headline?.description }}</p>
           </ion-label>
           <ion-icon
             name="ellipsis-vertical-outline"
