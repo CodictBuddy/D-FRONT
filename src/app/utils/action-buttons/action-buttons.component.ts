@@ -33,6 +33,7 @@ export class ActionButtonsComponent implements OnInit {
   ngOnInit() {
     this.checkConnection();
     console.log(this.sender_info);
+    
   }
   
 

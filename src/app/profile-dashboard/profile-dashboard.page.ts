@@ -150,7 +150,14 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
       'Accept'
     );
     console.log(d);
-   
+    // for(const userData of d.connections) {
+    //   const user = this.userService.getFullyProcessedUserData(
+    //     userData.connected_user
+    //   );
+    //   userData.connected_user = user;
+    //   console.log(user);
+    //   }
+
     d.connections.forEach(element => {
       element.connected_user= this.userService.getFullyProcessedUserData(element.connected_user)
       console.log(element.connected_user);   
@@ -162,6 +169,28 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
  
   goToUserProfile(user_id) {
     this.util.routeNavigation(`dashboard/${user_id}`);
+  }
+
+  hideConnection(data){
+    console.log('Output action',data);
+  
+  if(data.connection_status===this.util.connection_btns[6] && data.type===this.util.connection_btns[0]){
+    console.log('hello');
+    
+    this.showOtherDetails=true;
+  }
+  else if(data.connected_status!==this.util.connection_btns[6] && data.type===this.util.connection_btns[0]){
+    console.log('Hello2');
+    
+    this.showOtherDetails=false;
+  }
+  }
+  
+
+
+  logoutUser() {
+    localStorage.clear();
+    this.util.routeNavigation('/login');
   }
 
 

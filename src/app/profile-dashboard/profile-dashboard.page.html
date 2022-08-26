@@ -155,17 +155,8 @@
       </ion-list>
     </div>
 
-    
-    
-    <!-- <ion-icon
-    style="margin-bottom: -5px"
-    name="ellipsis-vertical-outline"
-    slot="end"
-    (click)="openActionSheet(noti._id,noti.type,i); $event.stopPropagation()"
-  ></ion-icon> -->
-
     <!-- networks tab -->
-    <div class="" *ngSwitchCase="'2'" >
+    <div class="" *ngSwitchCase="'2'">
       <ion-list style="padding: 0 10px">
         <ion-list-header> {{connected_user_list.length|number}} connections </ion-list-header>
 
@@ -178,8 +169,6 @@
             <h2>{{ n.connected_user.first_name | titlecase }} {{ n.connected_user.last_name | titlecase }}</h2>
             <p>{{ n.connected_user.user_headline?.description }}</p>
           </ion-label>
-
-
           <ion-icon
             name="ellipsis-vertical-outline"
             slot="end"
