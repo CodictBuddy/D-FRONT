@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileDashboardPage implements OnInit, OnDestroy {
 
-  tab = '1';
+  tab = '';
   user = {};
   userMeta = {};
   userFallbackImage = this.util.fallbackUserImage;
@@ -26,7 +26,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
   my_information = {};
   myProfile: boolean;
   connected_user_list=[];
-  connectedStatusObject={};
+  showOtherDetails : boolean
 
   mediaSubscription: Subscription;
   userSubscription: Subscription;
@@ -121,7 +121,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
           icon: 'person-remove',
           // data: 10,
           handler: () => {
-            this.removeConnection(this.connected_user_list?.['user_id'],this.util.connection_btns[0])
+            // this.removeConnection(this.connected_user_list?.['user_id'],this.util.connection_btns[0])
             console.log('Share clicked');
           },
         },
@@ -158,39 +158,33 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
 
     d.connections.forEach(element => {
       element.connected_user= this.userService.getFullyProcessedUserData(element.connected_user)
-      console.log(element.connected_user);
-      
+      console.log(element.connected_user);   
     });
     this.connected_user_list=d.connections
     console.log('new',d);
-    
+    console.log(this.connected_user_list);
+  }
+ 
+  goToUserProfile(user_id) {
+    this.util.routeNavigation(`dashboard/${user_id}`);
   }
 
-  removeConnection(user_id, connection_type) {
-    this.connectionService
-      .removeConnection(user_id, connection_type)
-      .then(() => {
-        // this.checkConnected();
-      });
-  }
-  // async checkConnected() {
-  //   this.connectedStatusObject = await this.connectedDetails(
-  //     this.connected_user_list?.['_id'],
-  //     this.util.connection_btns[0]
-  //   );
-  //   console.log(this.connectedStatusObject);
+  hideConnection(data){
+    console.log('Output action',data);
+  
+  if(data.connection_status===this.util.connection_btns[6] && data.type===this.util.connection_btns[0]){
+    console.log('hello');
     
-  // }
-  async connectedDetails(user_id, connection_type) {
-    console.log('entered here', user_id);
-    let connectionResponse = {};
-    connectionResponse = await this.connectionService.getConnectionDetail({
-      user_id,
-      connection_type,
-    });
-    console.log(connectionResponse); 
-    // return connectionResponse;
+    this.showOtherDetails=true;
   }
+  else if(data.connected_status!==this.util.connection_btns[6] && data.type===this.util.connection_btns[0]){
+    console.log('Hello2');
+    
+    this.showOtherDetails=false;
+  }
+  }
+  
+
 
   logoutUser() {
     localStorage.clear();

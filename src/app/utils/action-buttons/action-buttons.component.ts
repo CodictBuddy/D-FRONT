@@ -1,7 +1,7 @@
 import { ChatService } from './../../services/chat.service';
 import { ConnectionService } from './../../services/connection.service';
 import { UtilService } from '../util.service';
-import { Component, Input, OnInit, Type } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'app-action-buttons',
@@ -17,6 +17,7 @@ export class ActionButtonsComponent implements OnInit {
   @Input('user_id') user_id;
   @Input('sender_name') sender_name;
   @Input('sender_info') sender_info;
+  @Output() connection_details_emitter = new EventEmitter()
 
   showBtns = false;
   multipleButtons = true;
@@ -41,6 +42,7 @@ export class ActionButtonsComponent implements OnInit {
       this.utilButtons[0]
     );
     console.log(this.connectionStatusObject);
+    this.connection_details_emitter.emit({...this.connectionStatusObject})
     
 
     await this.setButtonLabels(this.connectionStatusObject);
@@ -64,6 +66,7 @@ export class ActionButtonsComponent implements OnInit {
          this.btn1= this.utilButtons[4];
          this.multipleButtons = !this.btn1
          this.showBtns = !!this.btn1;
+         this.changeBtnView= this.btn1 === this.utilButtons[4]
          if (this.btn1 === this.utilButtons[4]) {
           this.customizedActionButtonSheet = this.util.modifyActionSheetOptions(
             ['Message', 'Follow', 'Connect']
@@ -153,6 +156,7 @@ export class ActionButtonsComponent implements OnInit {
         this.utilButtons[5]
       );
     }
+    console.log(connectionResponse);
     return connectionResponse;
   }
 

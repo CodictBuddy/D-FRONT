@@ -57,6 +57,7 @@
       [user_id]="user?.['_id']"
       [sender_name]="sender_name"
       [sender_info]="my_information"
+      (connection_details_emitter)="hideConnection($event)"
     ></app-action-buttons>
   </ng-container>
 
@@ -75,6 +76,8 @@
     (ionChange)="segmentChanged($event)"
     color="secondary"
     class="segment-adjust"
+    (ionChange)="hideConnection($event)"
+    *ngIf="myProfile || showOtherDetails"
   >
     <ion-segment-button value="1">
       <ion-icon name="heart"></ion-icon>
@@ -156,7 +159,8 @@
       <ion-list style="padding: 0 10px">
         <ion-list-header> {{connected_user_list.length|number}} connections </ion-list-header>
 
-        <ion-item *ngFor="let n of connected_user_list; let in = index">
+        <ion-item *ngFor="let n of connected_user_list; let in = index"
+        (click)="goToUserProfile(n?.connected_user?._id)">
           <ion-avatar slot="start">
             <img [src]="n.connected_user.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>
