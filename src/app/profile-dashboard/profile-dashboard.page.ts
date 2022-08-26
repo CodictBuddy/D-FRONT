@@ -27,6 +27,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
   myProfile: boolean;
   connected_user_list=[];
   connectedStatusObject={};
+  user_connection_option= this.util.alert_options.profile_connection_options;
 
   mediaSubscription: Subscription;
   userSubscription: Subscription;
@@ -64,6 +65,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     this.getUserDetails(id);
     this.getMyDetails();
     this.netConnection();
+
   }
 
   async addImage(alreadyImage, addImage) {
@@ -111,7 +113,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     this.menu.open('first');
   }
 
-  async presentActionSheet() {
+  async presentActionSheet(user_id,connection_type,ind) {
     const actionSheet = await this.actionSheetController.create({
       // header: 'Who can view your talk?',
       cssClass: '',
@@ -123,6 +125,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
           handler: () => {
             this.removeConnection(this.connected_user_list?.['user_id'],this.util.connection_btns[0])
             console.log('Share clicked');
+            
           },
         },
         // {
@@ -148,14 +151,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
       'Accept'
     );
     console.log(d);
-    // for(const userData of d.connections) {
-    //   const user = this.userService.getFullyProcessedUserData(
-    //     userData.connected_user
-    //   );
-    //   userData.connected_user = user;
-    //   console.log(user);
-    //   }
-
+   
     d.connections.forEach(element => {
       element.connected_user= this.userService.getFullyProcessedUserData(element.connected_user)
       console.log(element.connected_user);
@@ -166,34 +162,35 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     
   }
 
-  removeConnection(user_id, connection_type) {
-    this.connectionService
-      .removeConnection(user_id, connection_type)
-      .then(() => {
-        // this.checkConnected();
-      });
-  }
-  // async checkConnected() {
-  //   this.connectedStatusObject = await this.connectedDetails(
-  //     this.connected_user_list?.['_id'],
-  //     this.util.connection_btns[0]
-  //   );
-  //   console.log(this.connectedStatusObject);
-    
-  // }
-  async connectedDetails(user_id, connection_type) {
-    console.log('entered here', user_id);
-    let connectionResponse = {};
-    connectionResponse = await this.connectionService.getConnectionDetail({
-      user_id,
-      connection_type,
-    });
-    console.log(connectionResponse); 
-    // return connectionResponse;
-  }
 
-  logoutUser() {
-    localStorage.clear();
-    this.util.routeNavigation('/login');
+  async removeConnection(user_id, connection_type) {
+    await this.connectionService.removeConnection(
+      user_id,
+      connection_type
+    );
+  }
+  async ActionSheet(user_id, connection_type,i) {
+    console.log("user",user_id)
+    const b = [
+      {
+        ...this.user_connection_option[2],
+        data: { user_id,connection_type },
+      },
+    ];
+    const { data } = await (
+      await this.util.dynamicActionSheet({ buttons: b })
+    ).onDidDismiss();
+    if (data) {
+      await this.removeConnection(
+        user_id,
+        connection_type
+      ).then(() => {
+        this.connected_user_list = this.util.arrayItemRemover(
+          i,
+          this.connected_user_list
+        );
+      });
+    }
   }
 }
+

@@ -33,6 +33,7 @@ export class ConnectionService {
       .toPromise();
   }
 
+
   getConnectionList(view_type, connection_type, connection_status) {
     return this.http
       .get<any>(

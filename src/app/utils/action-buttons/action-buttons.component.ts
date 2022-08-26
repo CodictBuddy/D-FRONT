@@ -32,8 +32,8 @@ export class ActionButtonsComponent implements OnInit {
   ngOnInit() {
     this.checkConnection();
     console.log(this.sender_info);
-    
   }
+  
 
   async checkConnection() {
     this.connectionStatusObject = await this.connectionDetails(
