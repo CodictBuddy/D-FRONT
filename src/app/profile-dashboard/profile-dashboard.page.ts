@@ -121,7 +121,6 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
           icon: 'person-remove',
           // data: 10,
           handler: () => {
-            // this.removeConnection(this.connected_user_list?.['user_id'],this.util.connection_btns[0])
             console.log('Share clicked');
           },
         },
