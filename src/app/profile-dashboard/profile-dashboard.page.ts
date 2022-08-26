@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileDashboardPage implements OnInit, OnDestroy {
 
-  tab = '1';
+  tab = '';
   user = {};
   userMeta = {};
   userFallbackImage = this.util.fallbackUserImage;
@@ -26,7 +26,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
   my_information = {};
   myProfile: boolean;
   connected_user_list=[];
-  connectedStatusObject={};
+  showOtherDetails : boolean
   user_connection_option= this.util.alert_options.profile_connection_options;
 
   mediaSubscription: Subscription;
@@ -123,7 +123,6 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
           icon: 'person-remove',
           // data: 10,
           handler: () => {
-            this.removeConnection(this.connected_user_list?.['user_id'],this.util.connection_btns[0])
             console.log('Share clicked');
             
           },
@@ -154,12 +153,15 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
    
     d.connections.forEach(element => {
       element.connected_user= this.userService.getFullyProcessedUserData(element.connected_user)
-      console.log(element.connected_user);
-      
+      console.log(element.connected_user);   
     });
     this.connected_user_list=d.connections
     console.log('new',d);
-    
+    console.log(this.connected_user_list);
+  }
+ 
+  goToUserProfile(user_id) {
+    this.util.routeNavigation(`dashboard/${user_id}`);
   }
 
 
