@@ -46,7 +46,7 @@ export class NotificationPage implements OnInit {
 
   async markRead(notification) {
     if(!notification.isRead){
-      notification.isRead = true;
+      notification.isRead = false;
     }
     const payload = {
       isRead: true,
@@ -64,8 +64,11 @@ export class NotificationPage implements OnInit {
         this.util.routeNavigation(`${notification.navigation_url}`);
       }
     }
-    if(d.isNewNotification && !notification.isRead){
+    if(d.isNewNotification &&  !notification.isRead){
       this.notificationCount--;
+      if(d.isRead){
+        notification.isRead = true;
+      }
     } 
   }
 

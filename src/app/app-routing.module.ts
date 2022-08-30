@@ -4,6 +4,7 @@ import { DoLoginGuard } from './auth/guards/do-login.guards';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { InvitationsComponent } from './invitations/invitations.component';
+import { LoaderComponent } from './loader/loader.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: 'recommendations',
     component: RecommendationComponent,
     canActivate: [IsAuthorizedGuard],
+  },
+  {
+    path: 'loader',
+    component:LoaderComponent,
+    
   },
   {
     path: 'invitations',

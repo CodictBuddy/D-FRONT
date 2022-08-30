@@ -3,7 +3,7 @@
     <ion-list-header>
       {{notificationCount|number}} Unread notifications
     </ion-list-header>
-
+   
     <ion-item
       *ngFor="let noti of notification_list; let i=index"
       [ngClass]="{'unreadClass':!noti.isRead}"
@@ -29,7 +29,6 @@
         >{{noti.created_at |date:'MMM d'}}</ion-label
       >
     </ion-item>
-
     <!-- <ion-item>
       <ion-avatar slot="start">
         <img src="assets/Image/Empty State Icon/People.svg" />
