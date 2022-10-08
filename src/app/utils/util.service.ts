@@ -284,4 +284,12 @@ export class UtilService {
     }
     this.router.navigate(routeArray, { queryParams: queryObject });
   }
+
+  compareDateIso(date1: string, date2: string) {
+    return this.splitNposition(date1, 'T', 0) === this.splitNposition(date2, 'T', 0)
+  }
+
+  splitNposition(data: string, splitValue: string, position: number) {
+    return data.split(splitValue)[position]
+  }
 }
