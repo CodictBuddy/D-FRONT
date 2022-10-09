@@ -1,6 +1,6 @@
 import { UserService } from './../services/user.service';
 import { UtilService } from './../utils/util.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../services/chat.service';
@@ -12,6 +12,7 @@ import { Socket } from 'ngx-socket-io';
   styleUrls: ['./chat-room.page.scss'],
 })
 export class ChatRoomPage implements OnInit, OnDestroy {
+  @ViewChild('content') private content: any;
   chatRoomSubscription: Subscription;
   memberInfo = {};
   textMessageString = '';
@@ -40,7 +41,10 @@ export class ChatRoomPage implements OnInit, OnDestroy {
       res.senderUser = this.userService.getFullyProcessedUserData(
         res.sender_id
       );
-      this.messagesList.push(res);
+      if (this.myInfo['_id'] !== res.sender_id._id) {
+
+        this.messagesList.push(res);
+      }
     });
 
     this._socket.on('updateMessage', (res) => {
@@ -49,6 +53,12 @@ export class ChatRoomPage implements OnInit, OnDestroy {
         this.messagesList[res.position].is_edited = res.updated_mesasge?.is_edited;
         this.messagesList[res.position].updated_at = res.updated_mesasge?.updated_at;
 
+      }
+    })
+
+    this._socket.on('deleteMessage', (res) => {
+      if (res && this.roomId == res.room_id) {
+        this.messagesList = this.util.arrayItemRemover(res.position, this.messagesList)
       }
     })
   }
@@ -66,6 +76,10 @@ export class ChatRoomPage implements OnInit, OnDestroy {
 
   getMyDetails(data) {
     this.memberInfo = this.userService.getFullyProcessedUserData(data);
+  }
+
+  bottomScroller(time: number) {
+    this.content.scrollToBottom(time);
   }
 
   async triggerMessage(text, roomId) {
@@ -89,7 +103,7 @@ export class ChatRoomPage implements OnInit, OnDestroy {
     if (res) this.textMessageString = '';
     res.senderUser = this.userService.getFullyProcessedUserData(res.sender_id);
     this.messagesList.push(res);
-    console.log('what is text m getting here', text, res);
+    this.bottomScroller(300)
   }
 
   async modifyMessage(data) {
@@ -100,7 +114,6 @@ export class ChatRoomPage implements OnInit, OnDestroy {
       position: data.position,
       created_at: data.createdAt,
     };
-    console.log('final fv formed here for update', fv);
     const resData = await this.chatService.updateChatMessage(fv);
 
     if (resData) {
@@ -108,8 +121,21 @@ export class ChatRoomPage implements OnInit, OnDestroy {
       this.messagesList[fv.position].content = resData.updatedData?.content;
       this.messagesList[fv.position].is_edited = resData.updatedData?.is_edited;
       this.messagesList[fv.position].updated_at = resData.updatedData?.updated_at;
-      console.log('what is updated data here', resData, this.messagesList[data.position]);
       this.updateMessageInfo = {}
+    }
+  }
+
+  async removeMessage(data) {
+    const fv = {
+      room_id: data.roomId,
+      message_id: data.messageId,
+      position: data.position,
+      created_at: data.createdAt,
+    };
+
+    const resData = await this.chatService.removeChatMessage(fv);
+    if (resData) {
+      this.messagesList = this.util.arrayItemRemover(data.position, this.messagesList)
     }
   }
 
@@ -119,24 +145,10 @@ export class ChatRoomPage implements OnInit, OnDestroy {
     this.messagesList.forEach((el) => {
       el.senderUser = this.userService.getFullyProcessedUserData(el.sender_id);
     });
+    this.bottomScroller(300)
   }
 
   async openActionSheet(i) {
-    console.log(
-      'message info here---',
-      this.messagesList[i],
-      this.memberInfo?.['_id'],
-      this.myInfo
-    );
-    console.log(
-      'date compare--',
-      new Date().toISOString(),
-      this.messagesList[i].created_at,
-      this.util.compareDateIso(
-        new Date().toISOString(),
-        this.messagesList[i].created_at
-      )
-    );
     let hideOptions = [];
     const isToday = this.util.compareDateIso(
       new Date().toISOString(),
@@ -159,7 +171,7 @@ export class ChatRoomPage implements OnInit, OnDestroy {
       await this.util.dynamicActionSheet({ buttons: b })
     ).onDidDismiss();
     if (data) {
-      if (this.util.alert_options.chat_options[1].text) {
+      if (this.util.alert_options.chat_options[1].text == data) {
         this.textMessageString = this.messagesList[i].content;
         this.updateMessageInfo = {
           isEditClicked: true,
@@ -168,37 +180,30 @@ export class ChatRoomPage implements OnInit, OnDestroy {
           content: this.textMessageString,
           createdAt: this.messagesList[i].created_at,
         };
+      } else if (this.util.alert_options.chat_options[2].text == data) {
+        this.removeMessage({
+          roomId: this.roomId, position: i,
+          messageId: this.messagesList[i]._id,
+          createdAt: this.messagesList[i].created_at,
+        })
+
       }
-      console.log('data here after button click--->', data);
     }
   }
 
   async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      // header: 'Who can view your talk?',
-      cssClass: '',
-      buttons: [
-        {
-          text: 'Delete this conversation?',
-          icon: 'trash',
-          // data: 10,
-          handler: () => {
-            console.log('Share clicked');
-          },
-        },
-        // {
-        //   text: 'Cancel',
-        //   icon: 'close',
-        //   role: 'cancel',
-        //   handler: () => {
-        //     console.log('Cancel clicked');
-        //   },
-        // },
-      ],
-    });
-    await actionSheet.present();
+    const b = this.util.modifyActionSheetOptions(
+      [],
+      [this.util.alert_options.chat_global_options[0]]
+    );
+    const { data } = await (
+      await this.util.dynamicActionSheet({ buttons: b })
+    ).onDidDismiss();
 
-    const { role, data } = await actionSheet.onDidDismiss();
-    console.log('onDidDismiss resolved with role and data', role, data);
+    if (data) {
+      // call delete all messages 
+      console.log('onDidDismiss resolved with role and data', data);
+    }
+
   }
 }

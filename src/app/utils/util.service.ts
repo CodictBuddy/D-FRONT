@@ -115,6 +115,13 @@ export class UtilService {
         icon: 'trash-outline',
       },
 
+    ],
+    chat_global_options: [
+      {
+        text: 'Delete this conversation?',
+        data: 'Delete this conversation?',
+        icon: 'trash-outline',
+      },
     ]
   };
 

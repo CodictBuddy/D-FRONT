@@ -51,6 +51,12 @@ export class ChatService {
       .toPromise();
   }
 
+  removeChatMessage(_input) {
+    return this.http
+      .post<any>(this.baseurl + `/chat/delete-message`, _input)
+      .toPromise();
+  }
+
   getMessagesList(_input) {
     return this.http
       .post<any>(
