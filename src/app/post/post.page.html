@@ -25,7 +25,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="height:85vh">
   <div class="" style="padding: 3%">
     <div
       class=""
@@ -36,11 +36,14 @@
         margin-right: 5px;
       "
     >
-      <img src="assets/Image/Empty State Icon/People.svg" />
+    <ion-avatar slot="start" style="padding: 8px;margin-left: -10px;">
+      <img [src]="my_information.user_profile_image.url || userFallbackImage" />
+    </ion-avatar>
     </div>
     <div style="display: inline-block">
-      <h6 style="padding: 0; margin: 0">Raunak Srivastava</h6>
-
+      <h6 style="padding: 0; margin: 0; margin-left: 11px;
+      margin-bottom: 1px;">{{my_information?.['first_name'] |titlecase}}
+      {{my_information?.['last_name'] |titlecase}}</h6>
       <ion-chip outline color="secondary" (click)="presentActionSheet()">
         <ion-icon *ngIf="anyone" name="earth"></ion-icon>
         <ion-label *ngIf="anyone">Anyone</ion-label>
@@ -50,23 +53,26 @@
         <ion-icon name="caret-down-outline"></ion-icon>
       </ion-chip>
     </div>
-
     <!-- <ion-label>Default Label</ion-label> -->
+    form start here
+    <form action="">
     <ion-input
       placeholder="Give me a beautiful title !
       "
       [maxlength]="40"
-      [(ngModel)]="title"
+  
     ></ion-input>
+   
     <ion-item style="height: 5px"> </ion-item>
 
     <ion-textarea
       style="height: 60vh"
       placeholder="What is coming in your creative mind?
       "
-      [(ngModel)]="text"
       clearOnEdit="true"
     ></ion-textarea>
+  </form>- form end here
+ 
   </div>
 </ion-content>
 
@@ -81,7 +87,7 @@
       <ion-icon name="add-circle-outline"></ion-icon>
       <ion-label>Add Talks</ion-label>
     </ion-tab-button> -->
-<div class="">
+<div class="" >
   <ion-tab-button *ngIf="toggleMike" (click)="stopListening()">
     <ion-icon size="large" name="mic" color="secondary"></ion-icon>
     <ion-label>Press again if you're done</ion-label>

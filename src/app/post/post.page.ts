@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
 import { ActionSheetController, AlertController } from '@ionic/angular';
+import { PostService } from '../services/post.service';
+import { UserService } from '../services/user.service';
+import { UtilService } from '../utils/util.service';
 
 @Component({
   selector: 'app-post',
@@ -12,15 +16,25 @@ export class PostPage implements OnInit {
   constructor(
     public actionSheetController: ActionSheetController,
     private speechRecognition: SpeechRecognition,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private post:PostService,
+    private postFormBuilder: FormBuilder,
+    private userService: UserService,
+    private util: UtilService
   ) {}
   text = '';
   title = '';
+  userFallbackImage = this.util.fallbackUserImage;
+  my_information = {};
+  myProfile: boolean;
   isTitle: Boolean = false;
   toggleMike: Boolean = false;
   connectionsOnly: Boolean = false;
   anyone: Boolean = true;
+  postForm: FormGroup = new FormGroup({})
   ngOnInit() {
+    this.handlePost()
+    this.getMyDetails()
     // Check feature available
     this.speechRecognition
       .isRecognitionAvailable()
@@ -171,4 +185,22 @@ export class PostPage implements OnInit {
     this.toggleMike = false;
     this.speechRecognition.stopListening();
   }
+
+  handlePost(){
+    this.postForm=this.postFormBuilder.group({
+      'title': new FormControl(null,Validators.required),
+      'content': new FormControl(null,Validators.required)
+    })
+    console.log(this.postForm);
+  }
+  
+  getMyDetails() {
+    let myInfo = this.userService.getMyDetails();
+    console.log("Before",myInfo);
+    this.my_information = this.userService.getFullyProcessedUserData(myInfo);
+    console.log("After",myInfo);
+    console.log(this.my_information);
+    
+  }
+  
 }

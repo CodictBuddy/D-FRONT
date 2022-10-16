@@ -12,6 +12,7 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { AuthService } from '../auth/auth.service';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-tabs',

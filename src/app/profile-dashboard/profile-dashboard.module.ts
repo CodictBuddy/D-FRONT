@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfileDashboardPageRoutingModule } from './profile-dashboard-routing.module';
 
 import { ProfileDashboardPage } from './profile-dashboard.page';
+import { CapitalizePipePipe } from '../capitalize-pipe.pipe';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { ProfileDashboardPage } from './profile-dashboard.page';
     ProfileDashboardPageRoutingModule,
     UtilsModule,
   ],
-  declarations: [ProfileDashboardPage],
+  declarations: [ProfileDashboardPage,CapitalizePipePipe],
 })
 export class ProfileDashboardPageModule {}

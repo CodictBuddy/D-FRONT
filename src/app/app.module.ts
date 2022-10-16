@@ -14,6 +14,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { CapitalizePipePipe } from './capitalize-pipe.pipe';
 // import { FCM} from '@ionic-native/fcm/ngx';
 // import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
 

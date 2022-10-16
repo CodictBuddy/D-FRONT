@@ -31,6 +31,7 @@ export class ResetPasswordVerificationPage implements OnInit {
         [Validators.required, Validators.minLength(6), Validators.maxLength(6)],
       ],
     });
+    
   }
 
   resendCode() {
