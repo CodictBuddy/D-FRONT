@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button
-        style="opacity: 0.6"
+       class="opacity-2" 
         defaultHref="/home"
         class="container-header"
       ></ion-back-button>
@@ -11,7 +11,8 @@
       <ion-button
         ><ion-label
           size="large"
-          style="text-transform: initial; font-size: large"
+          clas="text-transform font-size"
+          
           >Messaging</ion-label
         ></ion-button
       >
@@ -20,12 +21,12 @@
 </ion-header>
 
 <ion-searchbar
-  style="margin: 0"
+ class="margin" 
   placeholder="search messages"
   [debounce]="500"
 ></ion-searchbar>
 <ion-content>
-  <ion-list style="padding: 0 10px">
+  <ion-list  class="padding">
     <ion-item (click)="goToChatRoom(room)" *ngFor="let room of room_list">
       <ion-avatar slot="start">
         <img
@@ -39,7 +40,7 @@
         </h2>
         <p>latest message ....</p>
       </ion-label>
-      <ion-label slot="end" style="margin-top: -8px; opacity: 0.7"
+      <ion-label slot="end" class="margin-top  opacity" 
         >Dec 5</ion-label
       >
     </ion-item>
@@ -52,7 +53,7 @@
         <h2>Ben</h2>
         <p>latest message ....</p>
       </ion-label>
-      <ion-label slot="end" style="margin-top: -8px; opacity: 0.7"
+      <ion-label slot="end" class="margin-top  opacity" 
         >Dec 5</ion-label
       >
     </ion-item>
@@ -65,7 +66,7 @@
         <h2>Leia</h2>
         <p>latest message ....</p>
       </ion-label>
-      <ion-label slot="end" style="margin-top: -8px; opacity: 0.7"
+      <ion-label slot="end" class="margin-top  opacity" 
         >Dec 5</ion-label
       >
     </ion-item>
@@ -78,7 +79,7 @@
         <h2>Yoda</h2>
         <p>latest message ....</p>
       </ion-label>
-      <ion-label slot="end" style="margin-top: -8px; opacity: 0.7"
+      <ion-label slot="end" class="margin-top  opacity" 
         >Dec 5</ion-label
       >
     </ion-item>

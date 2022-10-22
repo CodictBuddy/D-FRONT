@@ -2,12 +2,12 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button [routerLink]="['/dashboard']">
-        <ion-icon style="font-size: 28px" name="close-outline"></ion-icon>
+        <ion-icon  class="font-size" name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons>
       <ion-button>
-        <ion-label style="font-size: medium; text-transform: initial">
+        <ion-label class="font-size-2  text-transform "  >
           Edit intro
         </ion-label>
       </ion-button>
@@ -15,7 +15,8 @@
     <ion-buttons slot="end">
       <ion-button type="button" (click)="refBtn.click()">
         <ion-label
-          style="font-size: medium; text-transform: initial"
+         
+          class="font-size-2  text-transform " 
           slot="end"
         >
           Save</ion-label
@@ -27,7 +28,8 @@
 
 <ion-content>
   <form
-    style="padding: 15px"
+  class ="padding"
+   
     [formGroup]="updateProfileForm"
     (ngSubmit)="updateProfile(updateProfileForm.value,updateProfileForm.valid)"
   >
@@ -47,7 +49,7 @@
         First name is required
       </p>
 
-    <ion-item style="margin-top: 10px">
+    <ion-item class ="margin-top">
       <ion-label
         color="secondary"
         class="input-label text-gray"
@@ -63,7 +65,7 @@
         Last name is required
       </p>
 
-    <ion-item style="margin-top: 10px">
+    <ion-item class ="margin-top">
       <ion-label
         color="secondary"
         class="input-label text-gray"
@@ -82,7 +84,7 @@
         A headline is required for your introduction
       </p>
 
-    <ion-item style="margin-top: 10px">
+    <ion-item class ="margin-top">
       <ion-label
         color="secondary"
         class="input-label text-gray"
@@ -104,10 +106,10 @@
     <button
       color="secondary"
       shape="round"
-      class="round-btn-40"
+      class="round-btn-40  visibility  "
       expand="block"
       type="submit"
-      style="visibility: hidden"
+      
       #refBtn
     >
     </button>

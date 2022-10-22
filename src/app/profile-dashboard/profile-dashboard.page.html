@@ -2,9 +2,8 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button
-        style="opacity: 0.6"
         defaultHref="/home"
-        class="container-header"
+        class="container-header opacity "
       ></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end" id="main">
@@ -44,11 +43,11 @@
       ></ion-icon>
     </ion-avatar>
   </div>
-  <h4 style="margin: 0 15px; opacity: 0.8">
-    {{user?.['first_name']?.['description'] |titlecase 
+  <h4 class="margin  opacity-2">
+    {{user?.['first_name']?.['description'] |titlecase }}
     {{user?.['last_name']?.['description'] |titlecase}}
   </h4>
-  <h6 style="margin: 0 15px; opacity: 0.6">
+  <h6 class="margin  opacity">
     {{user?.['user_headline']?.['description'] || 'Add your headline here... '}}
   </h6>
 
@@ -61,12 +60,11 @@
     ></app-action-buttons>
   </ng-container>
 
-  <ion-card style="padding: 5px">
-    <div class="" style="padding: 5px">
+  <ion-card class="padding">
+    <div class="padding" >
       <h4>About</h4>
       <p>
-        {{user?.['user_about']?.['description'] || "Let people know about
-        yourself..."}}
+        {{user?.['user_about']?.['description'] || "Let people know about yourself..."}}
       </p>
     </div>
   </ion-card>
@@ -103,7 +101,7 @@
 
   <div class="" [ngSwitch]="tab">
     <div class="" *ngSwitchCase="'1'">
-      <ion-list style="padding: 0 10px">
+      <ion-list class="padding-2">
         <ion-list-header>
           {{'433452'| number}} People likes the talks
         </ion-list-header>
@@ -157,7 +155,7 @@
 
     <!-- networks tab -->
     <div class="" *ngSwitchCase="'2'">
-      <ion-list style="padding: 0 10px">
+      <ion-list  class="padding-2">
         <ion-list-header> {{connected_user_list.length|number}} connections </ion-list-header>
 
         <ion-item *ngFor="let n of connected_user_list; let in = index"
@@ -181,7 +179,7 @@
 
     <!-- talks tab -->
     <div class="" *ngSwitchCase="'3'">
-      <ion-list style="padding: 0 10px">
+      <ion-list  class="adding-2" >
         <ion-list-header>
           {{'433452'|number}} talks added till now
         </ion-list-header>
@@ -228,7 +226,7 @@
       </ion-list>
     </div>
     <div class="" *ngSwitchCase="'4'">
-      <ion-list style="padding: 0 10px">
+      <ion-list class="padding-2">
         <ion-list-header> My activities</ion-list-header>
 
         <ion-item>

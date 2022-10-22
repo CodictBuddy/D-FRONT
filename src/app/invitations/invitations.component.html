@@ -1,31 +1,18 @@
 <ion-header *ngIf="!reusable">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
-        style="opacity: 0.6"
-        defaultHref="/network"
-        class="container-header"
-      ></ion-back-button>
+      <ion-back-button class="opacity" defaultHref="/network" class="container-header"></ion-back-button>
     </ion-buttons>
     <ion-buttons id="main">
-      <ion-button
-        ><ion-label
-          size="large"
-          style="text-transform: initial; font-size: large"
-          >Invitations</ion-label
-        ></ion-button
-      >
+      <ion-button>
+        <ion-label size="large" class="text-transform">Invitations</ion-label>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<div class="" slot="start" style="width: 50%">
-  <ion-segment
-    [value]="tab"
-    (ionChange)="segmentChanged($event)"
-    color="secondary"
-    style="padding-top: 10px"
-  >
+<div class="width" slot="start">
+  <ion-segment [value]="tab" (ionChange)="segmentChanged($event)" color="secondary" class="padding-top">
     <ion-segment-button value="2">
       <ion-label>Recieved</ion-label>
     </ion-segment-button>
@@ -34,31 +21,24 @@
     </ion-segment-button>
   </ion-segment>
 </div>
-
 <ng-container *ngIf="!reusable; else invitationsView">
   <ion-content>
     <div class="" [ngSwitch]="tab">
       <div class="" *ngSwitchCase="'2'">
-        <ion-list style="padding: 0 10px">
+        <ion-list class="padding-1">
           <ion-list-header>
             {{ recieved_network_list.length | number }} Pending invitations
           </ion-list-header>
 
-          <ion-item
-            *ngFor="let n of recieved_network_list; let in = index"
-            (click)="goToProfile(n?.user?._id)"
-          >
+          <ion-item *ngFor="let n of recieved_network_list; let in = index" (click)="goToProfile(n?.user?._id)">
             <ion-avatar slot="start">
-              <img
-                [src]="n.user.user_profile_image?.url || userFallbackImage"
-              />
+              <img [src]="n.user.user_profile_image?.url || userFallbackImage" />
             </ion-avatar>
             <ion-label>
               <h2>{{ n.user.first_name.description | titlecase }}</h2>
               <p>{{ n.user.user_headline?.description }}</p>
             </ion-label>
-            <ion-fab-button
-              (click)="
+            <ion-fab-button (click)="
                 removeConnection(
                   n.user._id,
                   n.type,
@@ -67,22 +47,15 @@
                   'Recieved'
                 );
                 $event.stopPropagation()
-              "
-              style="background: none"
-              size="small"
-              fill="outline"
-              ><ion-icon name="close-outline"></ion-icon
-            ></ion-fab-button>
-            <ion-fab-button
-              (click)="
+              " class="background" size="small" fill="outline">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button (click)="
                 modifyConnection(n, in, recieved_network_list);
                 $event.stopPropagation()
-              "
-              shape="round"
-              size="small"
-              fill="outline"
-              ><ion-icon name="checkmark-outline"></ion-icon
-            ></ion-fab-button>
+              " shape="round" size="small" fill="outline">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-fab-button>
           </ion-item>
 
           <!-- <ion-item>
@@ -106,19 +79,14 @@
       <!-- networks tab -->
 
       <div class="" *ngSwitchCase="'1'">
-        <ion-list style="padding: 0 10px">
+        <ion-list class="padding-1">
           <ion-list-header>
             {{ sent_network_list.length | number }} Sent invitations
           </ion-list-header>
 
-          <ion-item
-            *ngFor="let n of sent_network_list; let ind = index"
-            (click)="goToProfile(n?.user?._id)"
-          >
+          <ion-item *ngFor="let n of sent_network_list; let ind = index" (click)="goToProfile(n?.user?._id)">
             <ion-avatar slot="start">
-              <img
-                [src]="n.user.user_profile_image?.url || userFallbackImage"
-              />
+              <img [src]="n.user.user_profile_image?.url || userFallbackImage" />
             </ion-avatar>
             <ion-label>
               <h2>{{ n.user.first_name.description | titlecase }}</h2>
@@ -126,8 +94,7 @@
             </ion-label>
 
             <ion-buttons slot="end" size="small">
-              <ion-button
-                (click)="
+              <ion-button (click)="
                   showRemoveConnectionPopup(
                     n.user._id,
                     ind,
@@ -135,10 +102,7 @@
                     'Sent'
                   );
                   $event.stopPropagation()
-                "
-                style="text-transform: Capitalize; opacity: 0.6"
-                >withdraw</ion-button
-              >
+                " class="text-transform-1 opacity">withdraw</ion-button>
             </ion-buttons>
           </ion-item>
         </ion-list>
@@ -150,15 +114,12 @@
 <ng-template #invitationsView>
   <div class="" [ngSwitch]="tab">
     <div class="" *ngSwitchCase="'2'">
-      <ion-list style="padding: 0 10px">
+      <ion-list class="padding-1">
         <ion-list-header>
           {{ recieved_network_list.length | number }} Pending invitations
         </ion-list-header>
 
-        <ion-item
-          *ngFor="let n of recieved_network_list; let in = index"
-          (click)="goToProfile(n?.user?._id)"
-        >
+        <ion-item *ngFor="let n of recieved_network_list; let in = index" (click)="goToProfile(n?.user?._id)">
           <ion-avatar slot="start">
             <img [src]="n.user.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>
@@ -166,8 +127,7 @@
             <h2>{{ n.user.first_name.description | titlecase }}</h2>
             <p>{{ n.user.user_headline?.description }}</p>
           </ion-label>
-          <ion-fab-button
-            (click)="
+          <ion-fab-button (click)="
               removeConnection(
                 n.user._id,
                 n.type,
@@ -176,22 +136,15 @@
                 'Recieved'
               );
               $event.stopPropagation()
-            "
-            style="background: none"
-            size="small"
-            fill="outline"
-            ><ion-icon name="close-outline"></ion-icon
-          ></ion-fab-button>
-          <ion-fab-button
-            (click)="
+            " class="background" size="small" fill="outline">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="
               modifyConnection(n, in, recieved_network_list);
               $event.stopPropagation()
-            "
-            shape="round"
-            size="small"
-            fill="outline"
-            ><ion-icon name="checkmark-outline"></ion-icon
-          ></ion-fab-button>
+            " shape="round" size="small" fill="outline">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-fab-button>
         </ion-item>
       </ion-list>
     </div>
@@ -199,15 +152,12 @@
     <!-- networks tab -->
 
     <div class="" *ngSwitchCase="'1'">
-      <ion-list style="padding: 0 10px">
+      <ion-list class="padding-1">
         <ion-list-header>
           {{ sent_network_list.length | number }} Sent invitations
         </ion-list-header>
 
-        <ion-item
-          *ngFor="let n of sent_network_list; let ind = index"
-          (click)="goToProfile(n?.user?._id)"
-        >
+        <ion-item *ngFor="let n of sent_network_list; let ind = index" (click)="goToProfile(n?.user?._id)">
           <ion-avatar slot="start">
             <img [src]="n.user.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>
@@ -217,8 +167,7 @@
           </ion-label>
 
           <ion-buttons slot="end" size="small">
-            <ion-button
-              (click)="
+            <ion-button (click)="
                 showRemoveConnectionPopup(
                   n.user._id,
                   ind,
@@ -226,10 +175,7 @@
                   'Sent'
                 );
                 $event.stopPropagation()
-              "
-              style="text-transform: Capitalize; opacity: 0.6"
-              >withdraw</ion-button
-            >
+              " class="text-transform-1 opacity">withdraw</ion-button>
           </ion-buttons>
         </ion-item>
       </ion-list>

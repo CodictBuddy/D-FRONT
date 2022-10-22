@@ -2,21 +2,21 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button
-        style="opacity: 0.6"
         defaultHref="/home"
-        class="container-header"
+        class="container-header opacity  "
       ></ion-back-button>
     </ion-buttons>
     <ion-buttons>
-      <div class="">
+      <div >
         <ion-label class="container-header"
           >{{memberInfo['first_name'] | titlecase}} {{memberInfo['last_name'] |
           titlecase}}</ion-label
         >
 
-        <ion-label style="font-size: small; padding: 0 0 0 10px">
+        <ion-label class="font-size  padding" >
           <ion-icon
-            style="font-size: 12px; padding-top: 5px"
+          class="font-size2  padding-top"
+            
             name="radio-button-on-outline"
           ></ion-icon>
           Active</ion-label
@@ -35,11 +35,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-list style="padding: 10px">
-    <ion-list-header size="small;" style="padding: 10px 0 20px 0">
+  <ion-list class="padding">
+    <ion-list-header size="small;" class="padding-mix">
       <ion-label>
         <!-- <div class=""> -->
-        <div class="chat-room-member-profile" style="">
+        <div class="chat-room-member-profile">
           <ion-avatar class="">
             <img
               [src]="memberInfo['user_profile_image']?.url ||userFallbackImage "
@@ -48,37 +48,30 @@
         </div>
         <!-- </div> -->
 
-        <h6 style="font-size: 16px">
+        <h6 class="font-size-3">
           {{memberInfo['first_name'] | titlecase}} {{memberInfo['last_name'] |
           titlecase}}
         </h6>
-        <p style="font-size: 12px">
+        <p class="font-size-4">
           {{memberInfo['user_headline'] | lowercase}}
         </p>
       </ion-label>
     </ion-list-header>
 
-    <div style="" *ngFor="let chat of messagesList; let i=index">
+    <div  *ngFor="let chat of messagesList; let i=index">
       <ion-label (click)="openActionSheet(i)">
-        <div class="" style="padding: 1%">
+        <div class="padding">
           <div
-            class="image"
-            style="
-              display: inline-block;
-              justify-self: center important;
-              width: 38px;
-              margin-right: 5px;
-            "
-          >
+            class="image display-2  justify-self width  margin-right">
           <ion-avatar size="sm">
             <img [src]="chat.senderUser.user_profile_image.url" />
           </ion-avatar>
           </div>
-          <div style="display: inline-block">
+          <div class="display-2">
             <h2>{{chat.senderUser.first_name |titlecase}} {{chat.senderUser.last_name |titlecase}}</h2>
-            <div class="" style="display: flex;">
+            <div class="display" >
 
-              <h6 style="opacity: 0.7;padding-right: 3px;">{{chat.created_at | date}}</h6> <ion-icon *ngIf="chat.is_edited" name="pencil-outline"></ion-icon>
+              <h6 class="opacity  padding-right">{{chat.created_at | date}}</h6> <ion-icon *ngIf="chat.is_edited" name="pencil-outline"></ion-icon>
             </div>
           </div>
         </div>
@@ -169,7 +162,7 @@
   </ion-list>
 </ion-content>
 <ion-footer>
-  <div class="foot" style="display: flex">
+  <div class="foot  display" >
     <ion-input placeholder="enter your message here.."  [(ngModel)]="textMessageString" (keydown.enter)="triggerMessage(textMessageString ,roomId)"></ion-input>
     <ion-icon name="send" class="regular-font-size" (click)="triggerMessage(textMessageString,roomId)"></ion-icon>
   </div>
