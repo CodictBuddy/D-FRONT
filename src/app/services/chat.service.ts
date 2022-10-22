@@ -45,6 +45,18 @@ export class ChatService {
       .toPromise();
   }
 
+  updateChatMessage(_input) {
+    return this.http
+      .post<any>(this.baseurl + `/chat/update-message`, _input)
+      .toPromise();
+  }
+
+  removeChatMessage(_input) {
+    return this.http
+      .post<any>(this.baseurl + `/chat/delete-message`, _input)
+      .toPromise();
+  }
+
   getMessagesList(_input) {
     return this.http
       .post<any>(

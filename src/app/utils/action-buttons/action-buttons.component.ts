@@ -174,7 +174,6 @@ export class ActionButtonsComponent implements OnInit {
       this.util.chatRoomDetailLive.next(this.chatRoomInfo);  
       this.util.routeNavigation('/chat-room', this.chatRoomInfo?.['_id']);
     } else if (type === this.util.connection_btns[7]) {
-      console.log(type);
       this.removeConnection(user_id, this.util.connection_btns[0]);
     } else if(type === this.util.connection_btns[8]){
       this.removeConnection(user_id, this.util.connection_btns[0]);
