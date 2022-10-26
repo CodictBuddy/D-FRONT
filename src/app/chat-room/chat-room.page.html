@@ -71,7 +71,7 @@
             "
           >
             <ion-avatar size="sm">
-              <img [src]="chat.senderUser.user_profile_image.url" />
+              <img [src]="chat.senderUser.user_profile_image?.url ||userFallbackImage" />
             </ion-avatar>
           </div>
           <div style="display: inline-block">

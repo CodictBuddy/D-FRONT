@@ -1,7 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { UtilService } from './../utils/util.service';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { Socket } from 'ngx-socket-io';
@@ -22,27 +22,28 @@ export class ChatRoomPage implements OnInit, OnDestroy {
   myInfo = {};
   updateMessageInfo = {};
   constructor(
-    private actionSheetController: ActionSheetController,
     private util: UtilService,
     private userService: UserService,
     private chatService: ChatService,
+    private route: ActivatedRoute,
     private _socket: Socket
   ) {
     this.chatRoomSubscription = this.util.chatRoomDetailLive.subscribe((r) => {
-      this.roomId = r._id;
-      this.getMyDetails(r.members);
+      if (!r._id) {
+        this.fetchRoom()
+      } else {
+        this.roomId = r._id;
+        this.getMyDetails(r.members);
+      }
+
     });
 
+
     this._socket.on('add-message', (res) => {
-      console.log(
-        'i need to call notification service now add message socket',
-        res
-      );
       res.senderUser = this.userService.getFullyProcessedUserData(
         res.sender_id
       );
       if (this.myInfo['_id'] !== res.sender_id._id) {
-
         this.messagesList.push(res);
       }
     });
@@ -78,6 +79,14 @@ export class ChatRoomPage implements OnInit, OnDestroy {
     this.memberInfo = this.userService.getFullyProcessedUserData(data);
   }
 
+  async fetchRoom() {
+    this.roomId = this.route.snapshot.params['id']
+    const r = await this.chatService.getRoomData({ room_id: this.roomId })
+    if (r) {
+      this.getMyDetails(r.members);
+    }
+  }
+
   bottomScroller(time: number) {
     this.content.scrollToBottom(time);
   }
@@ -103,7 +112,7 @@ export class ChatRoomPage implements OnInit, OnDestroy {
     if (res) this.textMessageString = '';
     res.senderUser = this.userService.getFullyProcessedUserData(res.sender_id);
     this.messagesList.push(res);
-    this.bottomScroller(300)
+    this.bottomScroller(500)
   }
 
   async modifyMessage(data) {
