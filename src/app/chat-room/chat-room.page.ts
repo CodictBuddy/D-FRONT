@@ -5,6 +5,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { Socket } from 'ngx-socket-io';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-chat-room',
@@ -26,7 +27,8 @@ export class ChatRoomPage implements OnInit, OnDestroy {
     private userService: UserService,
     private chatService: ChatService,
     private route: ActivatedRoute,
-    private _socket: Socket
+    private _socket: Socket,
+    private socketService: SocketService
   ) {
     this.chatRoomSubscription = this.util.chatRoomDetailLive.subscribe((r) => {
       if (!r._id) {
@@ -84,6 +86,7 @@ export class ChatRoomPage implements OnInit, OnDestroy {
     const r = await this.chatService.getRoomData({ room_id: this.roomId })
     if (r) {
       this.getMyDetails(r.members);
+      this.socketService.loginUserSocket(r._id);
     }
   }
 
