@@ -33,6 +33,12 @@ export class UtilService {
     cover: 'user_background_image',
   };
 
+  public post_button= {
+    0:'Anyone',
+    1:'Connections only',
+    2:'Cancel'
+  }
+
   public connection_btns = {
     0: 'Connect',
     1: 'Pending',
@@ -123,6 +129,23 @@ export class UtilService {
         data: 'Delete this conversation?',
         icon: 'trash-outline',
       },
+    ],
+    post_options:[
+      {
+        text: this.post_button?.[0],
+        data: this.post_button?.[0],
+        icon: 'earth',
+      },
+      {
+        text: this.post_button?.[1],
+        data:this.post_button?.[1],
+        icon: 'people',
+      },
+      {
+        text: 'Cancel',
+        data: 'Cancel',
+        icon: 'close',
+      }
     ]
   };
 
@@ -132,6 +155,9 @@ export class UtilService {
       subHeading: `If you withdraw now, you won't be able to resend to this person for up to a month.`,
       buttons: ['Cancel', 'Withdraw'],
     },
+    post_creation:{
+      header: 'Let me know what you wanna add first?'
+    }
   };
 
   public fallbackUserImage = 'assets/Image/Empty State Icon/People.svg';
@@ -299,5 +325,13 @@ export class UtilService {
 
   splitNposition(data: string, splitValue: string, position: number) {
     return data.split(splitValue)[position]
+  }
+
+  textTrimmer(text:string,length:number=20,suffix:string='...' ):string{
+    if (text.length > length) {
+      let truncated: string = text.substring(0, length).trim() + suffix;
+      return truncated;
+    }
+    return text;
   }
 }

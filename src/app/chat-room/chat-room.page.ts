@@ -51,12 +51,12 @@ export class ChatRoomPage implements OnInit, OnDestroy {
     });
 
     this._socket.on('updateMessage', (res) => {
-      if (res && this.myInfo['_id'] !== this.messagesList[res.position].senderUser._id) {
-        this.messagesList[res.position].content = res.updated_mesasge?.content;
-        this.messagesList[res.position].is_edited = res.updated_mesasge?.is_edited;
-        this.messagesList[res.position].updated_at = res.updated_mesasge?.updated_at;
+      // if (res && this.myInfo['_id'] !== this.messagesList[res.position].senderUser._id) {
+      this.messagesList[res.position].content = res.updated_mesasge?.content;
+      this.messagesList[res.position].is_edited = res.updated_mesasge?.is_edited;
+      this.messagesList[res.position].updated_at = res.updated_mesasge?.updated_at;
 
-      }
+      // }
     })
 
     this._socket.on('deleteMessage', (res) => {
@@ -130,9 +130,9 @@ export class ChatRoomPage implements OnInit, OnDestroy {
 
     if (resData) {
       this.textMessageString = '';
-      this.messagesList[fv.position].content = resData.updatedData?.content;
-      this.messagesList[fv.position].is_edited = resData.updatedData?.is_edited;
-      this.messagesList[fv.position].updated_at = resData.updatedData?.updated_at;
+      // this.messagesList[fv.position].content = resData.updatedData?.content;
+      // this.messagesList[fv.position].is_edited = resData.updatedData?.is_edited;
+      // this.messagesList[fv.position].updated_at = resData.updatedData?.updated_at;
       this.updateMessageInfo = {}
     }
   }
@@ -147,7 +147,7 @@ export class ChatRoomPage implements OnInit, OnDestroy {
 
     const resData = await this.chatService.removeChatMessage(fv);
     if (resData) {
-      this.messagesList = this.util.arrayItemRemover(data.position, this.messagesList)
+      // this.messagesList = this.util.arrayItemRemover(data.position, this.messagesList)
     }
   }
 

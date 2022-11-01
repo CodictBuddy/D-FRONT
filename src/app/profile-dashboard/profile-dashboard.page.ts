@@ -25,9 +25,9 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
   sender_name = '';
   my_information = {};
   myProfile: boolean;
-  connected_user_list=[];
-  showOtherDetails : boolean
-  user_connection_option= this.util.alert_options.profile_connection_options;
+  connected_user_list = [];
+  showOtherDetails: boolean
+  user_connection_option = this.util.alert_options.profile_connection_options;
 
   mediaSubscription: Subscription;
   userSubscription: Subscription;
@@ -99,10 +99,10 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
   segmentChanged(event) {
     console.log('event here', event.target.value);
     this.tab = event.target.value;
-    if(this.tab==='2'){
-    this.netConnection()
+    if (this.tab === '2') {
+      this.netConnection()
     }
-    }
+  }
 
   close() {
     // this.menu.enable(false, 'first');
@@ -113,7 +113,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     this.menu.open('first');
   }
 
-  async presentActionSheet(user_id,connection_type,ind) {
+  async presentActionSheet(user_id, connection_type, ind) {
     const actionSheet = await this.actionSheetController.create({
       // header: 'Who can view your talk?',
       cssClass: '',
@@ -124,7 +124,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
           // data: 10,
           handler: () => {
             console.log('Share clicked');
-            
+
           },
         },
         // {
@@ -159,33 +159,33 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     //   }
 
     d.connections.forEach(element => {
-      element.connected_user= this.userService.getFullyProcessedUserData(element.connected_user)
-      console.log(element.connected_user);   
+      element.connected_user = this.userService.getFullyProcessedUserData(element.connected_user)
+      console.log(element.connected_user);
     });
-    this.connected_user_list=d.connections
-    console.log('new',d);
+    this.connected_user_list = d.connections
+    console.log('new', d);
     console.log(this.connected_user_list);
   }
- 
+
   goToUserProfile(user_id) {
     this.util.routeNavigation(`dashboard/${user_id}`);
   }
 
-  hideConnection(data){
-    console.log('Output action',data);
-  
-  if(data.connection_status===this.util.connection_btns[6] && data.type===this.util.connection_btns[0]){
-    console.log('hello');
-    
-    this.showOtherDetails=true;
+  hideConnection(data) {
+    console.log('Output action', data);
+
+    if (data.connection_status === this.util.connection_btns[6] && data.type === this.util.connection_btns[0]) {
+      console.log('hello');
+      //yaha lagana h
+      this.showOtherDetails = true;
+    }
+    else if (data.connected_status !== this.util.connection_btns[6] && data.type === this.util.connection_btns[0]) {
+      console.log('Hello2');
+
+      this.showOtherDetails = false;
+    }
   }
-  else if(data.connected_status!==this.util.connection_btns[6] && data.type===this.util.connection_btns[0]){
-    console.log('Hello2');
-    
-    this.showOtherDetails=false;
-  }
-  }
-  
+
 
 
   logoutUser() {
@@ -200,12 +200,12 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
       connection_type
     );
   }
-  async ActionSheet(user_id, connection_type,i) {
-    console.log("user",user_id)
+  async ActionSheet(user_id, connection_type, i) {
+    console.log("user", user_id)
     const b = [
       {
         ...this.user_connection_option[2],
-        data: { user_id,connection_type },
+        data: { user_id, connection_type },
       },
     ];
     const { data } = await (

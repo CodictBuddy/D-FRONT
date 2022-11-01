@@ -13,7 +13,7 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button [disabled]="!postForm.valid" (click)="createPost(postForm.valid,postForm.value)">
         <ion-label
         class ="fontsize-1"
           slot="end"
@@ -32,41 +32,39 @@
   
     >
     <ion-avatar slot="start"class="padding-2" >
-      <img [src]="my_information.user_profile_image.url || userFallbackImage" />
+      <img [src]="my_information?.user_profile_image?.url || userFallbackImage" />
     </ion-avatar>
     </div>
     <div class="display">
       <h6 class="padding-3">
-      margin-bottom: 1px;">{{my_information?.['first_name'] |titlecase}}
+      {{my_information?.['first_name'] |titlecase}}
       {{my_information?.['last_name'] |titlecase}}</h6>
-      <ion-chip outline color="secondary" (click)="presentActionSheet()">
+      <ion-chip outline color="secondary" (click)="openActionSheet()">
         <ion-icon *ngIf="anyone" name="earth"></ion-icon>
-        <ion-label *ngIf="anyone">Anyone</ion-label>
+        <ion-label *ngIf="anyone">{{selectedButtton}}</ion-label>
         <!-- show conditionally -->
         <ion-icon *ngIf="connectionsOnly" name="people"></ion-icon>
-        <ion-label *ngIf="connectionsOnly">Connections only</ion-label>
+        <ion-label *ngIf="connectionsOnly">{{selectedButtton}}</ion-label>
         <ion-icon name="caret-down-outline"></ion-icon>
       </ion-chip>
     </div>
     <!-- <ion-label>Default Label</ion-label> -->
-    form start here
-    <form action="">
+    <form [formGroup]="postForm">
     <ion-input
       placeholder="Give me a beautiful title !
       "
       [maxlength]="40"
+      formControlName="title"
   
     ></ion-input>
-   
-    <ion-item class ="height-2"> </ion-item>
-
-    <ion-textarea
+    <ion-textarea 
     class ="height-3"
       placeholder="What is coming in your creative mind?
       "
+      formControlName="content"
       clearOnEdit="true"
     ></ion-textarea>
-  </form>- form end here
+  </form>
  
   </div>
 </ion-content>

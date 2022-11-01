@@ -41,7 +41,7 @@
         <p>{{room?.lastMessage |truncate:20}}</p>
       </ion-label>
       <ion-label slot="end" style="margin-top: -8px; opacity: 0.7"
-        >{{room?.lastMessageCreated}}</ion-label
+        >{{room?.lastMessageCreated |dateAgoPipe}}</ion-label
       >
     </ion-item>
 
