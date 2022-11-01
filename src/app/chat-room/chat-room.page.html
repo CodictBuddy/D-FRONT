@@ -57,13 +57,21 @@
 
     <div *ngFor="let chat of messagesList; let i=index">
       <ion-label (click)="openActionSheet(i)">
-        <div class="padding">
-          <div class="image display-2 justify-self width margin-right">
+        <div class="" style="padding: 1%">
+          <div
+            class="image"
+            style="
+              display: inline-block;
+              justify-self: center important;
+              width: 38px;
+              margin-right: 5px;
+            "
+          >
             <ion-avatar size="sm">
-              <img [src]="chat.senderUser.user_profile_image.url" />
+              <img [src]="chat.senderUser.user_profile_image?.url ||userFallbackImage" />
             </ion-avatar>
           </div>
-          <div class="display-2">
+          <div style="display: inline-block">
             <h2>
               {{chat.senderUser.first_name |titlecase}}
               {{chat.senderUser.last_name |titlecase}}
@@ -161,7 +169,7 @@
   </ion-list>
 </ion-content>
 <ion-footer>
-  <div class="foot display">
+  <div class="foot" style="display: flex">
     <ion-input
       placeholder="enter your message here.."
       [(ngModel)]="textMessageString"
