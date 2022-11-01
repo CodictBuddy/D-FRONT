@@ -37,10 +37,10 @@
           {{room?.members?.first_name |titlecase}} {{room?.members?.last_name
           |titlecase}}
         </h2>
-        <p>latest message ....</p>
+        <p>{{room?.lastMessage |truncate:20}}</p>
       </ion-label>
       <ion-label slot="end" style="margin-top: -8px; opacity: 0.7"
-        >Dec 5</ion-label
+        >{{room?.lastMessageCreated}}</ion-label
       >
     </ion-item>
 

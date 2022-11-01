@@ -12,6 +12,7 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { AuthService } from '../auth/auth.service';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-tabs',
@@ -25,6 +26,7 @@ export class TabsPage implements OnInit {
     private notificationService: NotificationService,
     private _socket: Socket,
     private auth: AuthService,
+    private chatService: ChatService,
     private socket: SocketService,
     private util: UtilService,
     public plt: Platform
@@ -32,7 +34,7 @@ export class TabsPage implements OnInit {
     const user = this.util.retrieveLocalStorage('user_data');
     this.socket.loginUserSocket(JSON.parse(user)['_id']);
 
-    this.plt.ready().then(() => {});
+    this.plt.ready().then(() => { });
 
     this._socket.on('new-notification', () => {
       console.log('i need to call notification service now');
@@ -40,8 +42,18 @@ export class TabsPage implements OnInit {
     });
   }
 
+  async getRoomsList() {
+    const chatRooms = await this.chatService.getRoomList(0, 1000);
+    chatRooms.map(el => {
+      if (el) {
+        this.socket.loginUserSocket(el._id);
+      }
+    })
+  }
+
   ngOnInit() {
     this.getUnreadNotificationCount();
+    this.getRoomsList()
     console.log('Initializing HomePage');
 
     // Request permission to use push notifications

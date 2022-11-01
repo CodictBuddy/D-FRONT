@@ -34,7 +34,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #content>
   <ion-list style="padding: 10px">
     <ion-list-header size="small;" style="padding: 10px 0 20px 0">
       <ion-label>
@@ -70,15 +70,20 @@
               margin-right: 5px;
             "
           >
-          <ion-avatar size="sm">
-            <img [src]="chat.senderUser.user_profile_image.url" />
-          </ion-avatar>
+            <ion-avatar size="sm">
+              <img [src]="chat.senderUser.user_profile_image?.url ||userFallbackImage" />
+            </ion-avatar>
           </div>
           <div style="display: inline-block">
-            <h2>{{chat.senderUser.first_name |titlecase}} {{chat.senderUser.last_name |titlecase}}</h2>
-            <div class="" style="display: flex;">
-
-              <h6 style="opacity: 0.7;padding-right: 3px;">{{chat.created_at | date}}</h6> <ion-icon *ngIf="chat.is_edited" name="pencil-outline"></ion-icon>
+            <h2>
+              {{chat.senderUser.first_name |titlecase}}
+              {{chat.senderUser.last_name |titlecase}}
+            </h2>
+            <div class="" style="display: flex">
+              <h6 style="opacity: 0.7; padding-right: 3px">
+                {{chat.created_at | date}}
+              </h6>
+              <ion-icon *ngIf="chat.is_edited" name="pencil-outline"></ion-icon>
             </div>
           </div>
         </div>
@@ -170,7 +175,15 @@
 </ion-content>
 <ion-footer>
   <div class="foot" style="display: flex">
-    <ion-input placeholder="enter your message here.."  [(ngModel)]="textMessageString" (keydown.enter)="triggerMessage(textMessageString ,roomId)"></ion-input>
-    <ion-icon name="send" class="regular-font-size" (click)="triggerMessage(textMessageString,roomId)"></ion-icon>
+    <ion-input
+      placeholder="enter your message here.."
+      [(ngModel)]="textMessageString"
+      (keydown.enter)="triggerMessage(textMessageString ,roomId)"
+    ></ion-input>
+    <ion-icon
+      name="send"
+      class="regular-font-size"
+      (click)="triggerMessage(textMessageString,roomId)"
+    ></ion-icon>
   </div>
 </ion-footer>
