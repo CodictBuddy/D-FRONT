@@ -3,6 +3,7 @@ import { PostService } from './../../services/post.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import Speech from 'speak-tts';
+import { UtilService } from 'src/app/utils/util.service';
 
 @Component({
   selector: 'post-card',
@@ -17,13 +18,15 @@ export class CardComponent implements OnInit {
   postDetail: any;
   speech: any;
   speechData: any;
+  userFallbackImage = this.util.fallbackUserImage;
   constructor(private tts: TextToSpeech,
     private post: PostService,
-    private user: UserService) { }
+    private user: UserService,
+    private util: UtilService) { }
 
   ngOnInit() {
     console.log('value here', this.detail);
-    this.getPostDetail('635e887154e233001682010a');
+    this.getPostDetail('6362c08903ff69001631274b');
   }
 
   toggleLike() {
@@ -71,4 +74,5 @@ export class CardComponent implements OnInit {
     }
     console.log("postDetail", this.postDetail);
   }
+
 }

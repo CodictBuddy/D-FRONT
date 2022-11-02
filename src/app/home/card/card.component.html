@@ -22,15 +22,15 @@
               [routerLink]="['/profile']"
             >
               <ion-avatar class="avatar-small-image">
-                <img src="assets/Image/Empty State Icon/People.svg" />
+                <img [src]="postDetail?.['created_by']?.user_profile_image?.['url'] || userFallbackImage" />
               </ion-avatar>
             </div>
             <div>
               <h4 class="h3-activity" class="padding-1" >
-                Raunak Srivastava
+                {{postDetail?.['created_by']?.first_name |titlecase }} {{postDetail?.['created_by']?.last_name |titlecase}}
               </h4>
               <span  class= "font-size-1"
-                >2/12/21</span
+                >{{postDetail?.created_at |dateAgoPipe}}</span
               >
             </div>
             <ion-icon
@@ -50,23 +50,10 @@
           </ion-item>
         </ion-list>
         <div class="user-post">
-          <h4  class ="padding" >Title here</h4>
+          <h4  class ="padding" >{{postDetail?.title |titlecase}}</h4>
           <p  class ="margin"  class="like-comment-icon h4-sub-title">
-            some description here Lorem ipsum, dolor sit amet consectetur
-            adipisicing elit. Maxime molestiae quas labore odio doloremque
-            dignissimos laborum adipisci eos error totam inventore, eius,
-            sapiente ea nesciunt officia eveniet alias ratione esse dolores nam!
-            Molestias impedit quasi, maxime assumenda autem aspernatur doloribus
-            ducimus dignissimos in. Cupiditate nobis alias error inventore earum
-            voluptatibus explicabo! Eveniet laudantium natus corrupti deleniti
-            ducimus fuga eum. Adipisci perspiciatis ad explicabo vel culpa
-            dignissimos quis recusandae distinctio quos consectetur accusamus,
-            sit aliquid commodi libero sapiente provident voluptatum sint. Nulla
-            harum dicta esse earum eos perspiciatis placeat iusto soluta,
-            laudantium cum architecto reiciendis quisquam exercitationem nostrum
-            rem natus enim.
+              {{postDetail?.content}}
           </p>
-          ... readMore
         </div>
 
         <ion-item>

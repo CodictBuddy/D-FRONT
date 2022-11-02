@@ -7,6 +7,7 @@ import { UtilService } from './../utils/util.service';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MenuController, ActionSheetController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -28,6 +29,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
   connected_user_list = [];
   showOtherDetails: boolean
   user_connection_option = this.util.alert_options.profile_connection_options;
+  postInfo = {}
 
   mediaSubscription: Subscription;
   userSubscription: Subscription;
@@ -40,7 +42,7 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     private chatService: ChatService,
     private route: ActivatedRoute,
     private connectionService: ConnectionService,
-
+    private post: PostService
   ) {
     this.mediaSubscription = this.mediaService.imageData.subscribe((r) => {
       if (this.imageType === 'cover') {
@@ -65,7 +67,8 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     this.getUserDetails(id);
     this.getMyDetails();
     this.netConnection();
-
+    this.getMyPosts();
+    this.tab = '1';
   }
 
   async addImage(alreadyImage, addImage) {
@@ -186,13 +189,10 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     }
   }
 
-
-
   logoutUser() {
     localStorage.clear();
     this.util.routeNavigation('/login');
   }
-
 
   async removeConnection(user_id, connection_type) {
     await this.connectionService.removeConnection(
@@ -222,6 +222,15 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
         );
       });
     }
+  }
+  async getMyPosts(value = {
+    "skip": 0,
+    "limit": 10
+  }) {
+    this.postInfo = await this.post.myCreatedPostList(value)
+    console.log("data", this.postInfo);
+
+
   }
 }
 

@@ -240,7 +240,7 @@ export class PostPage implements OnInit {
 
     if (data) {
       this.handlePost();
-      this.util.toast('Post Send Succesfully', 3000)
+      this.util.toast('Post Created Succesfully', 3000)
     }
 
 

@@ -19,7 +19,7 @@ export class PostService {
   getPostDetail(_id) {
     return this.http.get<any>(this.baseurl + `/post/${_id}`).toPromise()
   }
-  createdPostList(_input) {
+  myCreatedPostList(_input) {
     return this.http.post<any>(this.baseurl + `/post/my_posts`, _input).toPromise()
   }
   publicAndConnectionPost(_input) {
