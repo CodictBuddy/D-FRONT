@@ -156,7 +156,8 @@ export class UtilService {
       buttons: ['Cancel', 'Withdraw'],
     },
     post_creation:{
-      header: 'Let me know what you wanna add first?'
+      heading: 'Let me know what you wanna add first?',
+      buttons:['Heading','Content']
     }
   };
 

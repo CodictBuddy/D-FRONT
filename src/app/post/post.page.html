@@ -32,7 +32,7 @@
   
     >
     <ion-avatar slot="start"class="padding-2" >
-      <img [src]="my_information?.user_profile_image?.url || userFallbackImage" />
+      <img [src]="my_information?.['user_profile_image']?.url || userFallbackImage" />
     </ion-avatar>
     </div>
     <div class="display">
@@ -48,7 +48,7 @@
         <ion-icon name="caret-down-outline"></ion-icon>
       </ion-chip>
     </div>
-    <!-- <ion-label>Default Label</ion-label> -->
+
     <form [formGroup]="postForm">
     <ion-input
       placeholder="Give me a beautiful title !
@@ -69,17 +69,6 @@
   </div>
 </ion-content>
 
-<!-- <ion-tabs> -->
-<!-- <ion-tab-bar slot="bottom"> -->
-<!-- <ion-tab-button tab="home">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>Home</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="map" [routerLink]="['/post']">
-      <ion-icon name="add-circle-outline"></ion-icon>
-      <ion-label>Add Talks</ion-label>
-    </ion-tab-button> -->
 <div class="" >
   <ion-tab-button *ngIf="toggleMike" (click)="stopListening()">
     <ion-icon size="large" name="mic" color="secondary"></ion-icon>
@@ -90,9 +79,3 @@
     <ion-label>Speak to add your talk</ion-label>
   </ion-tab-button>
 </div>
-<!-- <ion-tab-button tab="mic" slot="bottom" >
-      <ion-icon size='large' name="mic" color="secondary"></ion-icon>
-      <ion-label>Speak to add your talk</ion-label>
-    </ion-tab-button> -->
-<!-- </ion-tab-bar> -->
-<!-- </ion-tabs> -->
