@@ -56,6 +56,7 @@ export class PostPage implements OnInit, OnDestroy {
     this.handlePost()
     this.getMyDetails()
     this.setSpeechPermissions()
+
   }
 
   setSpeechPermissions() {
@@ -92,7 +93,7 @@ export class PostPage implements OnInit, OnDestroy {
 
   startListening() {
     this.toggleMike = true;
-  
+
     this.speechRecognition.startListening().subscribe(
       (r) => {
         if (this.isTitle && r.length > 0) {
@@ -148,11 +149,12 @@ export class PostPage implements OnInit, OnDestroy {
   }
   async createPost(isValid, formData) {
     if (!isValid) return
-
     const payload = {
       type: this.selectedButtton,
       title: formData.title,
       content: formData.content,
+      notification_title: `${this.my_information?.['first_name']} ${this.my_information?.['last_name']} has added a new post`,
+      notification_message: this.util.textTrimmer(formData.content),
       navigation_url: "/post/"
     }
     const data = await this.post.createPost(payload).catch(err => this.util.toast('Post Creation Failed.', 3000))
