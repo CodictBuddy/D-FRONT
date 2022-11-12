@@ -12,6 +12,7 @@ import { UtilService } from 'src/app/utils/util.service';
 })
 export class CardComponent implements OnInit {
   @Input('detail') detail: Boolean = true;
+  @Input('post_id') post_id: string = '';
   isLiked: Boolean = false;
   playSound: Boolean = false;
   isSelfPost: Boolean = false
@@ -26,7 +27,9 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
     console.log('value here', this.detail);
-    this.getPostDetail('6362c08903ff69001631274b');
+    this.getPostDetail(this.post_id);
+    console.log('PostId', this.post_id);
+
   }
 
   toggleLike() {

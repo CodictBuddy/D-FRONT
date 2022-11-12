@@ -6,8 +6,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="" *ngFor="let card of activity_list">
-    <post-card [detail]="false"></post-card>
+  <div class="" *ngFor="let card of talkList.posts">
+    <post-card [detail]="false" [post_id]="card._id"></post-card>
   </div>
   <!-- <app-activity-card
     [userPref]="userPreference"

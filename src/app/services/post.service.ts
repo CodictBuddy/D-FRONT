@@ -23,7 +23,7 @@ export class PostService {
     return this.http.post<any>(this.baseurl + `/post/my_posts`, _input).toPromise()
   }
   publicAndConnectionPost(_input) {
-    return this.http.post<any>(this.baseurl + `post/all_posts`, _input).toPromise()
+    return this.http.post<any>(this.baseurl + `/post/all_posts`, _input).toPromise()
   }
   // deletePost(_input) {
   //   return this.http.delete<any>(this.baseurl + `/post`, _input).toPromise()

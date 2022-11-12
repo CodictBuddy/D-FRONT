@@ -1,3 +1,4 @@
+import { PostService } from './../../services/post.service';
 import { SocketService } from './../../services/socket.service';
 import { UtilService } from './../../utils/util.service';
 // import { Socket } from "ngx-socket-io";
@@ -30,6 +31,7 @@ export class HomePage {
   recommendedListLoader: Boolean = false;
   private userDetail;
   id: any;
+  talkList: any
   activity_list: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 4];
   slideOptsOne = {
     initialSlide: 0,
@@ -44,8 +46,9 @@ export class HomePage {
     public router: Router,
     // private userService: UserService,
     private util: UtilService,
-    public modalController: ModalController
-  ) {}
+    public modalController: ModalController,
+    private post: PostService
+  ) { }
 
   checkGPSPermission() {
     // if (!localStorage.getItem("name")) {
@@ -63,6 +66,7 @@ export class HomePage {
 
   ngOnInit() {
     this.checkGPSPermission();
+    this.getPublicPostDetail();
     // this.socket.connect();
     if (!localStorage.getItem('overlay')) {
       this.openOverlay();
@@ -94,7 +98,7 @@ export class HomePage {
     // });
   }
 
-  data() {}
+  data() { }
 
   connect(i, targetId) {
     this.recommendedUser_list[i].people_connect = true;
@@ -196,5 +200,14 @@ export class HomePage {
     //     }
     //   }
     // );
+
+  }
+  async getPublicPostDetail(value = {
+    "skip": 0,
+    "limit": 10
+  }) {
+    this.talkList = await this.post.publicAndConnectionPost(value);
+    console.log('=====talk=====', this.talkList.posts);
+
   }
 }
