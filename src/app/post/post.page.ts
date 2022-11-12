@@ -39,6 +39,7 @@ export class PostPage implements OnInit, OnDestroy {
     private userService: UserService,
     private util: UtilService
   ) {
+
     this.alertOutputSubs = this.util.actionSheetOutput.subscribe((r) => {
 
       if (r && r.button == this.postAlertButton.buttons[0]) {
@@ -57,6 +58,14 @@ export class PostPage implements OnInit, OnDestroy {
     this.getMyDetails()
     this.setSpeechPermissions()
 
+  }
+
+  onClosePage(){
+    this.util.actionSheetOutput.observers.splice(0)
+    this.util.actionSheetOutput.next({})
+    this.alertOutputSubs.unsubscribe()
+    this.util.routeNavigation('/home')
+    this.handlePost()
   }
 
   setSpeechPermissions() {
@@ -123,7 +132,8 @@ export class PostPage implements OnInit, OnDestroy {
       title: new FormControl('', Validators.required),
       content: new FormControl('', Validators.required)
     })
-    console.log(this.postForm);
+
+    this.title = this.text = ''
   }
   async openActionSheet() {
     const b = this.postButton;
