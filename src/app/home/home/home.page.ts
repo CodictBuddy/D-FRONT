@@ -26,6 +26,7 @@ export class HomePage {
   invitations_list = [];
   recommendedUser_list = [];
   userPreference = true;
+  loader:Boolean = false
   connectionId;
   limit = 5;
   recommendedListLoader: Boolean = false;
@@ -202,11 +203,17 @@ export class HomePage {
     // );
 
   }
+
+  goToPost(postId){
+    this.util.routeNavigation('/home/detail',postId)
+  }
   async getPublicPostDetail(value = {
     "skip": 0,
     "limit": 10
   }) {
-    this.talkList = await this.post.publicAndConnectionPost(value);
+    this.loader = true
+    this.talkList = 
+      await this.post.publicAndConnectionPost(value).finally(()=>setTimeout(()=>this.loader = false) )
     console.log('=====talk=====', this.talkList.posts);
 
   }

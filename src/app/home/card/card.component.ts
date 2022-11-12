@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from './../../services/user.service';
 import { PostService } from './../../services/post.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ import { UtilService } from 'src/app/utils/util.service';
 })
 export class CardComponent implements OnInit {
   @Input('detail') detail: Boolean = true;
-  @Input('post_id') post_id: string = '';
+  @Input('post_data') post_data: any = null;
   isLiked: Boolean = false;
   playSound: Boolean = false;
   isSelfPost: Boolean = false
@@ -23,12 +24,13 @@ export class CardComponent implements OnInit {
   constructor(private tts: TextToSpeech,
     private post: PostService,
     private user: UserService,
-    private util: UtilService) { }
+    private util: UtilService,
+    private route:ActivatedRoute) { }
 
   ngOnInit() {
-    console.log('value here', this.detail);
-    this.getPostDetail(this.post_id);
-    console.log('PostId', this.post_id);
+    const id = this.route.snapshot.params['id']
+
+    this.getPostDetail(id,this.post_data);
 
   }
 
@@ -67,12 +69,13 @@ export class CardComponent implements OnInit {
     this.speech.setLanguage(this.speechData.voices[i].lang);
     this.speech.setVoice(this.speechData.voices[i].name);
   }
-  async getPostDetail(value) {
-    const data = await this.post.getPostDetail(value)
+
+  async getPostDetail(value, post_details?){
+    const data = post_details ? post_details : value?await this.post.getPostDetail(value) :null
     console.log("res", data)
     if (data) {
-      this.isSelfPost = data.isSelfPost
-      this.postDetail = data.post
+      this.isSelfPost = data?.isSelfPost ?? false
+      this.postDetail = data.post?? data
       this.postDetail['created_by'] = this.user.getFullyProcessedUserData(this.postDetail?.['created_by'])
     }
     console.log("postDetail", this.postDetail);
