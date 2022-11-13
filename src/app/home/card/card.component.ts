@@ -29,12 +29,11 @@ export class CardComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
-  }
-
-  ionViewWillEnter() {
     const id = this.route.snapshot.params['id']
     this.getPostDetail(id, this.post_data);
+  }
+  ionViewWillEnter() {
+
   }
 
   toggleLike() {

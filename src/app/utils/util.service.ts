@@ -33,10 +33,10 @@ export class UtilService {
     cover: 'user_background_image',
   };
 
-  public post_button= {
-    0:'Anyone',
-    1:'Connections only',
-    2:'Cancel'
+  public post_button = {
+    0: 'Anyone',
+    1: 'Connections only',
+    2: 'Cancel'
   }
 
   public connection_btns = {
@@ -130,7 +130,7 @@ export class UtilService {
         icon: 'trash-outline',
       },
     ],
-    post_options:[
+    post_options: [
       {
         text: this.post_button?.[0],
         data: this.post_button?.[0],
@@ -138,7 +138,7 @@ export class UtilService {
       },
       {
         text: this.post_button?.[1],
-        data:this.post_button?.[1],
+        data: this.post_button?.[1],
         icon: 'people',
       },
       {
@@ -146,6 +146,18 @@ export class UtilService {
         data: 'Cancel',
         icon: 'close',
       }
+    ],
+    post_modification_options: [
+      {
+        text: 'Edit this talk?',
+        data: 'Edit talk',
+        icon: 'create-outline',
+      },
+      {
+        text: 'Remove this talk',
+        data: 'Remove talk',
+        icon: 'trash-outline',
+      },
     ]
   };
 
@@ -155,9 +167,9 @@ export class UtilService {
       subHeading: `If you withdraw now, you won't be able to resend to this person for up to a month.`,
       buttons: ['Cancel', 'Withdraw'],
     },
-    post_creation:{
+    post_creation: {
       heading: 'Let me know what you wanna add first?',
-      buttons:['Heading','Content']
+      buttons: ['Heading', 'Content']
     }
   };
 
@@ -328,7 +340,7 @@ export class UtilService {
     return data.split(splitValue)[position]
   }
 
-  textTrimmer(text:string,length:number=20,suffix:string='...' ):string{
+  textTrimmer(text: string, length: number = 20, suffix: string = '...'): string {
     if (text.length > length) {
       let truncated: string = text.substring(0, length).trim() + suffix;
       return truncated;
