@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-avatar class="regular-font-size" [routerLink]="['/dashboard']">
-        <img src="assets/Image/Empty State Icon/People.svg" />
+        <img [src]="my_information?.['user_profile_image']?.url|| userFallbackImage" />
       </ion-avatar>
     </ion-buttons>
 

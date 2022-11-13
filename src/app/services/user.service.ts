@@ -14,6 +14,10 @@ export class UserService {
   constructor(private http: HttpClient, private util: UtilService) { }
 
   getMyDetails() {
+    const user = JSON.parse(this.util.retrieveLocalStorage('user_data'))
+    this.getUserProfile(user._id).then(res=>{
+      this.util.setLocalStorage('user_data',res.user)
+    })
     return JSON.parse(this.util.retrieveLocalStorage('user_data'));
   }
 

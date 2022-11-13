@@ -181,10 +181,10 @@
     <div class="" *ngSwitchCase="'3'">
       <ion-list  class="adding-2" >
         <ion-list-header>
-          {{postInfo?.count |number}} talks added till now
+          {{postInfo?.['count'] |number}} talks added till now
         </ion-list-header>
 
-        <ion-item *ngFor="let el of postInfo.posts">
+        <ion-item *ngFor="let el of postInfo?.['posts']">
           <ion-avatar slot="start">
             <img [src]="el?.created_by?.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>

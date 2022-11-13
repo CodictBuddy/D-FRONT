@@ -1,3 +1,5 @@
+import { UserService } from './../../services/user.service';
+import { UtilService } from './../../utils/util.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   newMessage:Boolean = true
-  constructor() { }
+  my_information = {}
+  userFallbackImage = this.util.fallbackUserImage;
+  constructor(private util:UtilService, private userService:UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getMyDetails() 
+  }
+
+  getMyDetails() {
+    let myInfo = this.userService.getMyDetails();
+    this.my_information = this.userService.getFullyProcessedUserData(myInfo);
+  }
+
 
 }
