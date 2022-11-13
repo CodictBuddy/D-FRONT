@@ -48,14 +48,14 @@
               name="volume-high-outline"
               slot="end"
               class="regular-font-size"
-              (click)="sound(postDetail.content)"
+              (click)="sound('')"
             ></ion-icon>
             <ion-icon
               *ngIf="!playSound"
               name="volume-mute-outline"
               slot="end"
               class="regular-font-size"
-              (click)="sound('')"
+              (click)="sound(postDetail.content)"
             ></ion-icon>
           </ion-item>
         </ion-list>
@@ -212,18 +212,18 @@
           name="volume-high-outline"
           slot="end"
           class="regular-font-size"
-          (click)="sound(postDetail.content)"
+          (click)="sound('')"
         ></ion-icon>
         <ion-icon
           *ngIf="!playSound"
           name="volume-mute-outline"
           slot="end"
           class="regular-font-size"
-          (click)="sound('')"
+          (click)="sound(postDetail.content)"
         ></ion-icon>
       </ion-item>
     </ion-list>
-    <div class="user-post" [routerLink]="['/home/detail']">
+    <div class="user-post" [routerLink]="['/home/detail',postDetail._id]">
       <h4 class="padding-4">{{ postDetail?.title | titlecase }}</h4>
 
       <p class="like-comment-icon h4-sub-title margin-2">
@@ -275,7 +275,7 @@
             <ion-label>like</ion-label>
           </ion-tab-button>
 
-          <ion-tab-button [routerLink]="['/home/detail']">
+          <ion-tab-button  [routerLink]="['/home/detail',postDetail._id]">
             <ion-icon name="chatbox-ellipses-outline"></ion-icon>
             <ion-label>comment</ion-label>
           </ion-tab-button>

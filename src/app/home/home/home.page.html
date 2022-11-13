@@ -9,7 +9,6 @@
   <div *ngIf="!loader" class="">
     <post-card
       *ngFor="let card of talkList?.posts"
-      (click)="goToPost(card._id)"
       [detail]="false"
       [post_data]="card"
     ></post-card>

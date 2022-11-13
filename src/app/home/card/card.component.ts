@@ -44,23 +44,23 @@ export class CardComponent implements OnInit {
     this.playSound = !this.playSound;
 
     if (!this.playSound) {
-      // this.speech.pause();
-      this.tts.stop();
-      this.tts = new TextToSpeech()
-    }else if (this.playSound) {
-      this.tts
-        .speak({
-          text: content,
-          locale: 'en-GB',
-          rate: 0.75,
-        })
-        .then(() => {
-          console.log('Success !');
-        })
-        .catch((e) => {
-          console.error('An error occurred :', e);
-        });
+      // this.tts.stop();
+      content = ""
     }
+
+    this.tts
+      .speak({
+        text: content,
+        locale: 'en-GB',
+        rate: 0.75,
+      })
+      .then(() => {
+        console.log('Success !');
+      })
+      .catch((e) => {
+        console.error('An error occurred :', e);
+      });
+
   }
 
   setLanguage(i) {

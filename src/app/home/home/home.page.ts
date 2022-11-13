@@ -194,10 +194,6 @@ export class HomePage {
 
   }
 
-  goToPost(postId) {
-    this.util.routeNavigation('/home/detail', postId)
-  }
-
   async getPublicPostDetail(value = {
     "skip": 0,
     "limit": 10
