@@ -40,17 +40,17 @@ export class CardComponent implements OnInit {
     this.isLiked = !this.isLiked;
   }
 
-  sound() {
+  sound(content) {
     this.playSound = !this.playSound;
 
     if (!this.playSound) {
       // this.speech.pause();
       this.tts.stop();
-    }
-    if (this.playSound) {
+      this.tts = new TextToSpeech()
+    }else if (this.playSound) {
       this.tts
         .speak({
-          text: 'your text reading software is working now',
+          text: content,
           locale: 'en-GB',
           rate: 0.75,
         })

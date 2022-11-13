@@ -48,14 +48,14 @@
               name="volume-high-outline"
               slot="end"
               class="regular-font-size"
-              (click)="sound()"
+              (click)="sound(postDetail.content)"
             ></ion-icon>
             <ion-icon
               *ngIf="!playSound"
               name="volume-mute-outline"
               slot="end"
               class="regular-font-size"
-              (click)="sound()"
+              (click)="sound('')"
             ></ion-icon>
           </ion-item>
         </ion-list>
@@ -212,14 +212,14 @@
           name="volume-high-outline"
           slot="end"
           class="regular-font-size"
-          (click)="sound()"
+          (click)="sound(postDetail.content)"
         ></ion-icon>
         <ion-icon
           *ngIf="!playSound"
           name="volume-mute-outline"
           slot="end"
           class="regular-font-size"
-          (click)="sound()"
+          (click)="sound('')"
         ></ion-icon>
       </ion-item>
     </ion-list>
