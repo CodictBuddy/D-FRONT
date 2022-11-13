@@ -5,16 +5,11 @@ import { UtilService } from './../../utils/util.service';
 // import { UtilService } from "./../../service/util.service";
 // import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
 
-// import { UserService } from "./../../service/user.service";
-import { Component, ViewChild } from '@angular/core';
-// import { AppService } from "src/app/service/app.service";
+import { Component} from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-// import { PostCardComponent } from "src/app/post/post-card/post-card.component";
 import { ModalController } from '@ionic/angular';
-import { Socket } from 'ngx-socket-io';
-// import { OverlayPage } from "src/app/common/overlay/overlay.page";
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -39,13 +34,9 @@ export class HomePage {
     slidesPerView: 2.3,
   };
 
-  // @ViewChild(PostCardComponent) postCardComponent: PostCardComponent;
   constructor(
-    // private service: AppService,
-    public actionSheetController: ActionSheetController,
     public alertCtrl: AlertController,
     public router: Router,
-    // private userService: UserService,
     private util: UtilService,
     public modalController: ModalController,
     private post: PostService
@@ -207,13 +198,14 @@ export class HomePage {
   goToPost(postId){
     this.util.routeNavigation('/home/detail',postId)
   }
+
   async getPublicPostDetail(value = {
     "skip": 0,
     "limit": 10
   }) {
     this.loader = true
     this.talkList = 
-      await this.post.publicAndConnectionPost(value).finally(()=>setTimeout(()=>this.loader = false) )
+      await this.post.publicAndConnectionPost(value).finally(()=>this.loader = false )
     console.log('=====talk=====', this.talkList.posts);
 
   }
