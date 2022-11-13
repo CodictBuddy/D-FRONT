@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: PostPage
+  },
+  {
+    path: ':id',
+    component: PostPage
   }
 ];
 
@@ -14,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PostPageRoutingModule {}
+export class PostPageRoutingModule { }

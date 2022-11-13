@@ -21,17 +21,20 @@ export class CardComponent implements OnInit {
   speech: any;
   speechData: any;
   userFallbackImage = this.util.fallbackUserImage;
+  post_modification_options = this.util.alert_options.post_modification_options
   constructor(private tts: TextToSpeech,
     private post: PostService,
     private user: UserService,
     private util: UtilService,
-    private route:ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+
+  }
+
+  ionViewWillEnter() {
     const id = this.route.snapshot.params['id']
-
-    this.getPostDetail(id,this.post_data);
-
+    this.getPostDetail(id, this.post_data);
   }
 
   toggleLike() {
@@ -70,15 +73,34 @@ export class CardComponent implements OnInit {
     this.speech.setVoice(this.speechData.voices[i].name);
   }
 
-  async getPostDetail(value, post_details?){
-    const data = post_details ? post_details : value?await this.post.getPostDetail(value) :null
+  async getPostDetail(value, post_details?) {
+    const data = post_details ? post_details : value ? await this.post.getPostDetail(value) : null
     console.log("res", data)
     if (data) {
       this.isSelfPost = data?.isSelfPost ?? false
-      this.postDetail = data.post?? data
+      this.postDetail = data.post ?? data
       this.postDetail['created_by'] = this.user.getFullyProcessedUserData(this.postDetail?.['created_by'])
     }
     console.log("postDetail", this.postDetail);
   }
 
+  async openActionSheet(post_id) {
+    const b = [...this.post_modification_options]
+    console.log('b', b);
+    const { data } = await (
+      await this.util.dynamicActionSheet({ buttons: b })
+    ).onDidDismiss();
+
+    if (data == this.post_modification_options[1].data && post_id) {
+      await this.post.deletePost(
+        post_id
+      )
+      this.util.toast('Talk Removed Succesfully', 3000);
+      this.util.routeNavigation('/home');
+    }
+    else if (data == this.post_modification_options[0].data && post_id) {
+      this.util.routeNavigation('/post', post_id);
+
+    }
+  }
 }

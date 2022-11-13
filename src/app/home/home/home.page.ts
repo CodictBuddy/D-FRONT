@@ -5,7 +5,7 @@ import { UtilService } from './../../utils/util.service';
 // import { UtilService } from "./../../service/util.service";
 // import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
 
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class HomePage {
   invitations_list = [];
   recommendedUser_list = [];
   userPreference = true;
-  loader:Boolean = false
+  loader: Boolean = false
   connectionId;
   limit = 5;
   recommendedListLoader: Boolean = false;
@@ -58,7 +58,6 @@ export class HomePage {
 
   ngOnInit() {
     this.checkGPSPermission();
-    this.getPublicPostDetail();
     // this.socket.connect();
     if (!localStorage.getItem('overlay')) {
       this.openOverlay();
@@ -69,7 +68,7 @@ export class HomePage {
     this.limit = 5;
     this.userPreference = true;
     this.getPeople();
-
+    this.getPublicPostDetail();
     this.getRecommendations();
     // this.postCardComponent.reloadData();
     this.userDetail = JSON.parse(localStorage.getItem('user_detail'));
@@ -195,8 +194,8 @@ export class HomePage {
 
   }
 
-  goToPost(postId){
-    this.util.routeNavigation('/home/detail',postId)
+  goToPost(postId) {
+    this.util.routeNavigation('/home/detail', postId)
   }
 
   async getPublicPostDetail(value = {
@@ -204,8 +203,8 @@ export class HomePage {
     "limit": 10
   }) {
     this.loader = true
-    this.talkList = 
-      await this.post.publicAndConnectionPost(value).finally(()=>this.loader = false )
+    this.talkList =
+      await this.post.publicAndConnectionPost(value).finally(() => this.loader = false)
     console.log('=====talk=====', this.talkList.posts);
 
   }

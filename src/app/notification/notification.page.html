@@ -3,7 +3,7 @@
     <ion-list-header>
       {{notificationCount|number}} Unread notifications
     </ion-list-header>
-   
+
     <ion-item
       *ngFor="let noti of notification_list; let i=index"
       [ngClass]="{'unreadClass':!noti.isRead}"
@@ -23,9 +23,7 @@
         slot="end"
         (click)="openActionSheet(noti._id,noti.type,i); $event.stopPropagation()"
       ></ion-icon>
-      <ion-label
-        slot="end"
-        class="margin opacity font-size"
+      <ion-label slot="end" class="margin opacity font-size"
         >{{noti.created_at |date:'MMM d'}}</ion-label
       >
     </ion-item>

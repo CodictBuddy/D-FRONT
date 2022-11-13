@@ -1,24 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="onClosePage()" >
-        <ion-icon class ="fontsize"  name="close-outline"></ion-icon>
+      <ion-button (click)="onClosePage()">
+        <ion-icon class="fontsize" name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons>
       <ion-button>
-        <ion-label  class ="fontsize-1">
-          Share talks
-        </ion-label>
+        <ion-label class="fontsize-1"> Share talks </ion-label>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button [disabled]="!postForm.valid" (click)="createPost(postForm.valid,postForm.value)">
-        <ion-label
-        class ="fontsize-1"
-          slot="end"
-        >
-          Post</ion-label
+      <ion-button
+        [disabled]="!postForm.valid"
+        (click)="createPost(postForm.valid,postForm.value)"
+      >
+        <ion-label class="fontsize-1" slot="end">
+          {{isUpdatePost?'Update':'Post'}}</ion-label
         >
       </ion-button>
     </ion-buttons>
@@ -26,19 +24,19 @@
 </ion-header>
 
 <ion-content class="height">
-  <div class="padding" >
-    <div
-      class="mixstyle"
-  
-    >
-    <ion-avatar slot="start"class="padding-2" >
-      <img [src]="my_information?.['user_profile_image']?.url || userFallbackImage" />
-    </ion-avatar>
+  <div class="padding">
+    <div class="mixstyle">
+      <ion-avatar slot="start" class="padding-2">
+        <img
+          [src]="my_information?.['user_profile_image']?.url || userFallbackImage"
+        />
+      </ion-avatar>
     </div>
     <div class="display">
       <h6 class="padding-3">
-      {{my_information?.['first_name'] |titlecase}}
-      {{my_information?.['last_name'] |titlecase}}</h6>
+        {{my_information?.['first_name'] |titlecase}}
+        {{my_information?.['last_name'] |titlecase}}
+      </h6>
       <ion-chip outline color="secondary" (click)="openActionSheet()">
         <ion-icon *ngIf="anyone" name="earth"></ion-icon>
         <ion-label *ngIf="anyone">{{selectedButtton}}</ion-label>
@@ -50,26 +48,24 @@
     </div>
 
     <form [formGroup]="postForm">
-    <ion-input
-      placeholder="Give me a beautiful title !
+      <ion-input
+        placeholder="Give me a beautiful title !
       "
-      [maxlength]="40"
-      formControlName="title"
-  
-    ></ion-input>
-    <ion-textarea 
-    class ="height-3"
-      placeholder="What is coming in your creative mind?
+        [maxlength]="40"
+        formControlName="title"
+      ></ion-input>
+      <ion-textarea
+        class="height-3"
+        placeholder="What is coming in your creative mind?
       "
-      formControlName="content"
-      clearOnEdit="true"
-    ></ion-textarea>
-  </form>
- 
+        formControlName="content"
+        clearOnEdit="true"
+      ></ion-textarea>
+    </form>
   </div>
 </ion-content>
 
-<div class="" >
+<div class="">
   <ion-tab-button *ngIf="toggleMike" (click)="stopListening()">
     <ion-icon size="large" name="mic" color="secondary"></ion-icon>
     <ion-label>Press again if you're done</ion-label>
