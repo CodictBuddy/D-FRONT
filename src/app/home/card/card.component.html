@@ -72,13 +72,10 @@
               <ion-tab-button class="display">
                 <div class="display-2">
                   <div class="">
-                    <ion-icon
-                      name="thumbs-up-sharp"
-                      class="font-size-2"
-                    ></ion-icon>
+                    <ion-icon name="heart-sharp" class="font-size-2"></ion-icon>
                   </div>
                   <div class="padding-2">
-                    <ion-label>{{ "33333" | number }}</ion-label>
+                    <ion-label>{{ totalLikesCount | number }}</ion-label>
                   </div>
                 </div>
               </ion-tab-button>
@@ -94,16 +91,18 @@
             <div class="justify-content">
               <ion-tab-button *ngIf="!isLiked">
                 <ion-icon
-                  name="thumbs-up-outline"
-                  (click)="toggleLike()"
+                  name="heart-outline"
+                  (click)="
+                    createLikes(postDetail?._id, postDetail?.created_by?._id)
+                  "
                   class="font-size-icon"
                 ></ion-icon>
                 <ion-label>like</ion-label>
               </ion-tab-button>
               <ion-tab-button *ngIf="isLiked">
                 <ion-icon
-                  name="thumbs-up"
-                  (click)="toggleLike()"
+                  name="heart"
+                  (click)="deleteLike(postDetail?._id)"
                   class="font-size-icon-2"
                 ></ion-icon>
                 <ion-label>like</ion-label>
@@ -223,7 +222,7 @@
         ></ion-icon>
       </ion-item>
     </ion-list>
-    <div class="user-post" [routerLink]="['/home/detail',postDetail._id]">
+    <div class="user-post" [routerLink]="['/home/detail', postDetail._id]">
       <h4 class="padding-4">{{ postDetail?.title | titlecase }}</h4>
 
       <p class="like-comment-icon h4-sub-title margin-2">
@@ -239,12 +238,12 @@
             <div class="display-5">
               <div class="">
                 <ion-icon
-                  name="thumbs-up-sharp"
+                  name="heart-sharp"
                   class="font-size-icon-3"
                 ></ion-icon>
               </div>
               <div class="padding-5">
-                <ion-label>{{ "33333" | number }}</ion-label>
+                <ion-label>{{ totalLikesCount | number }}</ion-label>
               </div>
             </div>
           </ion-tab-button>
@@ -260,22 +259,24 @@
         <div class="justify-content-2">
           <ion-tab-button *ngIf="!isLiked">
             <ion-icon
-              name="thumbs-up-outline"
-              (click)="toggleLike()"
+              name="heart-outline"
+              (click)="
+                createLikes(postDetail?._id, postDetail?.created_by?._id)
+              "
               class="font-size-icon-4"
             ></ion-icon>
             <ion-label>like</ion-label>
           </ion-tab-button>
           <ion-tab-button *ngIf="isLiked">
             <ion-icon
-              name="thumbs-up"
-              (click)="toggleLike()"
+              name="heart"
+              (click)="deleteLike(postDetail?._id)"
               class="font-size-icon-5"
             ></ion-icon>
             <ion-label>like</ion-label>
           </ion-tab-button>
 
-          <ion-tab-button  [routerLink]="['/home/detail',postDetail._id]">
+          <ion-tab-button [routerLink]="['/home/detail', postDetail._id]">
             <ion-icon name="chatbox-ellipses-outline"></ion-icon>
             <ion-label>comment</ion-label>
           </ion-tab-button>

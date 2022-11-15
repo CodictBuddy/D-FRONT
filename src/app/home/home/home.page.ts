@@ -201,7 +201,5 @@ export class HomePage {
     this.loader = true
     this.talkList =
       await this.post.publicAndConnectionPost(value).finally(() => this.loader = false)
-    console.log('=====talk=====', this.talkList.posts);
-
   }
 }

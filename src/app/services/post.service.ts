@@ -28,4 +28,5 @@ export class PostService {
   deletePost(_id) {
     return this.http.delete<any>(this.baseurl + `/post/${_id}`).toPromise()
   }
+
 }
