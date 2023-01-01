@@ -23,6 +23,7 @@ export class CardComponent implements OnInit {
   speechData: any;
   myInfo: any
   totalLikesCount: number = 0
+  totalCommentsCount: number = 0
   userFallbackImage = this.util.fallbackUserImage;
   post_modification_options = this.util.alert_options.post_modification_options
   constructor(private tts: TextToSpeech,
