@@ -1,91 +1,65 @@
-// import { UserService } from "./../../service/user.service";
-import { environment } from "./../../../environments/environment";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-// import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
-import { Platform } from "@ionic/angular";
+import { SocketService } from './../../services/socket.service';
+import { AuthService } from '../auth.service';
+import { UtilService } from '../../utils/util.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.page.html",
-  styleUrls: ["./login.page.scss"],
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  hide:Boolean = false
+  hide: Boolean = true;
+  loginForm: FormGroup;
+
   constructor(
-    private router: Router,
     public platform: Platform,
-    // private iab: InAppBrowser,
-    // private userService: UserService
+    private loginBuilder: FormBuilder,
+    private util: UtilService,
+    private auth: AuthService,
+    private socket: SocketService
   ) {}
 
-  ngOnInit() {}
-  addMessageListener() {
-    if (!window["hasListener"]) {
-      window.addEventListener("message", (message) => {
-        console.log("called msg listener");
-        localStorage.setItem(
-          "access_token",
-          JSON.parse(message.data).user.access_token
-        );
-        this.userAccessor();
-      });
-      window["hasListener"] = true;
-    }
+  ngOnInit() {
+    this.loginFormBuilder();
   }
-  doFLogin() {
-    // this.addMessageListener();
-    // this.openPopUp(environment.base_url + "/auth/facebook");
-  }
-  openPopUp(openLink: string) {
-    this.platform.ready().then(() => {
-      if (this.platform.is("cordova")) {
-        // const browser = this.iab.create(openLink, "_blank", {
-        //   hideurlbar: "yes",
-        //   fullscreen: "yes",
-        //   zoom: "no",
-        //   location: "no",
-        //   hidenavigationbuttons: "yes",
-        // });
-
-        // browser.on("loadstop").subscribe((response) => {
-        //   if (response.url.includes("loginstatus")) {
-        //     let accessToken = response.url.split(/success=/);
-        //     localStorage.setItem("access_token", accessToken[1]);
-        //     console.log("user access token here", accessToken[1]);
-        //     browser.close();
-        //     this.userAccessor();
-        //   }
-        // });
-      } else {
-        window.open(openLink);
-      }
+  // https://alligator.io/nodejs/express-cookies/  reference for cookies from node js
+  loginFormBuilder() {
+    this.loginForm = this.loginBuilder.group({
+      user_email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+        ],
+      ],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  userAccessor() {
-    // this.userService.getProfileDetail().subscribe((res) => {
-    //   localStorage.setItem("user_detail", JSON.stringify(res.user));
-    //   // localStorage.setItem("user_token_expires_in", res.token_expires_in);
-    //   localStorage.setItem("preferenceUpdated", res.preferenceUpdated);
-    //   localStorage.setItem("profileCompleted", res.profileCompleted);
-    //   this.userService.updateUserDetail();
-    //   if (res.profileCompleted === true && res.preferenceUpdated === false) {
-    //     return this.router.navigate(["/select-sports"]);
-    //   }
-    //   if (res.profileCompleted === true && res.preferenceUpdated === true) {
-    //     return this.router.navigate(["/current-location"]);
-    //   }
-    //   this.router.navigate(["/info-form"]);
-    // });
+  loginAccess(valid, value) {
+    if (valid) {
+      this.auth.login(value).subscribe(
+        (res) => {
+          console.log('login response', res);
+          this.util.toast('Login Successfully', 2000);
+          this.util.setLocalStorage('access_token', res.access_token);
+          this.util.setLocalStorage('user_data', res.user);
+          this.util.routeNavigation('/');
+          this.loginFormBuilder();
+          this.socket.loginUserSocket(res?.user?._id);
+        },
+        (err) => {
+          console.log('Login Error', err);
+
+          this.util.toast(err.error['message'], 2000);
+        }
+      );
+    }
   }
 
-  doGLogin() {
-    this.addMessageListener();
-    // this.openPopUp(environment.base_url + "/auth/google");
-  }
-  doELogin() {
-    this.router.navigate(["/login-email"]);
-  }
 
   toggleView(){
     this.hide =!this.hide

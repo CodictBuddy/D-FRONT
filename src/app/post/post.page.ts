@@ -1,42 +1,86 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
 import { ActionSheetController, AlertController } from '@ionic/angular';
+import { PostService } from '../services/post.service';
+import { UserService } from '../services/user.service';
+import { UtilService } from '../utils/util.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.scss'],
 })
-export class PostPage implements OnInit {
-  
-  constructor(
-    public actionSheetController: ActionSheetController,
-    private speechRecognition: SpeechRecognition,
-    public alertController: AlertController
-  ) {}
+export class PostPage implements OnInit, OnDestroy {
+
   text = '';
   title = '';
+  userFallbackImage = this.util.fallbackUserImage;
+  my_information = {};
+  myProfile: boolean;
   isTitle: Boolean = false;
   toggleMike: Boolean = false;
   connectionsOnly: Boolean = false;
   anyone: Boolean = true;
+  isUpdatePost: Boolean = false
+  postForm!: FormGroup
+  postDetail: any
+  post_id = null
+  postButton: any = this.util.alert_options.post_options
+  postAlertButton: any = this.util.alert_constants.post_creation
+  postButtonLabel: any = this.util.post_button
+  selectedButtton: any = this.postButtonLabel?.['0']
+  alertOutputSubs: Subscription
+
+  constructor(
+    public actionSheetController: ActionSheetController,
+    private speechRecognition: SpeechRecognition,
+    public alertController: AlertController,
+    private post: PostService,
+    private postFormBuilder: FormBuilder,
+    private userService: UserService,
+    private util: UtilService,
+    private route: ActivatedRoute
+  ) {
+
+    this.alertOutputSubs = this.util.actionSheetOutput.subscribe((r) => {
+
+      if (r && r.button == this.postAlertButton.buttons[0]) {
+        this.isTitle = true;
+        this.startListening();
+      } else if (r && r.button == this.postAlertButton.buttons[1]) {
+        this.isTitle = false;
+        this.startListening();
+      }
+    })
+  }
+
+
   ngOnInit() {
-    // Check feature available
+    this.post_id = this.route.snapshot.params['id']
+    this.isUpdatePost = !!this.post_id
+    this.handlePost()
+    this.getMyDetails()
+    this.setSpeechPermissions()
+    this.getPostDetail(this.post_id);
+  }
+
+  onClosePage() {
+    this.util.actionSheetOutput.observers.splice(0)
+    this.util.actionSheetOutput.next({})
+    this.alertOutputSubs.unsubscribe()
+    this.util.routeNavigation('/home')
+    this.handlePost()
+  }
+
+  setSpeechPermissions() {
     this.speechRecognition
       .isRecognitionAvailable()
       .then((available: boolean) =>
         console.log('functionality available', available)
       );
-
-    // Start the recognition process
-    // this.speechRecognition.startListening(options)
-    //   .subscribe(
-    //     (matches: string[]) => console.log(matches),
-    //     (onerror) => console.log('error:', onerror)
-    //   )
-
-    // Stop the recognition process (iOS only)
-    // this.speechRecognition.stopListening()
 
     // Get the list of supported languages
     this.speechRecognition.getSupportedLanguages().then(
@@ -58,111 +102,29 @@ export class PostPage implements OnInit {
     );
   }
 
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Who can view your talk?',
-      cssClass: '',
-      buttons: [
-        {
-          text: 'Anyone',
-          // role: 'destructive',
-          icon: 'earth',
-          // id: 'delete-button',
-          // data: {
-          //   type: 'delete'
-          // },
-          handler: () => {
-            this.connectionsOnly = false;
-            this.anyone = true;
-            console.log('Delete clicked');
-          },
-        },
-        {
-          text: 'Connections only',
-          icon: 'people',
-          // data: 10,
-          handler: () => {
-            this.connectionsOnly = true;
-            this.anyone = false;
-            console.log('Share clicked');
-          },
-        },
-        {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          },
-        },
-      ],
-    });
-    await actionSheet.present();
-
-    const { role, data } = await actionSheet.onDidDismiss();
-    console.log('onDidDismiss resolved with role and data', role, data);
-  }
 
   async showAlert() {
-    const alert = await this.alertController.create({
-      header: 'Let me know what you wanna add first?',
-      // message: msg,
-      buttons: [
-        {
-          text: 'Heading',
-          cssClass:'{color:green}',
-          // role: 'destructive',
-          // icon: 'earth',
-          id: 'heading-button',
-          // data: {
-          //   type: 'delete'
-          // },
-          handler: () => {
-            this.isTitle = true;
-            this.startListening();
-            console.log('heading clicked');
-          },
-        },
-        {
-          text: 'Content',
-          // role: 'destructive',
-          // icon: 'earth',
-          // id: 'delete-button',
-          // data: {
-          //   type: 'delete'
-          // },
-          handler: () => {
-            this.isTitle = false;
-            this.startListening();
-            console.log('content clicked');
-          },
-        },
-      ],
-    });
-    alert.present();
+    await this.util.showAlert(this.postAlertButton)
   }
 
   startListening() {
     this.toggleMike = true;
-    if (this.isTitle) {
-      console.log('title called ', this.isTitle);
-    } else {
-      console.log('text called ', this.isTitle);
-    }
 
     this.speechRecognition.startListening().subscribe(
       (r) => {
         if (this.isTitle && r.length > 0) {
           this.title += r[0];
+          this.postForm.patchValue({ title: this.title })
         } else if (!this.isTitle && r.length > 0) {
           this.text += r[0];
+          this.postForm.patchValue({ content: this.text })
         }
         console.log('r actual data coming here', r);
-
-        this.stopListening();
+        this.stopListening()
       },
       (err) => {
         console.log('error while speaking', err);
+        this.stopListening()
       }
     );
   }
@@ -171,4 +133,103 @@ export class PostPage implements OnInit {
     this.toggleMike = false;
     this.speechRecognition.stopListening();
   }
+
+  handlePost() {
+    this.postForm = this.postFormBuilder.group({
+      title: new FormControl('', Validators.required),
+      content: new FormControl('', Validators.required)
+    })
+
+    this.title = this.text = ''
+  }
+  async openActionSheet() {
+    const b = this.postButton;
+    console.log('b', b);
+
+    const { data } = await (
+      await this.util.dynamicActionSheet({ buttons: b })
+    ).onDidDismiss();
+    if (data) {
+      this.setButton(data)
+      console.log("data", data);
+
+    }
+  }
+  async createPost(isValid, formData) {
+    if (!isValid) return
+
+    if (this.isUpdatePost) {
+      this.updatePost(isValid, formData)
+    }
+    else {
+      const payload = {
+        type: this.selectedButtton,
+        title: formData.title,
+        content: formData.content,
+        notification_title: `${this.my_information?.['first_name']} ${this.my_information?.['last_name']} has added a new post`,
+        notification_message: this.util.textTrimmer(formData.content),
+        navigation_url: "/post/"
+      }
+      const data = await this.post.createPost(payload).catch(err => this.util.toast('Post Creation Failed.', 3000))
+      console.log("Data", data);
+
+      if (data) {
+        this.handlePost();
+        this.util.toast('Talk Created Succesfully', 3000)
+      }
+    }
+  }
+
+  getMyDetails() {
+    let myInfo = this.userService.getMyDetails();
+    this.my_information = this.userService.getFullyProcessedUserData(myInfo);
+  }
+  async getPostDetail(value, post_details?) {
+    const data = post_details ? post_details : value ? await this.post.getPostDetail(value) : null
+    console.log("res", data)
+    if (data) {
+      this.postDetail = data.post ?? data
+      this.setButton(this.postDetail.type)
+      this.postForm.patchValue({
+        title: this.postDetail.title,
+        content: this.postDetail.content
+      })
+      // this.postDetail['created_by'] = this.user.getFullyProcessedUserData(this.postDetail?.['created_by'])
+    }
+    console.log("postDetail", this.postDetail);
+  }
+
+  setButton(data) {
+    if (data == this.postButtonLabel?.['0']) {
+      this.selectedButtton = data
+      this.connectionsOnly = false;
+      this.anyone = true;
+    }
+    else if (data == this.postButtonLabel?.['1']) {
+      this.selectedButtton = data
+      this.connectionsOnly = true;
+      this.anyone = false;
+    }
+  }
+  async updatePost(isValid, formData) {
+    if (!isValid) return
+    const payload = {
+      post_id: this.post_id,
+      type: this.selectedButtton,
+      title: formData.title,
+      content: formData.content
+    }
+    const data = await this.post.updatePost(payload).catch(err =>
+      this.util.toast('Talk Updation Failed', 3000)
+    )
+    if (data) {
+      this.handlePost();
+      this.util.toast('Talk Updated Succesfully', 3000)
+      this.util.routeNavigation('/home/detail', this.post_id)
+    }
+  }
+  ngOnDestroy(): void {
+    this.alertOutputSubs.unsubscribe()
+  }
+
 }

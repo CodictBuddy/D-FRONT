@@ -1,0 +1,41 @@
+<ion-card class="people-you-scroll" (click)="cardClick(dymanic_id)">
+  <!-- <ion-avatar siz="sm"> -->
+  <div class="cross-btn" (click)="closeClick(); $event.stopPropagation()">
+    <ion-icon class="ion-font-23" name="close-circle"></ion-icon>
+  </div>
+  <!-- </ion-avatar> -->
+  <div class="avatar-recommend-image">
+    <img
+      [src]="img_url || fallback_img_url"
+      width="73px"
+      height="73px"
+      class="img-round"
+    />
+  </div>
+  <div class="recommended-user-names">
+    <h4 class="mt-5 text-dark res-1line padding-lr-10">
+      {{ main_text }}
+    </h4>
+    <h5 class="h5-sub-title res-1line padding-lr-10">
+      {{ description_text }}
+    </h5>
+    <ion-button
+      size="small"
+      [disabled]="disable"
+      shape="round"
+      class="btn-default-outline-primary  border"
+      fill="{{ !hide_border ? 'outline' : '' }}"
+      (click)="mainButtonClick(btn_label); $event.stopPropagation()"
+    >
+      <ion-icon name="checkmark" *ngIf="showCheckMark"></ion-icon>
+      {{ btn_label ? btn_label : "Button" }}</ion-button
+    >
+    <!-- <ion-button
+      *ngIf="peoples.request_sent"
+      size="small"
+      class="btn-default-outline-primary"
+      fill="outline"
+      >REQUESTED</ion-button
+    > -->
+  </div>
+</ion-card>

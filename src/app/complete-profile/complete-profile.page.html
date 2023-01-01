@@ -11,13 +11,13 @@
 <ion-content class="main-container ion-padding-horizontal">
   <br />
   <div class="ion-padding-horizontal">
-    <h5 class="title-20" style="opacity: 0.9">
+    <h5 class="title-20" class="opacity">
       Adding an intro will help you stand out
     </h5>
     <div class="df-space-between"></div>
-    <form style="padding: 15px">
+    <form class="padding" [formGroup]="completeProfileForm">
       <ion-list>
-        <ion-radio-group>
+        <ion-radio-group formControlName="user_gender">
           <ion-item>
             <ion-label>Male</ion-label>
             <ion-radio value="Male"></ion-radio>
@@ -35,25 +35,45 @@
         </ion-radio-group>
       </ion-list>
 
-      <ion-item style="margin-top: 10px">
+      <ion-item  class="margin-top">
         <ion-label
           color="secondary"
           class="input-label text-gray"
           position="floating"
           >Headline
         </ion-label>
-        <ion-input inputmode="text"></ion-input>
+        <ion-input
+          inputmode="text"
+          formControlName="user_headline"
+          maxlength="80"
+        ></ion-input>
       </ion-item>
+      <p
+        class="text-danger"
+        *ngIf="completeProfileForm.controls.user_headline?.errors?.required"
+      >
+        A headline about you is necessary
+      </p>
 
-      <ion-item style="margin-top: 10px">
+      <ion-item  class="margin-top">
         <ion-label
           color="secondary"
           class="input-label text-gray"
           position="floating"
           >About
         </ion-label>
-        <ion-textarea inputmode="text"></ion-textarea>
+        <ion-textarea
+          inputmode="text"
+          formControlName="user_about"
+          maxlength="500"
+        ></ion-textarea>
       </ion-item>
+      <p
+        class="text-danger"
+        *ngIf="completeProfileForm.controls.user_about?.errors?.required"
+      >
+        Please add atleast few lines about you
+      </p>
 
       <ion-button
         color="secondary"
@@ -61,7 +81,7 @@
         class="round-btn-40 m-t"
         expand="block"
         type="submit"
-        [routerLink]="['/profile-image']"
+        (click)="completeProfile(completeProfileForm.valid,completeProfileForm.value)"
       >
         Next
       </ion-button>

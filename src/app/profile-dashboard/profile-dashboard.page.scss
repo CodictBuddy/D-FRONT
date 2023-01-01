@@ -2,6 +2,20 @@
   padding-left: 10px;
 }
 
+.profile-camera-positioning {
+  position: absolute;
+  right: 1px;
+  padding: 4px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.card-setting {
+  height: 150px;
+  z-index: -1;
+  margin: 0;
+}
 .add-img-positioning {
   position: relative;
   opacity: 0.6;
@@ -9,4 +23,29 @@
   color: black;
 
   margin: 0 -32px -7px;
+}
+
+ion-content {
+  // overwrite inline styles
+  --offset-bottom: auto !important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.opacity{
+  opacity: 0.6
+}
+.opacity-2{
+  opacity: 0.8
+}
+.margin{
+  margin: 0 15px
+}
+.padding{
+  padding: 5px
+}
+.padding-2{
+  padding: 0 10px
 }

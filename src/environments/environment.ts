@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  base_url: 'https://dtalks-back.onrender.com/4201121119/4201121119',
+  url: 'https://dtalks-back.onrender.com',
+
+  base_url_heroku: 'https://dtalks-back.herokuapp.com/4201121119/4201121119',
+  url_heroku: 'https://dtalks-back.herokuapp.com',
 };
 
 /*

@@ -4,3 +4,32 @@ ion-fab-button {
   --background: white;
   --border: 1px solid red;
 }
+
+
+.content{
+
+    --offset-top: 0px;
+    --offset-bottom: 0px;
+}
+.opacity{
+  opacity: 0.6
+}
+.text-transform{
+  text-transform: initial; 
+  font-size: large
+}
+.text-transform-1{
+  text-transform: Capitalize;
+}
+.width{
+  width: 50%
+}
+.padding-top{
+  padding-top: 10px
+}
+.padding-1{
+  padding: 0 10px
+}
+.background{
+  background:none
+}

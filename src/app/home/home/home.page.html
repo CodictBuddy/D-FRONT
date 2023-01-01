@@ -1,14 +1,20 @@
 <!-- <app-header></app-header> -->
 <app-header></app-header>
+<app-loader *ngIf="loader" class="height-100vh"></app-loader>
 <ion-content class="main-container ion-padding-horizontal">
   <!-- refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-
-  <div class="" *ngFor="let card of activity_list">
-    <post-card [detail]="false"></post-card>
+  <div *ngIf="!loader" class="">
+    <post-card
+      *ngFor="let card of talkList?.posts"
+      [detail]="false"
+      [post_data]="card"
+    ></post-card>
   </div>
+
+  
   <!-- <app-activity-card
     [userPref]="userPreference"
     [limitBody]="limit"
@@ -21,7 +27,7 @@
     limit="5"
   ></my-activity-card> -->
 
-  <div style="margin-top: 10px; margin-bottom: 10px">
+  <div class="margin-1">
     <!-- <app-home-slide></app-home-slide> -->
   </div>
 
@@ -34,25 +40,13 @@
         <ion-slide *ngFor="let peoples of people_list" align="center">
           <ion-card class="people-you-scroll">
             <div class="avatar-recommend-image">
-              <img
-                [src]=""
-                style="width: 73px; height: 73px; margin-bottom: 5px"
-                class="img-round animated-title-loader"
-              />
+              <img [src]="" class="img-round animated-title-loader width-1" />
             </div>
-            <h4
-              class="mt-5 text-dark animated-title-loader"
-              style="width: 80px; margin: 5px auto"
-            ></h4>
+            <h4 class="mt-5 text-dark animated-title-loader width-2"></h4>
             <h5
-              class="h5-sub-title padding-lr-10 animated-title-loader"
-              style="width: 60px; margin: 5px auto"
+              class="h5-sub-title padding-lr-10 animated-title-loader width-3"
             ></h5>
-            <p
-              size="small"
-              class="animated-title-loader"
-              style="width: 80px; height: 25px; left: 23%"
-            ></p>
+            <p size="small" class="animated-title-loader width-4"></p>
           </ion-card>
         </ion-slide>
       </ion-slides>

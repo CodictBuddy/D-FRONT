@@ -2,20 +2,21 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button [routerLink]="['/dashboard']">
-        <ion-icon style="font-size: 28px" name="close-outline"></ion-icon>
+        <ion-icon  class="font-size" name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons>
       <ion-button>
-        <ion-label style="font-size: medium; text-transform: initial">
+        <ion-label class="font-size-2  text-transform "  >
           Edit intro
         </ion-label>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button type="button" (click)="refBtn.click()">
         <ion-label
-          style="font-size: medium; text-transform: initial"
+         
+          class="font-size-2  text-transform " 
           slot="end"
         >
           Save</ion-label
@@ -26,7 +27,12 @@
 </ion-header>
 
 <ion-content>
-  <form style="padding: 15px">
+  <form
+  class ="padding"
+   
+    [formGroup]="updateProfileForm"
+    (ngSubmit)="updateProfile(updateProfileForm.value,updateProfileForm.valid)"
+  >
     <ion-item>
       <ion-label
         color="secondary"
@@ -34,48 +40,78 @@
         position="floating"
         >First name
       </ion-label>
-      <ion-input inputmode="text"></ion-input>
+      <ion-input inputmode="text" formControlName="first_name"></ion-input>
     </ion-item>
+    <p
+        class="text-danger"
+        *ngIf="updateProfileForm.controls.first_name?.errors?.required"
+      >
+        First name is required
+      </p>
 
-    <ion-item style="margin-top: 10px">
+    <ion-item class ="margin-top">
       <ion-label
         color="secondary"
         class="input-label text-gray"
         position="floating"
         >Last name
       </ion-label>
-      <ion-input inputmode="text"></ion-input>
+      <ion-input inputmode="text" formControlName="last_name"></ion-input>
     </ion-item>
+    <p
+        class="text-danger"
+        *ngIf="updateProfileForm.controls.last_name?.errors?.required"
+      >
+        Last name is required
+      </p>
 
-    <ion-item style="margin-top: 10px">
+    <ion-item class ="margin-top">
       <ion-label
         color="secondary"
         class="input-label text-gray"
         position="floating"
         >Headline
       </ion-label>
-      <ion-textarea inputmode="text"></ion-textarea>
+      <ion-textarea
+        inputmode="text"
+        formControlName="user_headline"
+      ></ion-textarea>
     </ion-item>
+    <p
+        class="text-danger"
+        *ngIf="updateProfileForm.controls.user_headline?.errors?.required"
+      >
+        A headline is required for your introduction
+      </p>
 
-    <ion-item style="margin-top: 10px">
+    <ion-item class ="margin-top">
       <ion-label
         color="secondary"
         class="input-label text-gray"
         position="floating"
         >About
       </ion-label>
-      <ion-textarea inputmode="text"></ion-textarea>
+      <ion-textarea
+        inputmode="text"
+        formControlName="user_about"
+      ></ion-textarea>
     </ion-item>
+    <p
+        class="text-danger"
+        *ngIf="updateProfileForm.controls.user_about?.errors?.required"
+      >
+        Add about yourself and let people know bit about you
+      </p>
 
-    <ion-button
+    <button
       color="secondary"
       shape="round"
-      class="round-btn-40"
+      class="round-btn-40  visibility  "
       expand="block"
       type="submit"
-      [routerLink]="['/']"
-      style="visibility: hidden"
+      
+      #refBtn
     >
-    </ion-button>
+    </button>
   </form>
 </ion-content>

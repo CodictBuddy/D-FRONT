@@ -2,18 +2,18 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-avatar class="regular-font-size" [routerLink]="['/dashboard']">
-        <img src="assets/Image/Empty State Icon/People.svg" />
+        <img [src]="my_information?.['user_profile_image']?.url|| userFallbackImage" />
       </ion-avatar>
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <app-search style="border: none"></app-search>
+      <app-search class="border"></app-search>
     </ion-buttons>
 
     <ion-buttons slot="end" id="main">
       <ion-button class="container-header" routerLink="/home/chat-list">
         <ion-badge
-          style="position: absolute; top: -1px; left: 20px"
+         class="position" 
           slot="end"
           color="secondary"
           >2</ion-badge

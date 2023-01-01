@@ -22,94 +22,88 @@
               [routerLink]="['/profile']"
             >
               <ion-avatar class="avatar-small-image">
-                <img src="assets/Image/Empty State Icon/People.svg" />
+                <img
+                  [src]="postDetail?.['created_by']?.user_profile_image?.['url'] || userFallbackImage"
+                />
               </ion-avatar>
             </div>
             <div>
-              <h4 class="h3-activity" style="padding: 0; margin: 0">
-                Raunak Srivastava
+              <h4 class="h3-activity" class="padding-1">
+                {{postDetail?.['created_by']?.first_name |titlecase }}
+                {{postDetail?.['created_by']?.last_name |titlecase}}
               </h4>
-              <span style="font-size: small; padding: 0; margin: 0"
-                >2/12/21</span
-              >
+              <span class="font-size-1">{{
+                postDetail?.created_at | dateAgoPipe
+              }}</span>
             </div>
+            <ion-icon
+              *ngIf="isSelfPost"
+              class="margin-bottom"
+              name="ellipsis-vertical-outline"
+              (click)="openActionSheet(postDetail._id)"
+              slot="end"
+            ></ion-icon>
             <ion-icon
               *ngIf="playSound"
               name="volume-high-outline"
               slot="end"
               class="regular-font-size"
-              (click)="sound()"
+              (click)="sound('')"
             ></ion-icon>
             <ion-icon
               *ngIf="!playSound"
               name="volume-mute-outline"
               slot="end"
               class="regular-font-size"
-              (click)="sound()"
+              (click)="sound(postDetail.content)"
             ></ion-icon>
           </ion-item>
         </ion-list>
         <div class="user-post">
-          <h4 style="padding: 0 35%">Title here</h4>
-          <p style="margin: 0 15px 10px" class="like-comment-icon h4-sub-title">
-            some description here Lorem ipsum, dolor sit amet consectetur
-            adipisicing elit. Maxime molestiae quas labore odio doloremque
-            dignissimos laborum adipisci eos error totam inventore, eius,
-            sapiente ea nesciunt officia eveniet alias ratione esse dolores nam!
-            Molestias impedit quasi, maxime assumenda autem aspernatur doloribus
-            ducimus dignissimos in. Cupiditate nobis alias error inventore earum
-            voluptatibus explicabo! Eveniet laudantium natus corrupti deleniti
-            ducimus fuga eum. Adipisci perspiciatis ad explicabo vel culpa
-            dignissimos quis recusandae distinctio quos consectetur accusamus,
-            sit aliquid commodi libero sapiente provident voluptatum sint. Nulla
-            harum dicta esse earum eos perspiciatis placeat iusto soluta,
-            laudantium cum architecto reiciendis quisquam exercitationem nostrum
-            rem natus enim.
+          <h4 class="padding">{{ postDetail?.title | titlecase }}</h4>
+          <p class="margin" class="like-comment-icon h4-sub-title">
+            {{ postDetail?.content }}
           </p>
-          ... readMore
         </div>
 
         <ion-item>
-          <ion-list style="width: 100%">
+          <ion-list class="width">
             <div>
-              <ion-tab-button style="display: flex; float: left">
-                <div class="" style="display: flex; float: left">
+              <ion-tab-button class="display">
+                <div class="display-2">
                   <div class="">
-                    <ion-icon
-                      name="thumbs-up-sharp"
-                      style="font-size: 16px"
-                    ></ion-icon>
+                    <ion-icon name="heart-sharp" class="font-size-2"></ion-icon>
                   </div>
-                  <div class="" style="padding-top: 3px; padding-left: 3px">
-                    <ion-label>{{ "33333" | number }}</ion-label>
+                  <div class="padding-2">
+                    <ion-label>{{ totalLikesCount | number }}</ion-label>
                   </div>
                 </div>
               </ion-tab-button>
 
-              <ion-tab-button style="display: inline-block; float: right">
-                <ion-label style="align-items: center">2 comments</ion-label>
+              <ion-tab-button class="display-3">
+                <ion-label class="align-1">2 comments</ion-label>
               </ion-tab-button>
             </div>
           </ion-list>
         </ion-item>
         <ion-item>
-          <ion-list style="width: 100%">
-            <div
-              style="justify-content: space-between; display: flex; width: 100%"
-            >
+          <ion-list class="width-2">
+            <div class="justify-content">
               <ion-tab-button *ngIf="!isLiked">
                 <ion-icon
-                  name="thumbs-up-outline"
-                  (click)="toggleLike()"
-                  style="font-size: 22px"
+                  name="heart-outline"
+                  (click)="
+                    createLikes(postDetail?._id, postDetail?.created_by?._id)
+                  "
+                  class="font-size-icon"
                 ></ion-icon>
                 <ion-label>like</ion-label>
               </ion-tab-button>
               <ion-tab-button *ngIf="isLiked">
                 <ion-icon
-                  name="thumbs-up"
-                  (click)="toggleLike()"
-                  style="font-size: 22px; color: rgb(0, 47, 255)"
+                  name="heart"
+                  (click)="deleteLike(postDetail?._id)"
+                  class="font-size-icon-2"
                 ></ion-icon>
                 <ion-label>like</ion-label>
               </ion-tab-button>
@@ -149,50 +143,31 @@
                 [routerLink]="['/profile']"
               >
                 <ion-avatar class="avatar-small-image">
-                  <img
-                    [src]=""
-                    class="img-round animated-title-loader"
-                    style="width: 40px; height: 40px"
-                  />
+                  <img [src]="" class="img-round animated-title-loader img" />
                 </ion-avatar>
               </div>
               <ion-label>
-                <h4 class="mt-5 animated-title-loader" style="width: 50px"></h4>
+                <h4 class="mt-5 animated-title-loader width-3"></h4>
               </ion-label>
             </ion-item>
           </ion-list>
           <div class="user-post">
-            <img
-              [src]=""
-              class="animated-title-loader"
-              style="width: 409px; height: 409px"
-            />
+            <img [src]="" class="animated-title-loader img-2" />
           </div>
           <div class="like-comment-icon"></div>
-          <h4 class="h4-user-name animated-title-loader" style="width: 220px">
+          <h4 class="h4-user-name animated-title-loader width-4">
             <b class="routerLink" [routerLink]="['/likes']"></b>
           </h4>
-          <h4
-            class="h4-user-name animated-title-loader"
-            style="width: 400px"
-          ></h4>
+          <h4 class="h4-user-name animated-title-loader width-5"></h4>
           <span
-            class="see-more text-success animated-title-loader"
-            style="width: 100px"
+            class="see-more text-success animated-title-loader width-6"
           ></span>
           <h5
-            class="
-              h5-user-view-comment
-              text-success
-              routerLink
-              animated-title-loader
-            "
+            class="h5-user-view-comment text-success routerLink animated-title-loader width-7"
             [routerLink]="['/comments']"
-            style="width: 160px"
           ></h5>
           <h5
-            class="h5-user-view-comment text-success animated-title-loader"
-            style="width: 100px"
+            class="h5-user-view-comment text-success animated-title-loader width-8"
           ></h5>
         </div>
       </div>
@@ -210,94 +185,98 @@
           [routerLink]="['/profile']"
         >
           <ion-avatar class="avatar-small-image">
-            <img src="assets/Image/Empty State Icon/People.svg" />
+            <img
+              [src]="postDetail?.['created_by']?.user_profile_image?.['url'] || userFallbackImage"
+            />
           </ion-avatar>
         </div>
         <div [routerLink]="['/profile']">
-          <h4 class="h3-activity" style="padding: 0; margin: 0">
-            Raunak Srivastava
+          <h4 class="h3-activity padding-3">
+            {{postDetail?.['created_by']?.first_name |titlecase }}
+            {{postDetail?.['created_by']?.last_name |titlecase}}
           </h4>
-          <span style="font-size: small; padding: 0; margin: 0">2/12/21</span>
+          <span class="font-size-3">{{
+            postDetail?.created_at | dateAgoPipe
+          }}</span>
         </div>
+        <ion-icon
+          *ngIf="isSelfPost"
+          class="margin-bottom"
+          name="ellipsis-vertical-outline"
+          (click)="openActionSheet(postDetail._id)"
+          slot="end"
+        ></ion-icon>
         <ion-icon
           *ngIf="playSound"
           name="volume-high-outline"
           slot="end"
           class="regular-font-size"
-          (click)="sound()"
+          (click)="sound('')"
         ></ion-icon>
         <ion-icon
           *ngIf="!playSound"
           name="volume-mute-outline"
           slot="end"
           class="regular-font-size"
-          (click)="sound()"
+          (click)="sound(postDetail.content)"
         ></ion-icon>
       </ion-item>
     </ion-list>
-    <div class="user-post" [routerLink]="['/home/detail']">
-      <h4 style="padding: 0 35%">Title here</h4>
-      <p style="margin: 0 15px 10px" class="like-comment-icon h4-sub-title">
-        some description here Lorem ipsum, dolor sit amet consectetur
-        adipisicing elit. Maxime molestiae quas labore odio doloremque
-        dignissimos laborum adipisci eos error totam inventore, eius, sapiente
-        ea nesciunt officia eveniet alias ratione esse dolores nam! Molestias
-        impedit quasi, maxime assumenda autem aspernatur doloribus ducimus
-        dignissimos in. Cupiditate nobis alias error inventore earum
-        voluptatibus explicabo! Eveniet laudantium natus corrupti deleniti
-        ducimus fuga eum. Adipisci perspiciatis ad explicabo vel culpa
-        dignissimos quis recusandae distinctio quos consectetur accusamus, sit
-        aliquid commodi libero sapiente provident voluptatum sint. Nulla harum
-        dicta esse earum eos perspiciatis placeat iusto soluta, laudantium cum
-        architecto reiciendis quisquam exercitationem nostrum rem natus enim.
+    <div class="user-post" [routerLink]="['/home/detail', postDetail._id]">
+      <h4 class="padding-4">{{ postDetail?.title | titlecase }}</h4>
+
+      <p class="like-comment-icon h4-sub-title margin-2">
+        {{ postDetail?.content }}
       </p>
-      ... readMore
+      <!-- ... readMore -->
     </div>
 
     <ion-item>
-      <ion-list style="width: 100%">
+      <ion-list class="width-9">
         <div>
-          <ion-tab-button style="display: flex; float: left">
-            <div class="" style="display: flex; float: left">
+          <ion-tab-button class="display-4">
+            <div class="display-5">
               <div class="">
                 <ion-icon
-                  name="thumbs-up-sharp"
-                  style="font-size: 16px"
+                  name="heart-sharp"
+                  class="font-size-icon-3"
                 ></ion-icon>
               </div>
-              <div class="" style="padding-top: 3px; padding-left: 3px">
-                <ion-label>{{ "33333" | number }}</ion-label>
+              <div class="padding-5">
+                <ion-label>{{ totalLikesCount | number }}</ion-label>
               </div>
             </div>
           </ion-tab-button>
 
-          <ion-tab-button style="display: inline-block; float: right">
-            <ion-label style="align-items: center">2 comments</ion-label>
+          <ion-tab-button class="display-6">
+            <ion-label class="align-2">2 comments</ion-label>
           </ion-tab-button>
         </div>
       </ion-list>
     </ion-item>
     <ion-item>
-      <ion-list style="width: 100%">
-        <div style="justify-content: space-between; display: flex; width: 100%">
+      <ion-list class="width-10">
+        <div class="justify-content-2">
           <ion-tab-button *ngIf="!isLiked">
             <ion-icon
-              name="thumbs-up-outline"
-              (click)="toggleLike()"
-              style="font-size: 22px"
+              name="heart-outline"
+              (click)="
+                createLikes(postDetail?._id, postDetail?.created_by?._id)
+              "
+              class="font-size-icon-4"
             ></ion-icon>
             <ion-label>like</ion-label>
           </ion-tab-button>
           <ion-tab-button *ngIf="isLiked">
             <ion-icon
-              name="thumbs-up"
-              (click)="toggleLike()"
-              style="font-size: 22px; color: rgb(0, 47, 255)"
+              name="heart"
+              (click)="deleteLike(postDetail?._id)"
+              class="font-size-icon-5"
             ></ion-icon>
             <ion-label>like</ion-label>
           </ion-tab-button>
 
-          <ion-tab-button [routerLink]="['/home/detail']">
+          <ion-tab-button [routerLink]="['/home/detail', postDetail._id]">
             <ion-icon name="chatbox-ellipses-outline"></ion-icon>
             <ion-label>comment</ion-label>
           </ion-tab-button>

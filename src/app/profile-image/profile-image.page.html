@@ -12,7 +12,8 @@
   <br />
 
   <div class="ion-padding-horizontal">
-    <h5 class="title-20" style="opacity: 0.9">
+    <h5 class="title-20  opacity" >
+      
       Adding a photo helps people recognize you
     </h5>
     <div class="df-space-between"></div>
@@ -20,7 +21,16 @@
     <ion-card class="people-you-scroll ; p-20">
       <div class="avatar-recommend-image">
         <img
+          *ngIf="!userImg['url']"
           src="assets/Image/Empty State Icon/People.svg"
+          width="73px"
+          height="73px"
+          class="img-round"
+        />
+
+        <img
+          *ngIf="userImg['url']"
+          [src]="userImg['url']"
           width="73px"
           height="73px"
           class="img-round"
@@ -28,9 +38,12 @@
       </div>
       <div class="recommended-user-names">
         <h4 class="mt-5 text-dark res-1line padding-lr-10">
-          Raunak Srivastava
+          {{userData.first_name.description |titlecase}}
+          {{userData.last_name.description |titlecase}}
         </h4>
-        <h5 class="h5-sub-title res-1line padding-lr-10">A story teller guy</h5>
+        <h5 class="h5-sub-title res-1line padding-lr-10">
+          {{userData.user_headline.description |titlecase}}
+        </h5>
       </div>
     </ion-card>
   </div>
@@ -43,12 +56,12 @@
       class="round-btn-40 f-t"
       expand="block"
       type="submit"
+      (click)="addImage(!!userImg['url'] , 'profile')"
     >
-      <!-- [routerLink]="['/profile-image']" -->
-      Add a photo
+      {{userImg['url']? 'Change photo':'Add a photo'}}
     </ion-button>
     <div class="df-space-between no-bg-button cursor-pointer">
-      <span [routerLink]="['/reset-password']">Skip for now</span>
+      <span [routerLink]="['/']">{{userImg['url']?'Next':'Skip for now'}}</span>
     </div>
   </div>
 </footer>

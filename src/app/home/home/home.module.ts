@@ -12,9 +12,10 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { SearchComponent } from 'src/app/utils/search/search.component';
+import { UtilsModule } from 'src/app/utils/utils.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
+  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule, UtilsModule],
   declarations: [
     HomePage,
     CardComponent,
@@ -23,4 +24,4 @@ import { SearchComponent } from 'src/app/utils/search/search.component';
     CommentsComponent,
   ],
 })
-export class HomePageModule {}
+export class HomePageModule { }

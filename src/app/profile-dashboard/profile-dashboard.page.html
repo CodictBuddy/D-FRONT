@@ -2,13 +2,15 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button
-        style="opacity: 0.6"
         defaultHref="/home"
-        class="container-header"
+        class="container-header opacity "
       ></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end" id="main">
-      <ion-button (click)="openMenu()" class="container-header"
+      <ion-button
+        (click)="openMenu()"
+        class="container-header"
+        *ngIf="userMeta?.['self']"
         ><ion-icon class="regular-font-size" name="settings-sharp"></ion-icon
       ></ion-button>
     </ion-buttons>
@@ -16,38 +18,53 @@
 </ion-header>
 
 <ion-content>
-  <ion-card style="height: 150px; z-index: -1; margin: 0">
-    <ion-icon
-      style="z-index: +2; margin-bottom: -40px; float: right; padding: 10px"
-      name="camera"
-    ></ion-icon>
+  <ion-icon
+    *ngIf="myProfile"
+    (click)="addImage(!!userCoverImg?.['url'] , 'cover')"
+    name="camera"
+    class="profile-camera-positioning"
+  >
+  </ion-icon>
+  <ion-card class="card-setting">
     <img
       width="100%"
       height="100%"
-      src="assets/Image/Empty State Icon/People.svg"
-  /></ion-card>
-  <div class="">
-    <ion-avatar
-      style="
-        height: 100px;
-        width: 100px;
-        border: 5px solid white;
-        margin: -55px 0 0 20px;
-      "
-    >
-      <img src="assets/Image/Empty State Icon/People.svg" />
-      <ion-icon class="add-img-positioning" name="add-circle-sharp"></ion-icon>
+      [src]="userCoverImg?.['url'] ||userFallbackImage"
+    />
+  </ion-card>
+  <div class="m-b-20">
+    <ion-avatar class="profile-image-avatar">
+      <img [src]="userImg?.['url'] || userFallbackImage" />
+      <ion-icon
+        *ngIf="myProfile"
+        (click)="addImage(!!userImg?.['url'] , 'profile')"
+        class="add-img-positioning round-border w-bg"
+        name="add-circle-sharp"
+      ></ion-icon>
     </ion-avatar>
   </div>
-  <h4 style="margin: 0 15px; opacity: 0.8">Raunak Srivastava</h4>
-  <h6 style="margin: 0 15px; opacity: 0.6">A story teller guy</h6>
+  <h4 class="margin  opacity-2">
+    {{user?.['first_name']?.['description'] |titlecase }}
+    {{user?.['last_name']?.['description'] |titlecase}}
+  </h4>
+  <h6 class="margin  opacity">
+    {{user?.['user_headline']?.['description'] || 'Add your headline here... '}}
+  </h6>
 
-  <ion-card style="padding: 5px">
-    <div class="" style="padding: 5px">
+  <ng-container *ngIf="!myProfile && user?.['_id']">
+    <app-action-buttons
+      [user_id]="user?.['_id']"
+      [sender_name]="sender_name"
+      [sender_info]="my_information"
+      (connection_details_emitter)="hideConnection($event)"
+    ></app-action-buttons>
+  </ng-container>
+
+  <ion-card class="padding">
+    <div class="padding" >
       <h4>About</h4>
       <p>
-        Multiline text that should wrap when it is too long to fit on one line
-        in the item.
+        {{user?.['user_about']?.['description'] || "Let people know about yourself..."}}
       </p>
     </div>
   </ion-card>
@@ -56,7 +73,9 @@
     [value]="tab"
     (ionChange)="segmentChanged($event)"
     color="secondary"
-    style="padding-top: 10px"
+    class="segment-adjust"
+    (ionChange)="hideConnection($event)"
+    *ngIf="myProfile || showOtherDetails"
   >
     <ion-segment-button value="1">
       <ion-icon name="heart"></ion-icon>
@@ -81,7 +100,7 @@
 
   <div class="" [ngSwitch]="tab">
     <div class="" *ngSwitchCase="'1'">
-      <ion-list style="padding: 0 10px">
+      <ion-list class="padding-2">
         <ion-list-header>
           {{'433452'| number}} People likes the talks
         </ion-list-header>
@@ -135,69 +154,22 @@
 
     <!-- networks tab -->
     <div class="" *ngSwitchCase="'2'">
-      <ion-list style="padding: 0 10px">
-        <ion-list-header> {{'433452'|number}} connections </ion-list-header>
+      <ion-list  class="padding-2">
+        <ion-list-header> {{connected_user_list.length|number}} connections </ion-list-header>
 
-        <ion-item>
+        <ion-item *ngFor="let n of connected_user_list; let in = index"
+        (click)="goToUserProfile(n?.connected_user?._id)">
           <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
+            <img [src]="n.connected_user.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>
           <ion-label>
-            <h2>Poe</h2>
-            <p>intro heading of user</p>
+            <h2>{{ n.connected_user.first_name | titlecase }} {{ n.connected_user.last_name | titlecase }}</h2>
+            <p>{{ n.connected_user.user_headline?.description }}</p>
           </ion-label>
           <ion-icon
             name="ellipsis-vertical-outline"
             slot="end"
-            (click)="presentActionSheet()"
-          ></ion-icon>
-          <ion-icon slot="end" name="send"></ion-icon>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Ben</h2>
-            <p>These aren't the droids you're looking for...</p>
-          </ion-label>
-          <ion-icon
-            name="ellipsis-vertical-outline"
-            slot="end"
-            (click)="presentActionSheet()"
-          ></ion-icon>
-          <ion-icon slot="end" name="send"></ion-icon>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Leia</h2>
-            <p>I've placed information vital to the survival...</p>
-          </ion-label>
-          <ion-icon
-            name="ellipsis-vertical-outline"
-            slot="end"
-            (click)="presentActionSheet()"
-          ></ion-icon>
-          <ion-icon slot="end" name="send"></ion-icon>
-        </ion-item>
-
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
-          </ion-avatar>
-          <ion-label>
-            <h2>Yoda</h2>
-            <p>Do or do not. There is no try...</p>
-          </ion-label>
-          <ion-icon
-            name="ellipsis-vertical-outline"
-            slot="end"
-            (click)="presentActionSheet()"
+            (click)="ActionSheet(n.connected_user._id,n.type,in)"
           ></ion-icon>
           <ion-icon slot="end" name="send"></ion-icon>
         </ion-item>
@@ -206,18 +178,18 @@
 
     <!-- talks tab -->
     <div class="" *ngSwitchCase="'3'">
-      <ion-list style="padding: 0 10px">
+      <ion-list  class="adding-2" >
         <ion-list-header>
-          {{'433452'|number}} talks added till now
+          {{postInfo?.['count'] |number}} talks added till now
         </ion-list-header>
 
-        <ion-item>
+        <ion-item *ngFor="let el of postInfo?.['posts']">
           <ion-avatar slot="start">
-            <img src="assets/Image/Empty State Icon/People.svg" />
+            <img [src]="el?.created_by?.user_profile_image?.url || userFallbackImage" />
           </ion-avatar>
           <ion-label>
-            <h2>talk heading</h2>
-            <p>5 words talk description</p>
+            <h2>{{el.title |titlecase}}</h2>
+            <p>{{el.content |truncate}}</p>
           </ion-label>
         </ion-item>
 
@@ -253,7 +225,7 @@
       </ion-list>
     </div>
     <div class="" *ngSwitchCase="'4'">
-      <ion-list style="padding: 0 10px">
+      <ion-list class="padding-2">
         <ion-list-header> My activities</ion-list-header>
 
         <ion-item>
@@ -308,7 +280,7 @@
         ></ion-icon>
         <ion-label class="pl10">Edit profile</ion-label>
       </ion-item>
-      <ion-item routerLink="/login">
+      <ion-item (click)="logoutUser()" class="cursor-pointer">
         <ion-icon
           class="pl10 regular-font-size"
           name="log-out-outline"

@@ -7,7 +7,7 @@
 <ion-content class="network_base">
   <div class="invitations">
     <ion-toolbar>
-      <ion-title style="opacity: 0.8">Invitations</ion-title>
+      <ion-title class="opacity">Invitations</ion-title>
       <ion-buttons slot="end">
         <ion-button routerLink="/invitations">
           <ion-icon name="chevron-forward-outline"></ion-icon
@@ -17,7 +17,11 @@
     <app-invitations [reusable]="true"></app-invitations>
   </div>
   <div class="recommendations">
-    <app-recommendation [reusable]="true"></app-recommendation>
+    <app-recommendation
+      [reusable]="true"
+      [showCount]="5"
+      (list)="trackListData($event)"
+    ></app-recommendation>
     <!-- <div
       class=""
       slot="bottom"
@@ -28,7 +32,8 @@
     </div> -->
     <ion-buttons slot="end" expand="full">
       <ion-button
-        style="width: 100%; text-transform: initial"
+        *ngIf="showMore"
+        class="width"
         slot="end"
         expand="full"
         routerLink="/recommendations"

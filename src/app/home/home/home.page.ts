@@ -1,20 +1,19 @@
+import { PostService } from './../../services/post.service';
+import { SocketService } from './../../services/socket.service';
+import { UtilService } from './../../utils/util.service';
 // import { Socket } from "ngx-socket-io";
 // import { UtilService } from "./../../service/util.service";
 // import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
 
-// import { UserService } from "./../../service/user.service";
-import { Component, ViewChild } from "@angular/core";
-// import { AppService } from "src/app/service/app.service";
-import { ActionSheetController } from "@ionic/angular";
-import { AlertController } from "@ionic/angular";
-import { Router } from "@angular/router";
-// import { PostCardComponent } from "src/app/post/post-card/post-card.component";
-import { ModalController } from "@ionic/angular";
-// import { OverlayPage } from "src/app/common/overlay/overlay.page";
+import { Component } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.page.html",
-  styleUrls: ["./home.page.scss"],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
   posterObj: any;
@@ -22,28 +21,26 @@ export class HomePage {
   invitations_list = [];
   recommendedUser_list = [];
   userPreference = true;
+  loader: Boolean = false
   connectionId;
   limit = 5;
   recommendedListLoader: Boolean = false;
   private userDetail;
   id: any;
-  activity_list: any[] = [1,2,3,4,5,6,7,8,9,4];
+  talkList: any
+  activity_list: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 4];
   slideOptsOne = {
     initialSlide: 0,
     slidesPerView: 2.3,
   };
 
-  // @ViewChild(PostCardComponent) postCardComponent: PostCardComponent;
   constructor(
-    // private service: AppService,
-    public actionSheetController: ActionSheetController,
     public alertCtrl: AlertController,
     public router: Router,
-    // private userService: UserService,
-    // private utilService: UtilService,
-    // private socket: Socket,
-    public modalController: ModalController
-  ) {}
+    private util: UtilService,
+    public modalController: ModalController,
+    private post: PostService
+  ) { }
 
   checkGPSPermission() {
     // if (!localStorage.getItem("name")) {
@@ -62,7 +59,7 @@ export class HomePage {
   ngOnInit() {
     this.checkGPSPermission();
     // this.socket.connect();
-    if (!localStorage.getItem("overlay")) {
+    if (!localStorage.getItem('overlay')) {
       this.openOverlay();
     }
   }
@@ -71,14 +68,14 @@ export class HomePage {
     this.limit = 5;
     this.userPreference = true;
     this.getPeople();
-
+    this.getPublicPostDetail();
     this.getRecommendations();
     // this.postCardComponent.reloadData();
-    this.userDetail = JSON.parse(localStorage.getItem("user_detail"));
+    this.userDetail = JSON.parse(localStorage.getItem('user_detail'));
   }
 
   peopleprofile(user) {
-    this.router.navigate(["/profile"], {
+    this.router.navigate(['/profile'], {
       queryParams: {
         otherUserProfile: true,
         userId: user._id,
@@ -92,13 +89,13 @@ export class HomePage {
     // });
   }
 
-  data() {}
+  data() { }
 
   connect(i, targetId) {
     this.recommendedUser_list[i].people_connect = true;
 
     let fv = {
-      type: "Relationship",
+      type: 'Relationship',
       user_id: this.userDetail._id,
       target_user_id: targetId,
     };
@@ -118,12 +115,12 @@ export class HomePage {
 
   async showAlertMsg(i) {
     const alert = await this.alertCtrl.create({
-      header: "Alert!!",
-      message: "Do you want to cancel the request??",
+      header: 'Alert!!',
+      message: 'Do you want to cancel the request??',
       buttons: [
-        { text: "No", role: "cancel" },
+        { text: 'No', role: 'cancel' },
         {
-          text: "Yes",
+          text: 'Yes',
           handler: () => {
             this.updateRequestStatus(i);
           },
@@ -140,7 +137,7 @@ export class HomePage {
   updateRequestStatus(i) {
     let fv = {
       id: this.connectionId,
-      connection_status: "Reject",
+      connection_status: 'Reject',
     };
 
     // this.userService.updateConnRequestStatus(fv).subscribe(
@@ -161,7 +158,7 @@ export class HomePage {
 
     this.getRecommendations();
     // this.postCardComponent.reloadData();
-    this.userDetail = JSON.parse(localStorage.getItem("user_detail"));
+    this.userDetail = JSON.parse(localStorage.getItem('user_detail'));
     setTimeout(() => {
       event.target.complete();
     }, 2000);
@@ -194,5 +191,15 @@ export class HomePage {
     //     }
     //   }
     // );
+
+  }
+
+  async getPublicPostDetail(value = {
+    "skip": 0,
+    "limit": 10
+  }) {
+    this.loader = true
+    this.talkList =
+      await this.post.publicAndConnectionPost(value).finally(() => this.loader = false)
   }
 }
