@@ -30,7 +30,8 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
   showOtherDetails: boolean
   user_connection_option = this.util.alert_options.profile_connection_options;
   postInfo = {}
-
+show=false
+loader=false
   mediaSubscription: Subscription;
   userSubscription: Subscription;
   constructor(
@@ -84,12 +85,18 @@ export class ProfileDashboardPage implements OnInit, OnDestroy {
     this.my_information = this.userService.profilePatchingObject(myInfo);
     this.sender_name = `${this.my_information['first_name']} ${this.my_information['last_name']}`;
   }
+  
   async getUserDetails(uid) {
+    this.show=false
+    this.loader=true
     const userId = uid ? uid : this.userService.getMyDetails()?._id;
     const uData = await this.userService.getUserProfile(userId);
     if (!uid) {
       this.userMeta = uData?.userMeta;
     }
+    this.show=true
+    this.loader=false
+    // alert('hi user')
     this.user = this.userService.processData(
       uData.user,
       this.util.default_language

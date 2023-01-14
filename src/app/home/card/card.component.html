@@ -22,9 +22,7 @@
               [routerLink]="['/profile']"
             >
               <ion-avatar class="avatar-small-image">
-                <img
-                  [src]="postDetail?.['created_by']?.user_profile_image?.['url'] || userFallbackImage"
-                />
+                <img [src]="postDetail?.['created_by']?.user_profile_image?.['url'] || userFallbackImage"/>
               </ion-avatar>
             </div>
             <div>
@@ -223,7 +221,7 @@
       </ion-item>
     </ion-list>
     <div class="user-post" [routerLink]="['/home/detail', postDetail._id]">
-      <h4 class="padding-4">{{ postDetail?.title | titlecase }}</h4>
+      <h4 class="padding-2">{{ postDetail?.title | titlecase }}</h4>
 
       <p class="like-comment-icon h4-sub-title margin-2">
         {{ postDetail?.content }}

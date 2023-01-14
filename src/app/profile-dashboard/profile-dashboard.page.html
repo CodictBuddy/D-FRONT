@@ -17,7 +17,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
+   <app-loader  *ngIf="loader" ></app-loader> 
   <ion-icon
     *ngIf="myProfile"
     (click)="addImage(!!userCoverImg?.['url'] , 'cover')"
@@ -32,7 +33,7 @@
       [src]="userCoverImg?.['url'] ||userFallbackImage"
     />
   </ion-card>
-  <div class="m-b-20">
+  <div class="m-b-20" *ngIf="show">
     <ion-avatar class="profile-image-avatar">
       <img [src]="userImg?.['url'] || userFallbackImage" />
       <ion-icon
@@ -47,7 +48,7 @@
     {{user?.['first_name']?.['description'] |titlecase }}
     {{user?.['last_name']?.['description'] |titlecase}}
   </h4>
-  <h6 class="margin  opacity">
+  <h6 class="margin  opacity"  *ngIf="show">
     {{user?.['user_headline']?.['description'] || 'Add your headline here... '}}
   </h6>
 
@@ -60,7 +61,7 @@
     ></app-action-buttons>
   </ng-container>
 
-  <ion-card class="padding">
+  <ion-card class="padding" *ngIf="show">
     <div class="padding" >
       <h4>About</h4>
       <p>
@@ -69,8 +70,9 @@
     </div>
   </ion-card>
 
-
+<div  *ngIf="show">
   <ion-segment
+  
     [value]="tab"
     (ionChange)="segmentChanged($event)"
     color="secondary"
@@ -98,8 +100,8 @@
       <ion-label>Activity</ion-label>
     </ion-segment-button>
   </ion-segment>
-
-  <div class="" [ngSwitch]="tab">
+</div>
+  <div class="" [ngSwitch]="tab"  *ngIf="show">
     <div class="" *ngSwitchCase="'1'">
       <ion-list class="padding-2">
         <ion-list-header>
