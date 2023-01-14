@@ -86,7 +86,7 @@ export class TabsPage implements OnInit {
 
     PushNotifications.addListener(
       'pushNotificationReceived',
-      (notification: PushNotificationSchema) => {
+      async (notification: PushNotificationSchema) => {
         console.log('Push received: ' + JSON.stringify(notification));
         // alert('Push received: ' + JSON.stringify(notification));
       }
@@ -95,7 +95,9 @@ export class TabsPage implements OnInit {
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
       (notification: ActionPerformed) => {
-        console.log('Push action performed: ' + JSON.stringify(notification));
+
+        console.log('Push action performed: ' + JSON.stringify(notification), 'navigation url fetched', notification?.notification?.data?.navigation_url);
+        this.util.routeNavigation(notification?.notification?.data?.navigation_url)
         // alert('Push action performed: ' + JSON.stringify(notification));
       }
     );
