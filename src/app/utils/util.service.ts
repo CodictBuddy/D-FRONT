@@ -158,6 +158,23 @@ export class UtilService {
         data: 'Remove talk',
         icon: 'trash-outline',
       },
+    ],
+    comment_options: [
+      {
+        text: 'Copy Comment',
+        data: 'Copy Comment',
+        icon: 'copy-outline',
+      },
+      {
+        text: 'Edit Comment',
+        data: 'Edit Comment',
+        icon: 'create-outline',
+      },
+      {
+        text: 'Remove Comment',
+        data: 'Remove Comment',
+        icon: 'trash-outline',
+      }
     ]
   };
 

@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  // base_url: 'http://localhost:3000/4201121119/4201121119',
+  // url: 'http://localhost:3000',
   base_url: 'https://dtalks-back.onrender.com/4201121119/4201121119',
   url: 'https://dtalks-back.onrender.com',
 

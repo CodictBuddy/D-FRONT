@@ -35,8 +35,8 @@ export class LikesCommentsService {
     return this.http.patch<any>(this.baseurl + `/comments/${comment_id}`, _input).toPromise()
   }
 
-  deleteComment(content_id) {
-    return this.http.delete<any>(this.baseurl + `/comments/${content_id}`).toPromise()
+  deleteComment(comment_id) {
+    return this.http.delete<any>(this.baseurl + `/comments/${comment_id}`).toPromise()
   }
 
 }

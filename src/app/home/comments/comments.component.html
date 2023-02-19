@@ -4,15 +4,15 @@
     {{ totalCommentsCount | number }} Comments on this talk
   </ion-list-header>
 
-  <ion-item *ngFor="let comment of commentsList">
+  <ion-item *ngFor="let comment of commentsList; let i = index">
     <ion-label>
       <div class="padding">
         <div slot="start">
-        <ion-avatar class="avatar-small-image">
-          <img
-            [src]="comment?.['created_by']?.user_profile_image?.['url'] || userFallbackImage"
-          />
-        </ion-avatar>
+          <ion-avatar class="avatar-small-image">
+            <img
+              [src]="comment?.['created_by']?.user_profile_image?.['url'] || userFallbackImage"
+            />
+          </ion-avatar>
         </div>
         <div class="display">
           <h2>
@@ -26,8 +26,8 @@
           class="margin-bottom"
           name="ellipsis-vertical-outline"
           slot="end"
+          (click)="openActionSheet(i)"
         ></ion-icon>
-        <!-- (click)="openActionSheet(postDetail._id)" -->
       </div>
 
       <p>{{ comment?.comment_data }}</p>

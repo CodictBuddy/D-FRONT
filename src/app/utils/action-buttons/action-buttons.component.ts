@@ -192,14 +192,14 @@ export class ActionButtonsComponent implements OnInit {
     user_id,
     type,
     message,
-    invitation_title,
+    notification_title,
     navigation_url
   ) {
     const res = await this.connectionService.createConnection({
       user_id,
       type,
       message,
-      invitation_title,
+      notification_title,
       navigation_url,
     });
     this.checkConnection();
@@ -227,7 +227,7 @@ export class ActionButtonsComponent implements OnInit {
       user_id: connectionObject.user_id,
       message:
         this.util.notification_template_constants.connection_req_accepted,
-      invitation_title: this.sender_info,
+        notification_title: this.sender_info,
     };
     const updatedD = await this.connectionService.modifyConnection(payload);
     if (updatedD) {
